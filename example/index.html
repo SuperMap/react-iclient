@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>React App test</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="http://iclient.supermap.io/web/libs/mapbox-gl-js-enhance/1.2.0/mapbox-gl-enhance.css"
+    />
+    <script src="http://iclient.supermap.io/web/libs/mapbox-gl-js-enhance/1.2.0/mapbox-gl-enhance.js"></script>
+    <script src="./iclient9-mapboxgl.min.js"></script>
+    <link rel="stylesheet" href="./iclient9-mapboxgl.min.css" />
+    <link rel="stylesheet" href="./iclient9-mapboxgl-react.min.css" />
+    <script src="./iclient9-mapboxgl-react.min.js"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #main {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main"></div>
+    <script type="text/babel">
+      // import {WebMap} from '@supermap/react-iclient'
+      var host = window.isLocal ? window.server : 'http://iclient.supermap.io';
+      // http://iclient.supermap.io
+      // http://support.supermap.com.cn:8090
+      var attribution =
+        "<a href='https://www.mapbox.com/about/maps/' target='_blank'>© Mapbox </a>" +
+        " with <span>© <a href='http://iclient.supermap.io' target='_blank'>SuperMap iClient</a> | </span>" +
+        " Map Data <span>© <a href='http://support.supermap.com.cn/product/iServer.aspx' target='_blank'>SuperMap iServer</a></span> ";
+      var WebMap = window.SuperMap.Components.WebMap;
+      var mapOptions = {
+        container: 'map',
+        style: {
+          version: 8,
+          sources: {
+            'raster-tiles': {
+              attribution: attribution,
+              type: 'raster',
+              tiles: [host + '/iserver/services/map-china400/rest/maps/China/zxyTileImage.png?z={z}&x={x}&y={y}'],
+              tileSize: 256
+            }
+          },
+          layers: [
+            {
+              id: 'simple-tiles',
+              type: 'raster',
+              source: 'raster-tiles',
+              minzoom: 0,
+              maxzoom: 22
+            }
+          ]
+        },
+        center: [120.143, 30.236],
+        zoom: 3
+      };
+      ReactDOM.render(<WebMap mapOptions={mapOptions} />, document.getElementById('main'));
+    </script>
+  </body>
+</html>

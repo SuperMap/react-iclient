@@ -1,0 +1,16 @@
+body, html {
+  margin: 0;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+}
+#root {
+  height: 100%;
+}
+.App {
+  margin: 0 auto;
+  height: 100%;
+  .App-header {
+    height: 100%;
+  }
+}

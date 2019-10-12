@@ -1,0 +1,1 @@
+export { default as WebMap } from './web-map/WebMap';
