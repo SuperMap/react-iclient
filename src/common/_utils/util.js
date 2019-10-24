@@ -78,3 +78,17 @@ export function isYField(data) {
 //   let newColor = colorcolor(color, 'rgb');
 //   return 'rgba' + newColor.substring(3, newColor.length - 1) + `,${opacity})`;
 // }
+
+const HOOKS = ['loaded', 'removed'];
+
+export function callHook(instanceRef, hook, map) {
+  HOOKS.includes(hook) && instanceRef[hook] && typeof instanceRef[hook] === 'function' && instanceRef[hook](map);
+}
+
+export function getComponentInstance(ref) {
+  this.instanceRef = ref;
+}
+
+export function isFunction(event) {
+  return Object.prototype.toString.call(event) === '[object Function]';
+}

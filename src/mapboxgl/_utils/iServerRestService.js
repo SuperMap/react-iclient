@@ -1,5 +1,5 @@
-import mapboxgl from '../../../static/libs/mapboxgl/mapbox-gl-enhance';
-import '../../../static/libs/iclient-mapboxgl/iclient9-mapboxgl.min';
+import mapboxgl from '../../../public/libs/mapboxgl/mapbox-gl-enhance';
+import '../../../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min';
 
 /**
  * @class iServerRestService
@@ -226,7 +226,7 @@ export default class iServerRestService extends mapboxgl.Evented {
     let attributeFilter = '';
     fields.forEach((field, index) => {
       attributeFilter +=
-        index !== fields.length - 1 ? `${field} LIKE '%${keyWord}%' ` + 'OR ' : `${field} LIKE '%${keyWord}%'`;
+        index !== fields.length - 1 ? `${field} LIKE '%${keyWord}%' OR` : `${field} LIKE '%${keyWord}%'`;
     }, this);
     return attributeFilter;
   }
