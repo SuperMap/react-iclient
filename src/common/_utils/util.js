@@ -1,5 +1,5 @@
 // 获取当前时间返回置顶格式
-// import colorcolor from 'colorcolor';
+import colorcolor from 'colorcolor';
 
 // export function getDateTime(timeType) {
 //   return geti18n().d(new Date(), timeType.replace(/\+/g, '_'), getLanguage());
@@ -71,13 +71,13 @@ export function isYField(data) {
   );
 }
 
-// export function getColorWithOpacity(color, opacity) {
-//   if (color.indexOf('rgba') > -1) {
-//     return color.substring(0, color.lastIndexOf(',') + 1) + opacity + ')';
-//   }
-//   let newColor = colorcolor(color, 'rgb');
-//   return 'rgba' + newColor.substring(3, newColor.length - 1) + `,${opacity})`;
-// }
+export function getColorWithOpacity(color, opacity) {
+  if (color.indexOf('rgba') > -1) {
+    return color.substring(0, color.lastIndexOf(',') + 1) + opacity + ')';
+  }
+  let newColor = colorcolor(color, 'rgb');
+  return 'rgba' + newColor.substring(3, newColor.length - 1) + `,${opacity})`;
+}
 
 const HOOKS = ['loaded', 'removed'];
 

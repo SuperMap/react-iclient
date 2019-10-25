@@ -7,3 +7,4 @@ export { default as SmVectorTileLayer } from './web-map/layer/vector-tile/Vector
 export { default as SmUniqueThemeLayer } from './web-map/layer/unique-theme/UniqueThemeLayer';
 export { default as SmRanksymbolThemeLayer } from './web-map/layer/ranksymbol-theme/RanksymbolThemeLayer';
 export { default as SmClusterLayer } from './web-map/layer/cluster/ClusterLayer';
+export { default as SmAnimateMarkerLayer } from './web-map/layer/animate-marker/AnimateMarkerLayer';
