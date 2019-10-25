@@ -6,17 +6,16 @@ import layer, { LayerProps } from '../../../_mixin/layer';
 
 interface VectorTileProps extends MapGetterProps, LayerProps {
   styleOptions?: string | object;
-};
+}
 
-@compose(mapGetter, layer)
+@compose(
+  mapGetter,
+  layer
+)
 export default class VectorTileLayer extends React.Component<VectorTileProps> {
   static propTypes = {
-    styleOptions: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object
-    ])
+    styleOptions: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
-
 
   loaded(map: mapboxglTypes.Map) {
     if (map && map['addStyle']) {
@@ -27,5 +26,4 @@ export default class VectorTileLayer extends React.Component<VectorTileProps> {
   render() {
     return null;
   }
-
 }

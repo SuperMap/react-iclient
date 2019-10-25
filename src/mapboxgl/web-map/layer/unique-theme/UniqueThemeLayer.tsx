@@ -10,10 +10,12 @@ interface UniqueThemeProps extends MapGetterProps, LayerProps {
   layerName?: string;
   options?: object;
   data: any[];
-  onLoad?(themeLayer?: object, map?: mapboxglTypes.Map): any;
-};
+}
 
-@compose(mapGetter, layer)
+@compose(
+  mapGetter,
+  layer
+)
 export default class UniqueThemeLayer extends React.Component<UniqueThemeProps> {
   viewModel: UniqueThemeLayerViewModel;
 
@@ -21,17 +23,16 @@ export default class UniqueThemeLayer extends React.Component<UniqueThemeProps> 
   static propTypes = {
     layerName: PropTypes.string,
     options: PropTypes.object,
-    data: PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired
   };
 
   componentDidUpdate(prevProps: UniqueThemeProps) {
     const { data } = this.props;
-    if(!isEqual(prevProps.data, data) && this.viewModel) {
+    if (!isEqual(prevProps.data, data) && this.viewModel) {
       this.viewModel.setData(data);
     }
   }
 
-  
   loaded(map: mapboxglTypes.Map) {
     this.viewModel = new UniqueThemeLayerViewModel(map, this.props);
   }
@@ -39,5 +40,4 @@ export default class UniqueThemeLayer extends React.Component<UniqueThemeProps> 
   render() {
     return null;
   }
-
 }

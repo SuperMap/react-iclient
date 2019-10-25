@@ -1,9 +1,6 @@
-export * from './uniqueTheme';
-export * from './rankSymbolTheme';
-
 export const mapProps = {
   serverUrl: 'http://support.supermap.com.cn:8092/',
-  mapId: '750216161',
+  mapId: '',
   mapOptions: {
     container: 'map', // container id
     style: {

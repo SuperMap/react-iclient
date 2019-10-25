@@ -15,7 +15,10 @@ interface ClusterLayerProps extends LayerProps, MapGetterProps {
   clusteredPointTextLayout?: object;
 }
 
-@compose(MapGetter, Layer)
+@compose(
+  MapGetter,
+  Layer
+)
 class ClusterLayer extends Component<ClusterLayerProps> {
   viewModel: ClusterLayerViewModel;
   static defaultProps = {

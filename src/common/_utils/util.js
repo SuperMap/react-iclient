@@ -92,3 +92,14 @@ export function getComponentInstance(ref) {
 export function isFunction(event) {
   return Object.prototype.toString.call(event) === '[object Function]';
 }
+
+export function getFirstMapTarget(maps) {
+  let firstTarget;
+  for(let key in maps) {
+    if(!!key) {
+      firstTarget = key;
+      break;
+    }
+  }
+  return firstTarget;
+}

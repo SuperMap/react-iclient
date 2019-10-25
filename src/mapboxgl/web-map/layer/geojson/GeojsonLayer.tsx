@@ -6,11 +6,14 @@ import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
 import layer, { LayerProps } from '../../../_mixin/layer';
 
 interface GeojsonLayerProps extends MapGetterProps, LayerProps {
-  layerStyle: object,
-  data: object | string
+  layerStyle: object;
+  data: object | string;
 }
 
-@compose(mapGetter, layer)
+@compose(
+  mapGetter,
+  layer
+)
 export default class GeojsonLayer extends Component<GeojsonLayerProps> {
   viewModel: GeojsonLayerViewModel;
 
@@ -30,4 +33,4 @@ export default class GeojsonLayer extends Component<GeojsonLayerProps> {
   render() {
     return null;
   }
-};
+}

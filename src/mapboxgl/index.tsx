@@ -1,5 +1,11 @@
 import './style.scss';
 
-export * from './components';
+import * as components from './components';
+import * as commontypes from './_types';
+
+export *  from './components';
 // export const WebMap = components.WebMap;
-// export default components;
+export default {
+  ...components,
+  commontypes
+};

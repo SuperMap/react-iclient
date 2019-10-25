@@ -16,9 +16,12 @@ interface RasterTileProps extends MapGetterProps, LayerProps {
   scheme?: SchemeType;
   visible?: boolean;
   opacity?: number;
-};
+}
 
-@compose(mapGetter, layer)
+@compose(
+  mapGetter,
+  layer
+)
 export default class RasterTileLayer extends React.Component<RasterTileProps> {
   viewModel: RasterTileLayerViewModel;
 
@@ -33,7 +36,6 @@ export default class RasterTileLayer extends React.Component<RasterTileProps> {
     opacity: PropTypes.number
   };
 
-  
   loaded(map: mapboxglTypes.Map) {
     this.viewModel = new RasterTileLayerViewModel(map, this.props);
   }
@@ -45,5 +47,4 @@ export default class RasterTileLayer extends React.Component<RasterTileProps> {
   render() {
     return null;
   }
-
 }

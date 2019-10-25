@@ -26,7 +26,7 @@ const postcssNormalize = require('postcss-normalize');
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
 const imageInlineSizeLimit = parseInt(
-  process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
+  process.env.IMAGE_INLINE_SIZE_LIMIT || '200000'
 );
 
 // Check if TypeScript is setup
@@ -184,6 +184,12 @@ module.exports = function(webpackEnv) {
         },
         echarts: 'echarts',
         mapv: 'mapv',
+        three: {
+          root: 'THREE',
+          commonjs: 'three',
+          commonjs2: 'three',
+          amd: 'three'
+        }
       },
       / \/static\/libs\//,
       function(context, request, callback) {
@@ -540,11 +546,11 @@ module.exports = function(webpackEnv) {
           }
         }
       })
-    )
+    );
   }
 
-  // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-  // WebpackConfig.plugins.push(new BundleAnalyzerPlugin());
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  WebpackConfig.plugins.push(new BundleAnalyzerPlugin());
 
   return WebpackConfig;
 };

@@ -1,14 +1,10 @@
 import React from 'react';
-import { SmWebMap, SmRasterTileLayer, SmVectorTileLayer, SmUniqueThemeLayer, SmRanksymbolThemeLayer } from '../src/mapboxgl';
 import {
-  mapProps,
-  mapOptionsW,
-  mapOptionsC,
-  rasteLayerOptions,
-  uniqueThemeOptions,
-  ranksmbolThemeOptions,
-  initUniqueTheme
-} from './datas/data';
+  SmWebMap,
+  SmRasterTileLayer,
+  SmVectorTileLayer
+} from '../src/mapboxgl';
+import { mapProps, mapOptionsW, mapOptionsC, rasteLayerOptions } from './datas/data';
 import './style.scss';
 
 interface mapOptions {
@@ -29,8 +25,6 @@ interface AppState {
   mapId?: string;
   mapOptions?: mapOptions;
   serverUrl?: string;
-  uniqueFeatures: object[];
-  ranksymbolFeatures: object[];
   [stateName: string]: any;
 }
 
@@ -38,13 +32,10 @@ class App extends React.Component<null, AppState> {
   constructor(props) {
     super(props);
     this.state = Object.assign(mapProps, {
-      uniqueFeatures: [],
-      ranksymbolFeatures: []
+      uniqueFeatures: null,
+      ranksymbolFeatures: [],
+      rangeFeatures: []
     });
-  }
-
-  componentDidMount() {
-    initUniqueTheme(this.setUniqueFeatures.bind(this));
   }
 
   changeMapId = (id: string) => {
@@ -73,22 +64,8 @@ class App extends React.Component<null, AppState> {
     console.log('map load: ', e);
   }
 
-  mapClick(e) {
-    console.log('map click: ', e);
-  }
-
-  unithemeMove(e) {
-    console.log('unitheme move: ', e);
-  }
-
   render() {
-    const {
-      mapId,
-      mapOptions,
-      serverUrl,
-      uniqueFeatures,
-      ranksymbolFeatures
-    } = this.state;
+    const { mapId, mapOptions, serverUrl } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -97,21 +74,9 @@ class App extends React.Component<null, AppState> {
             mapOptions={mapOptions}
             serverUrl={serverUrl}
             onLoad={this.mapLoaded}
-            onClick={this.mapClick}
           >
-            {/* <SmRasterTileLayer {...rasteLayerOptions} />
-            <SmVectorTileLayer styleOptions="http://iclient.supermap.io/iserver/services/map-Population/rest/maps/PopulationDistribution/tileFeature/vectorstyles.json?type=MapBox_GL&styleonly=true" /> */}
-            {/* <SmUniqueThemeLayer
-              layerName="UniqueThemeLayer"
-              data={uniqueFeatures}
-              options={uniqueThemeOptions}
-              onMousemove={this.unithemeMove}
-            /> */}
-            {/* <SmRanksymbolThemeLayer
-              options={ranksmbolThemeOptions}
-              data={ranksymbolFeatures}
-              symbolType="Circle"
-            /> */}
+            <SmRasterTileLayer {...rasteLayerOptions} />
+            <SmVectorTileLayer styleOptions="http://iclient.supermap.io/iserver/services/map-Population/rest/maps/PopulationDistribution/tileFeature/vectorstyles.json?type=MapBox_GL&styleonly=true" />
           </SmWebMap>
         </header>
         <div className="ctr-btns">
@@ -136,11 +101,6 @@ class App extends React.Component<null, AppState> {
           >
             change crs c
           </button>
-        </div>
-        <div style={{ width: '272px', position: 'absolute', right: '50px', top: '200px', background: '#fff' }}>
-          <p>ID: </p>
-          <p>土地类型: </p>
-          <p>面积: </p>
         </div>
       </div>
     );

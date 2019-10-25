@@ -1,11 +1,10 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { wrapDisplayName } from 'recompose';
-import findKey from 'lodash.findkey';
 import WebMapViewModel from '../web-map/WebMapViewModel';
 import mapEvent from '../_types/map-event';
 import globalEvent from '../../common/_utils/global-event';
-import { callHook, getComponentInstance } from '../../common/_utils/util';
+import { callHook, getComponentInstance, getFirstMapTarget } from '../../common/_utils/util';
 
 export interface MapGetterProps {
   mapTarget?: string;
@@ -66,7 +65,7 @@ export default function mapGetter<P extends MapGetterProps = MapGetterProps>(Wra
       //   selfParent.target;
       // return this.props.mapTarget || parentTarget || Object.keys(mapEvent.getAllMaps())[0];
       const maps = mapEvent.getAllMaps();
-      return this.props.mapTarget || findKey(maps, map => !!map);
+      return this.props.mapTarget || getFirstMapTarget(maps);
     }
 
     loadMapSucceed(map: mapboxglTypes.Map, target: string) {
@@ -79,7 +78,7 @@ export default function mapGetter<P extends MapGetterProps = MapGetterProps>(Wra
     mapTargetChanged(target: string) {
       // 多个map切换的时候，需要删除该组件与前一个map的图层绑定, 如果新的target没有对应的map，那么默认绑定第一个地图
       const maps = mapEvent.getAllMaps();
-      const targetName = findKey(maps, map => !!map);
+      const targetName = getFirstMapTarget(maps);
       const firstMap = mapEvent.getMap(targetName);
       this.resetData();
       if (mapEvent.getMap(target) || firstMap) {

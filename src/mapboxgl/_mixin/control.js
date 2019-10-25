@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { getDisplayName } from 'recompose';
-import findKey from 'lodash.findkey';
 import mapEvent from '../_types/map-event';
+import { getFirstMapTarget } from '../../common/_utils/util';
 
 const withControl = WrappedComponent => {
   class Control extends Component {
@@ -15,7 +15,7 @@ const withControl = WrappedComponent => {
     componentDidMount() {
       this.$el = ReactDom.findDOMNode(this.instance);
       const componentName = getDisplayName(WrappedComponent);
-      this.filterDelayLoad = !['smwebmap', 'smminimap'].includes(componentName.toLowerCase());
+      this.filterDelayLoad = !['webmap', 'minimap'].includes(componentName.toLowerCase());
       if (this.$el && this.parentIsWebMapOrMap) {
         if (this.filterDelayLoad) {
           this.$el.style && (this.$el.style.display = 'none');
@@ -39,7 +39,6 @@ const withControl = WrappedComponent => {
     }
     addTo = () => {
       this.control = this.initControl();
-      console.log('this.control', this.props.position);
       this.$el.classList.add('mapboxgl-ctrl');
       this.map.addControl(this.control, this.props.position);
     };
@@ -61,7 +60,7 @@ const withControl = WrappedComponent => {
       const selfParent = this.props.parentParams;
       const parentTarget = selfParent && selfParent.name.toLowerCase() === 'smwebmap' && selfParent.target;
       const maps = mapEvent.getAllMaps();
-      return this.props.mapTarget || parentTarget || findKey(maps, map => !!map);
+      return this.props.mapTarget || parentTarget || getFirstMapTarget(maps);
     };
     controlLoadMapSucceed = (map, target) => {
       const targetName = this.getControlMapName();
