@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import MapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
 import Layer, { LayerProps } from '../../../_mixin/layer';
-import RanksymbolThemeLayerViewModel from './RanksymbolThemeLayerViewModel.js';
 import { compose } from 'recompose';
+import RanksymbolThemeLayerViewModel from './RanksymbolThemeLayerViewModel.js';
 
 interface RanksymbolThemeLayerProps extends LayerProps, MapGetterProps {
   symbolType: string;

@@ -549,8 +549,8 @@ module.exports = function(webpackEnv) {
     );
   }
 
-  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-  WebpackConfig.plugins.push(new BundleAnalyzerPlugin());
+  // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  // WebpackConfig.plugins.push(new BundleAnalyzerPlugin());
 
   return WebpackConfig;
 };

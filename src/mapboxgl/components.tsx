@@ -9,6 +9,8 @@ export { default as SmRanksymbolThemeLayer } from './web-map/layer/ranksymbol-th
 export { default as SmRangeThemeLayer } from './web-map/layer/range-theme/RangeThemeLayer';
 export { default as SmGraphThemeLayer } from './web-map/layer/graph-theme/GraphThemeLayer';
 export { default as SmClusterLayer } from './web-map/layer/cluster/ClusterLayer';
+export { default as SmDeckglLayer } from './web-map/layer/deckgl/DeckglLayer';
+export { default as SmLabelThemeLayer } from './web-map/layer/label-theme/LabelThemeLayer';
 export { default as SmHeatmapLayer } from './web-map/layer/heatmap/HeatmapLayer';
 export { default as SmMapvLayer } from './web-map/layer/mapv/MapvLayer';
 export { default as SmEchartsLayer } from './web-map/layer/echarts/EchartsLayer';
