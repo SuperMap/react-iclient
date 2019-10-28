@@ -22,11 +22,8 @@ interface AnimateMarkerLayerProps extends MapGetterProps {
   type?: any,
   textFontSize?: number
 }
-const initialState = { marker: null, _markersElement: [] };
-type State = Readonly<typeof initialState>
-
 @mapGetter
-export default class AnimateMarkerLayer extends Component<AnimateMarkerLayerProps, State> {
+export default class AnimateMarkerLayer extends Component<AnimateMarkerLayerProps> {
 
   viewModel: AnimateMarkerLayerViewModel;
   map: mapboxglTypes.Map;
@@ -40,41 +37,40 @@ export default class AnimateMarkerLayer extends Component<AnimateMarkerLayerProp
   _markersElement: HTMLElement[];
 
   static defaultProps = { type: 'breathingAperture', textFontSize: 14 };
-  state: State = initialState
 
   componentDidMount() {
-    this.setState({ _markersElement: [] });
+    this._markersElement = [];
   }
 
   componentDidUpdate(prevProps: AnimateMarkerLayerProps) {
 
     if (this.viewModel && !isEqual(prevProps.features, this.props.features)) {
-      this.setState({ _markersElement: [] });
+      this._markersElement = [];
       this._getMarkerElement();
-      this.props.features && this.viewModel.setFeatures(this.props.features, this.state._markersElement);
+      this.props.features && this.viewModel.setFeatures(this.props.features, this._markersElement);
     }
     if (this.viewModel && !isEqual(prevProps.type, this.props.type)) {
-      this.setState({ _markersElement: [] });
+      this._markersElement = [];
       this._getMarkerElement();
-      this.viewModel.setType(this.state._markersElement);
+      this.viewModel.setType(this._markersElement);
     }
     if (this.viewModel && this.props.width && prevProps.width !== this.props.width) {
-      this.state.marker && this.state.marker.setMarkersWidth(this.props.width);
+      this.marker && this.marker.setMarkersWidth(this.props.width);
     }
     if (this.viewModel && this.props.height && prevProps.height !== this.props.height) {
-      this.state.marker && this.state.marker.setMarkersHeight && this.state.marker.setMarkersHeight(this.props.height);
+      this.marker && this.marker.setMarkersHeight && this.marker.setMarkersHeight(this.props.height);
     }
     if (this.viewModel && this.props.textColor && prevProps.textColor !== this.props.textColor) {
-      this.state.marker && this.state.marker.setMarkersTextColor(this.props.textColor);
+      this.marker && this.marker.setMarkersTextColor(this.props.textColor);
     }
     if (this.viewModel && this.props.textFontSize && prevProps.textFontSize !== this.props.textFontSize) {
-      this.state.marker && this.state.marker.setMarkersTextFontSize(this.props.textFontSize);
+      this.marker && this.marker.setMarkersTextFontSize(this.props.textFontSize);
     }
     if (this.viewModel && this.props.colors && this.props.colors.length && this.props.colors.length > 0 && !isEqual(prevProps.colors, this.props.colors)) {
-      this.state.marker && this.state.marker.setMarkersTextFontSize(this.props.textFontSize);
+      this.marker && this.marker.setMarkersTextFontSize(this.props.textFontSize);
     }
     if (this.viewModel && this.props.textField && prevProps.textField !== this.props.textField) {
-      this.state.marker && this.state.marker.setMarkersTextField(this.props.textField);
+      this.marker && this.marker.setMarkersTextField(this.props.textField);
     }
   }
 
@@ -83,7 +79,7 @@ export default class AnimateMarkerLayer extends Component<AnimateMarkerLayerProp
   }
   loaded(map: mapboxglTypes.Map) {
     this.props.features && this._getMarkerElement();
-    this.viewModel = new AnimateMarkerLayerViewModel(map, this.props.features, this.state._markersElement, this.props.fitBounds);
+    this.viewModel = new AnimateMarkerLayerViewModel(map, this.props.features, this._markersElement, this.props.fitBounds);
 
   }
   _getMarkerElement(): void {
@@ -95,44 +91,38 @@ export default class AnimateMarkerLayer extends Component<AnimateMarkerLayerProp
     }
     switch (type) {
       case 'rotatingAperture':
-        this.setState({ marker: new RotatingApertureMarker(features, { width, colors, textField, textColor, textFontSize }) });
+        this.marker = new RotatingApertureMarker(features, { width, colors, textField, textColor, textFontSize });
         break;
       case 'haloRing':
-        this.setState({ marker: new HaloRingMarker(features, { width, colors, textField, textColor, textFontSize }) });
+          this.marker = new HaloRingMarker(features, { width, colors, textField, textColor, textFontSize });
         break;
       case 'breathingAperture':
-        this.setState({ marker: new BreathingApertureMarker(features, { width, colors, textField, textColor, textFontSize }) });
+        this.marker = new BreathingApertureMarker(features, { width, colors, textField, textColor, textFontSize });
         break;
       case 'diffusedAperture':
-        this.setState({ marker: new DiffusedApertureMarker(features, { width, colors, textField, textColor, textFontSize }) });
+        this.marker = new DiffusedApertureMarker(features, { width, colors, textField, textColor, textFontSize });
         break;
       case 'rotatingTextBorder':
-        this.setState({
-          marker: new RotatingTextBorderMarker(features, {
-            width,
-            height,
-            colors,
-            textField,
-            textColor,
-            textFontSize
-          })
+        this.marker = new RotatingTextBorderMarker(features, {
+          width,
+          height,
+          colors,
+          textField,
+          textColor,
+          textFontSize
         });
         break;
       case 'fluorescence':
-        this.setState({
-          marker: new FluorescenceMarker(features, {
-            width,
-            colors,
-            textField,
-            textColor,
-            textFontSize
-          })
+        this.marker = new FluorescenceMarker(features, {
+          width,
+          colors,
+          textField,
+          textColor,
+          textFontSize
         });
         break;
     }
-    if (this.state.marker) {
-      this.setState({ _markersElement: this.state.marker.getMarkersElement() });
-    }
+    this.marker && (this._markersElement = this.marker.getMarkersElement());
   }
   render() {
     return null;
