@@ -10,7 +10,6 @@ export default class RanksymbolThemeLayerViewModel extends mapboxgl.Evented {
     this.symbolType = symbolType || 'Circle';
     options.id = options.id || layerId;
     this.options = options;
-    this.layerId = layerId;
     this.data = data || [];
     this._init();
   }

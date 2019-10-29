@@ -7,8 +7,8 @@ export default class LabelThemeLayerViewModel extends mapboxgl.Evented {
     const { layerName, options, layerId, data } = themeProps;
     this.map = map;
     this.layerName = layerName || layerId;
+    options.id = options.id || layerId;
     this.options = options;
-    this.layerId = layerId;
     this.data = data || [];
     this._init();
   }

@@ -1,14 +1,15 @@
 import { Component } from 'react';
+import { compose } from 'recompose';
 import MapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
 import Layer, { LayerProps } from '../../../_mixin/layer';
-import { compose } from 'recompose';
+import { isFunction } from '../../../../common/_utils/util';
 import LabelThemeLayerViewModel from './LabelThemeLayerViewModel.js';
 
 interface LabelThemeLayerProps extends MapGetterProps, LayerProps {
   layerName:string,
   options?:object,
   data:Array<any>,
-  onLoad:(themeLayer:any, map: mapboxglTypes.Map) => void
+  onLoad?: (themeLayer?:any, map?: mapboxglTypes.Map) => void
 }  
 @compose(MapGetter,Layer)
 export default class LabelThemeLayer extends Component<LabelThemeLayerProps> {
@@ -17,8 +18,9 @@ export default class LabelThemeLayer extends Component<LabelThemeLayerProps> {
     options: {}
   }
   loaded(map: mapboxglTypes.Map) {
+    const { onLoad } = this.props;
     this.viewModel = new LabelThemeLayerViewModel(map, this.props);
-    this.props.onLoad && this.props.onLoad(this.viewModel.themeLayer, map);
+    isFunction(onLoad) && onLoad(this.viewModel.themeLayer, map);
   }
   render() {
     return null;

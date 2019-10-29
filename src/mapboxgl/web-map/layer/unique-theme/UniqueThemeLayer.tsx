@@ -4,12 +4,14 @@ import { compose } from 'recompose';
 import isEqual from 'lodash.isequal';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
 import layer, { LayerProps } from '../../../_mixin/layer';
+import { isFunction } from '../../../../common/_utils/util';
 import UniqueThemeLayerViewModel from './UniqueThemeLayerViewModel';
 
 interface UniqueThemeProps extends MapGetterProps, LayerProps {
   layerName?: string;
   options?: object;
   data: any[];
+  onLoad?: (themeLayer?:any, map?: mapboxglTypes.Map) => any;
 }
 
 @compose(
@@ -34,7 +36,9 @@ export default class UniqueThemeLayer extends React.Component<UniqueThemeProps> 
   }
 
   loaded(map: mapboxglTypes.Map) {
+    const { onLoad } = this.props;
     this.viewModel = new UniqueThemeLayerViewModel(map, this.props);
+    isFunction(onLoad) && onLoad(this.viewModel.themeLayer, map);
   }
 
   render() {

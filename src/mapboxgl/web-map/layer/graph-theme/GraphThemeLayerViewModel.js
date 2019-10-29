@@ -10,7 +10,6 @@ export default class GraphThemeLayerViewModel extends mapboxgl.Evented {
     this.chartsType = chartsType || 'Bar';
     options.id = options.id || layerId;
     this.options = options;
-    this.layerId = layerId;
     this.data = data || {};
     this._init();
   }

@@ -9,7 +9,6 @@ export default class UniqueThemeLayerViewModel extends mapboxgl.Evented {
     this.layerName = layerName || layerId;
     options.id = options.id || layerId;
     this.options = options;
-    this.layerId = layerId;
     this.data = data || [];
     this._init();
   }

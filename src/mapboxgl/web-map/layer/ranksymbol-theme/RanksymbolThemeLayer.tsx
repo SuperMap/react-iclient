@@ -1,7 +1,8 @@
 import { Component } from 'react';
+import { compose } from 'recompose';
 import MapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
 import Layer, { LayerProps } from '../../../_mixin/layer';
-import { compose } from 'recompose';
+import { isFunction } from '../../../../common/_utils/util';
 import RanksymbolThemeLayerViewModel from './RanksymbolThemeLayerViewModel.js';
 
 interface RanksymbolThemeLayerProps extends LayerProps, MapGetterProps {
@@ -20,8 +21,9 @@ export default class RanksymbolThemeLayer extends Component<RanksymbolThemeLayer
   viewModel: RanksymbolThemeLayerViewModel;
 
   loaded(map: mapboxglTypes.Map) {
+    const { onLoad } = this.props;
     this.viewModel = new RanksymbolThemeLayerViewModel(map, this.props);
-    this.props.onLoad(this.viewModel.themeLayer, map);
+    isFunction(onLoad) && onLoad(this.viewModel.themeLayer, map);
   }
 
   render() {

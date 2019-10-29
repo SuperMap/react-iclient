@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 import isEqual from 'lodash.isequal';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
 import layer, { LayerProps } from '../../../_mixin/layer';
+import { isFunction } from '../../../../common/_utils/util';
 import GraphThemeLayerViewModel from './GraphThemeLayerViewModel';
 
 interface GraphThemeProps extends MapGetterProps, LayerProps {
@@ -11,6 +12,7 @@ interface GraphThemeProps extends MapGetterProps, LayerProps {
   layerName?: string;
   options?: object;
   data: object;
+  onLoad?: (themeLayer?:any, map?: mapboxglTypes.Map) => any;
 }
 
 @compose(
@@ -36,7 +38,9 @@ export default class GraphThemeLayer extends React.Component<GraphThemeProps> {
   }
 
   loaded(map: mapboxglTypes.Map) {
+    const { onLoad } = this.props;
     this.viewModel = new GraphThemeLayerViewModel(map, this.props);
+    isFunction(onLoad) && onLoad(this.viewModel.themeLayer, map);
   }
 
   render() {
