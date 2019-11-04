@@ -1,6 +1,7 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { wrapDisplayName } from 'recompose';
+import { message } from 'antd';
 import WebMapViewModel from '../web-map/WebMapViewModel';
 import mapEvent from '../_types/map-event';
 import globalEvent from '../../common/_utils/global-event';
@@ -115,8 +116,10 @@ export default function mapGetter<P extends MapGetterProps = MapGetterProps>(Wra
 
     mapNotLoadedTip(): boolean {
       if (!this.map) {
-        // this.$message.destroy();
-        // this.$message.warning(this.$t('warning.unassociatedMap'));
+        message.destroy();
+        // TODO
+        // message.warning(this.$t('warning.unassociatedMap'));
+        message.warning('您需要配置关联地图！');
         return true;
       }
       return false;

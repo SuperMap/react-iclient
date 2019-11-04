@@ -42,46 +42,46 @@ export const MAP_EVENT_NAMES: string[] = [
 ];
 
 export interface MapEvents {
-  onResize?(params: object): any
-  onWebglcontextlost?(params: object): any
-  onWebglcontextrestored?(params: object): any
-  onRemove?(params: object): any
-  onMovestart?(params: object): any
-  onContextmenu?(params: object): any
-  onDblclick?(params: object): any
-  onClick?(params: object): any
-  onTouchcancel?(params: object): any
-  onTouchmove?(params: object): any
-  onTouchend?(params: object): any
-  onTouchstart?(params: object): any
-  onDataloading?(params: object): any
-  onMousemove?(params: object): any
-  onMouseup?(params: object): any
-  onMousedown?(params: object): any
-  onSourcedataloading?(params: object): any
-  onError?(params: object): any
-  onData?(params: object): any
-  onStyledata?(params: object): any
-  onSourcedata?(params: object): any
-  onMouseout?(params: object): any
-  onStyledataloading?(params: object): any
-  onMoveend?(params: object): any
-  onMove?(params: object): any
-  onRender?(params: object): any
-  onZoom?(params: object): any
-  onZoomstart?(params: object): any
-  onZoomend?(params: object): any
-  onBoxzoomstart?(params: object): any
-  onBoxzoomcancel?(params: object): any
-  onBoxzoomend?(params: object): any
-  onRotate?(params: object): any
-  onRotatestart?(params: object): any
-  onRotateend?(params: object): any
-  onDragend?(params: object): any
-  onDrag?(params: object): any
-  onDragstart?(params: object): any
-  onPitch?(params: object): any
-  onIdle?(params: object): any
+  onResize?(params: object): void
+  onWebglcontextlost?(params: object): void
+  onWebglcontextrestored?(params: object): void
+  onRemove?(params: object): void
+  onMovestart?(params: object): void
+  onContextmenu?(params: object): void
+  onDblclick?(params: object): void
+  onClick?(params: object): void
+  onTouchcancel?(params: object): void
+  onTouchmove?(params: object): void
+  onTouchend?(params: object): void
+  onTouchstart?(params: object): void
+  onDataloading?(params: object): void
+  onMousemove?(params: object): void
+  onMouseup?(params: object): void
+  onMousedown?(params: object): void
+  onSourcedataloading?(params: object): void
+  onError?(params: object): void
+  onData?(params: object): void
+  onStyledata?(params: object): void
+  onSourcedata?(params: object): void
+  onMouseout?(params: object): void
+  onStyledataloading?(params: object): void
+  onMoveend?(params: object): void
+  onMove?(params: object): void
+  onRender?(params: object): void
+  onZoom?(params: object): void
+  onZoomstart?(params: object): void
+  onZoomend?(params: object): void
+  onBoxzoomstart?(params: object): void
+  onBoxzoomcancel?(params: object): void
+  onBoxzoomend?(params: object): void
+  onRotate?(params: object): void
+  onRotatestart?(params: object): void
+  onRotateend?(params: object): void
+  onDragend?(params: object): void
+  onDrag?(params: object): void
+  onDragstart?(params: object): void
+  onPitch?(params: object): void
+  onIdle?(params: object): void
 }
 
 export interface MapOptions {
@@ -109,12 +109,13 @@ export interface WebMapProps extends MapEvents {
   tiandituKey?: string;
   excludePortalProxyUrl?: boolean;
   autoresize: boolean;
-  onLoad?(params: object): any;
+  onLoad?(params: object): void;
+  onGetMapFailed?(params: object): void;
+  onGetLayerDatasourceFailed?(params: object): void;
 }
 
 export interface WebMapState {
   spinning?: boolean;
-  mapId?: string | null;
   viewModelProps: string[];
 };
 

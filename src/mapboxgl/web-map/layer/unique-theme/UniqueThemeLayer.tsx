@@ -11,7 +11,7 @@ interface UniqueThemeProps extends MapGetterProps, LayerProps {
   layerName?: string;
   options?: object;
   data: any[];
-  onLoad?: (themeLayer?:any, map?: mapboxglTypes.Map) => any;
+  onLoad?: (themeLayer?:any, map?: mapboxglTypes.Map) => void;
 }
 
 @compose(

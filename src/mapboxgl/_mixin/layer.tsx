@@ -6,19 +6,19 @@ import { wrapDisplayName } from 'recompose';
 import { callHook, getComponentInstance, isFunction } from '../../common/_utils/util';
 
 interface layerEvents {
-  onMousedown?(params: object): any,
-  onMouseup?(params: object): any,
-  onClick?(params: object): any,
-  onDblclick?(params: object): any,
-  onMousemove?(params: object): any,
-  onMouseenter?(params: object): any,
-  onMouseleave?(params: object): any,
-  onMouseover?(params: object): any,
-  onMouseout?(params: object): any,
-  onContextmenu?(params: object): any,
-  onTouchstart?(params: object): any,
-  onTouchend?(params: object): any,
-  onTouchcancel?(params: object): any
+  onMousedown?(params: object): void,
+  onMouseup?(params: object): void,
+  onClick?(params: object): void,
+  onDblclick?(params: object): void,
+  onMousemove?(params: object): void,
+  onMouseenter?(params: object): void,
+  onMouseleave?(params: object): void,
+  onMouseover?(params: object): void,
+  onMouseout?(params: object): void,
+  onContextmenu?(params: object): void,
+  onTouchstart?(params: object): void,
+  onTouchend?(params: object): void,
+  onTouchcancel?(params: object): void
 }
 
 export interface LayerProps extends layerEvents {

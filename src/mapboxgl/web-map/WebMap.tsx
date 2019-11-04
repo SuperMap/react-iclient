@@ -2,6 +2,9 @@ import React from 'react';
 import { addListener, removeListener } from 'resize-detector';
 import debounce from 'lodash.debounce';
 import capitalize from 'lodash.capitalize';
+import { Spin, message } from 'antd';
+import get from 'lodash.get';
+import isEqual from 'lodash.isequal';
 import mapEvent from '../_types/map-event';
 import WebMapViewModel from './WebMapViewModel';
 import { isFunction } from '../../common/_utils/util';
@@ -17,10 +20,10 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
     autoresize: true
   };
 
-  // state: WebMapState
   constructor(props: WebMapProps) {
     super(props);
     this.state = {
+      spinning: true,
       viewModelProps: [
         'mapId',
         'serverUrl',
@@ -47,27 +50,14 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
   }
 
   componentDidUpdate(prevProps: WebMapProps) {
-    if (this.viewModel) {
-      this.state.viewModelProps.forEach(prop => {
-        const propArr = prop.split('.');
-        const funcName = `set${propArr[propArr.length - 1].charAt(0).toUpperCase()}${propArr[propArr.length - 1].slice(
-          1
-        )}`;
-        if (propArr.length > 1) {
-          if (
-            this.props[propArr[0]] &&
-            this.props[propArr[0]][propArr[1]] &&
-            (!prevProps.mapOptions || this.props[propArr[0]][propArr[1]] !== prevProps[propArr[0]][propArr[1]])
-          ) {
-            this.viewModel[funcName](this.props[propArr[0]][propArr[1]]);
-          }
-        } else {
-          if (this.props[propArr[0]] && this.props[propArr[0]] !== prevProps[propArr[0]]) {
-            this.viewModel[funcName](this.props.mapId);
-          }
-        }
-      });
-    }
+    this.viewModel && this.state.viewModelProps.forEach(prop => {
+      const funcName = `set${capitalize(prop.slice(-1).toString())}`;
+      const propsValue = get(this.props, prop);
+      const prevPropsValue = get(prevProps, prop);
+      if (propsValue && !isEqual(propsValue, prevPropsValue)) {
+        this.viewModel[funcName](propsValue);
+      }
+    });
   }
 
   componentWillUnmount() {
@@ -111,25 +101,51 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
 
   registerEvents = () => {
     const { target, onLoad } = this.props;
-    this.viewModel &&
-      this.viewModel.on('addlayerssucceeded', (e) => {
-        this.setState({
-          spinning: false
-        });
-        mapEvent.setMap(target, e.map);
-        this.viewModel && mapEvent.setWebMap(target, this.viewModel);
-        mapEvent.emit('load-map', e.map, target);
-        e.map.resize();
-        this.map = e.map;
-        // 绑定map event
-        this.bindMapEvents();
-        /**
-         * @event load
-         * @desc webmap 加载完成之后触发。
-         * @property {mapboxgl.Map} map - MapBoxGL Map 对象。
-         */
-        isFunction(onLoad) && onLoad({ ...e, component: this });
+    this.viewModel.on('addlayerssucceeded', (e) => {
+      this.setState({
+        spinning: false
       });
+      mapEvent.setMap(target, e.map);
+      this.viewModel && mapEvent.setWebMap(target, this.viewModel);
+      mapEvent.emit('load-map', e.map, target);
+      e.map.resize();
+      this.map = e.map;
+      // 绑定map event
+      this.bindMapEvents();
+      /**
+       * @event load
+       * @desc webmap 加载完成之后触发。
+       * @property {mapboxgl.Map} map - MapBoxGL Map 对象。
+       */
+      isFunction(onLoad) && onLoad({ ...e, component: this });
+    });
+    this.viewModel.on('getmapinfofailed', e => {
+      const { onGetMapFailed } = this.props;
+      /**
+       * @event getMapFailed
+       * @desc 获取 WebMap 地图信息失败。
+       * @property {Object} error - 失败原因。
+       */
+      isFunction(onGetMapFailed) && onGetMapFailed({ error: e.error });
+      message.error(e.error.message);
+      this.setState({
+        spinning: false
+      });
+    });
+    this.viewModel.on('getlayerdatasourcefailed', e => {
+      const { onGetLayerDatasourceFailed } = this.props;
+      /**
+       * @event getLayerDatasourceFailed
+       * @desc 获取图层数据失败。
+       * @property {Object} error - 失败原因。
+       * @property {Object} layer - 图层信息。
+       * @property {mapboxgl.Map} map - MapBoxGL Map 对象。
+       */
+      isFunction(onGetLayerDatasourceFailed) && onGetLayerDatasourceFailed({ error: e.error, layer: e.layer, map: e.map });
+      // TODO
+      // message.error(this.$t('webmap.getLayerInfoFailed'));
+      message.error('获取图层信息失败！');
+    });
   };
 
   __resizeHandler() {
@@ -171,10 +187,16 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
   }
 
   render() {
+    const { spinning } = this.state;
     const { target, children } = this.props;
     return (
       <div id={target} className="sm-component-web-map" ref={this.selfRef}>
         {children}
+        {
+          spinning
+          &&
+          <Spin size="large" tip="地图加载中..." spinning={spinning} />
+        }
       </div>
     );
   }
