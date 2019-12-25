@@ -25,7 +25,7 @@ function getProdConfig(isMinify) {
     bail: true,
     entry: [path.resolve(__dirname, '../src/mapboxgl/index.tsx')].filter(Boolean),
     output: {
-      path: path.resolve(__dirname, '../dist'),
+      path: path.resolve(__dirname, '../dist/mapboxgl'),
       filename: isMinify ? `${outputFileName}.min.js` : `${outputFileName}.js`,
       libraryTarget: 'umd',
       libraryExport: 'default',
@@ -35,9 +35,9 @@ function getProdConfig(isMinify) {
       {
         react: {
           root: 'React',
-          commonjs: 'React',
-          commonjs2: 'React',
-          amd: 'React'
+          commonjs: 'react',
+          commonjs2: 'react',
+          amd: 'react'
         },
         'react-dom': {
           root: 'ReactDOM',
@@ -55,38 +55,37 @@ function getProdConfig(isMinify) {
           amd: 'three'
         }
       },
-      / \/static\/libs\//,
       function(context, request, callback) {
         if (/\/public\/libs\/mapboxgl\/mapbox-gl-enhance/.test(request)) {
           return callback(null, {
             root: 'mapboxgl',
-            commonjs: './libs/mapboxgl/mapbox-gl-enhance.js',
-            commonjs2: './libs/mapboxgl/mapbox-gl-enhance.js',
-            amd: './libs/mapboxgl/mapbox-gl-enhance.js'
+            commonjs: '../../public/libs/mapboxgl/mapbox-gl-enhance.js',
+            commonjs2: '../../public/libs/mapboxgl/mapbox-gl-enhance.js',
+            amd: '../../public/libs/mapboxgl/mapbox-gl-enhance.js'
           });
         }
         if (/\/public\/libs\/deckgl\/deck.gl/.test(request)) {
           return callback(null, {
             root: 'DeckGL',
-            commonjs: './libs/deckgl/deck.gl.min.js',
-            commonjs2: './libs/deckgl/deck.gl.min.js',
-            amd: './libs/deckgl/deck.gl.min.js'
+            commonjs: '../../public/libs/deckgl/deck.gl.min.js',
+            commonjs2: '../../public/libs/deckgl/deck.gl.min.js',
+            amd: '../../public/libs/deckgl/deck.gl.min.js'
           });
         }
         if (/\/public\/libs\/echarts-layer\/EchartsLayer/.test(request)) {
           return callback(null, {
             root: 'EchartsLayer',
-            commonjs: './libs/echarts-layer/EchartsLayer.js',
-            commonjs2: './libs/echarts-layer/EchartsLayer.js',
-            amd: './libs/echarts-layer/EchartsLayer.js'
+            commonjs: '../../public/libs/echarts-layer/EchartsLayer.js',
+            commonjs2: '../../public/libs/echarts-layer/EchartsLayer.js',
+            amd: '../../public/libs/echarts-layer/EchartsLayer.js'
           });
         }
         if (/\/public\/libs\/iclient-mapboxgl\/iclient9-mapboxgl/.test(request)) {
           return callback(null, {
             root: 'SuperMap',
-            commonjs: './libs/iclient-mapboxgl/iclient9-mapboxgl.min.js',
-            commonjs2: './libs/iclient-mapboxgl/iclient9-mapboxgl.min.js',
-            amd: './libs/iclient-mapboxgl/iclient9-mapboxgl.min.js'
+            commonjs: '../../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js',
+            commonjs2: '../../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js',
+            amd: '../../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js'
           });
         }
         callback();
@@ -100,7 +99,7 @@ function getProdConfig(isMinify) {
       new webpack.DefinePlugin(env.stringified),
       new webpack.BannerPlugin(`
       ${pkg.name}.(${pkg.homepage})
-      Copyright© 2000 - 2019 SuperMap Software Co.Ltd
+      Copyright© 2000 - 2020 SuperMap Software Co.Ltd
       license: ${pkg.license}
       version: v${pkg.version}
      `),
@@ -130,9 +129,8 @@ function getProdConfig(isMinify) {
       }),
       new CopyWebpackPlugin([
         {
-          from: path.resolve(__dirname, '../public'),
-          to: path.resolve(__dirname, '../dist'),
-          ignore: ['libs/Cesium/**/*', 'index.html']
+          from: path.resolve(__dirname, '../public/mbgl-index.js'),
+          to: path.resolve(__dirname, '../dist/mapboxgl/index.js')
         }
       ])
     ]

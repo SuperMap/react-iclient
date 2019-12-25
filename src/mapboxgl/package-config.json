@@ -1,0 +1,71 @@
+{
+  "name": "@supermap/react-iclient-mapboxgl",
+  "version": "10.0.1",
+  "description": "SuperMap iClient for React.js",
+  "main": "dist/mapboxgl/index",
+  "dependencies": {
+    "@turf/bbox": "^6.0.1",
+    "@turf/envelope": "^5.1.5",
+    "@turf/transform-scale": "^5.1.5",
+    "@types/echarts": "^4.1.13",
+    "@types/geojson": "^7946.0.7",
+    "@types/jest": "24.0.18",
+    "@types/lodash.clonedeep": "^4.5.6",
+    "@types/lodash.uniqueid": "^4.0.6",
+    "@types/mapbox-gl": "^0.54.3",
+    "@types/node": "12.7.5",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "16.9.2",
+    "@types/react-dom": "16.9.0",
+    "antd": "^3.24.3",
+    "canvg": "^1.5.3",
+    "colorcolor": "^1.1.1",
+    "echarts": "^4.4.0",
+    "hoist-non-react-statics": "^3.3.0",
+    "identity-obj-proxy": "3.0.0",
+    "is-wsl": "^1.1.0",
+    "loadsh": "0.0.4",
+    "lodash.capitalize": "^4.2.1",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.debounce": "^4.0.8",
+    "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.5.0",
+    "lodash.max": "^4.0.1",
+    "lodash.tonumber": "^4.0.3",
+    "lodash.uniqueid": "^4.0.1",
+    "prop-types": "^15.7.2",
+    "recompose": "^0.30.0",
+    "resize-detector": "^0.2.0",
+    "semver": "6.3.0",
+    "three": "^0.111.0",
+    "turf": "^3.0.14",
+    "xml-js": "^1.6.11"
+  },
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
+  },
+  "author": "SuperMap_FE",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "SuperMap",
+    "Mapbox GL",
+    "React"
+  ],
+  "license": "Apache-2.0"
+}

@@ -41,7 +41,7 @@
     // "allowSyntheticDefaultImports": true,
     // 移除注释
     "removeComments": true,
-    "types": ["node", "mapbox-gl"],
+    "types": ["node", "mapbox-gl", "geojson"],
     "pretty": true,
     // 函数返回值
     "noImplicitReturns": true,

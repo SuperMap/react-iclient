@@ -6,6 +6,7 @@
  * 原因还是因为 TypeScript 默认只识别 *.ts 文件，不识别 *.vue 文件
  */
 //给配置文件中types：['mapbox-gl']引入的namespace mapboxgl起个别名
+// eslint-ignore
 import mapboxglTypes = mapboxgl;
 declare var SuperMap: any;
 
@@ -13,7 +14,6 @@ declare var SuperMap: any;
  * 告诉 TypeScript window是个全局对象，直接可用，这样就不会在window.xx = 123时报错
  */
 interface Window {
-  Vue: any;
   convert: any;
   jsonsql: any;
   canvg: any;
@@ -26,6 +26,6 @@ declare var window: Window;
 
 // typings.d.ts
 declare module '*.json' {
-  const value: any
+  const value: any;
   export default value;
 }

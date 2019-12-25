@@ -42,7 +42,7 @@ module.exports = {
     'no-delete-var': 2,
     'prefer-const': 0,
     //Ensure imports point to a file/module that can be resolved
-    'import/no-unresolved': [2, { commonjs: true, amd: true }],
+    'import/no-unresolved': [2, { commonjs: true, amd: true, ignore: ['geojson'] }],
     //Ensure named imports correspond to a named export in the remote file
     'import/named': 2,
     //Ensure a default export is present, given a default import
