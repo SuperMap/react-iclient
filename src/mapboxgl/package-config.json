@@ -2,7 +2,7 @@
   "name": "@supermap/react-iclient-mapboxgl",
   "version": "10.0.1",
   "description": "SuperMap iClient for React.js",
-  "main": "dist/mapboxgl/index",
+  "main": "dist/index",
   "dependencies": {
     "@turf/bbox": "^6.0.1",
     "@turf/envelope": "^5.1.5",
@@ -67,5 +67,8 @@
     "Mapbox GL",
     "React"
   ],
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "scripts": {
+    "postpublish": "git reset --hard && git clean -df && rimraf ./dist"
+  }
 }

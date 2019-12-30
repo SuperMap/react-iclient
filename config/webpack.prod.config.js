@@ -59,33 +59,33 @@ function getProdConfig(isMinify) {
         if (/\/public\/libs\/mapboxgl\/mapbox-gl-enhance/.test(request)) {
           return callback(null, {
             root: 'mapboxgl',
-            commonjs: '../../public/libs/mapboxgl/mapbox-gl-enhance.js',
-            commonjs2: '../../public/libs/mapboxgl/mapbox-gl-enhance.js',
-            amd: '../../public/libs/mapboxgl/mapbox-gl-enhance.js'
+            commonjs: '../public/libs/mapboxgl/mapbox-gl-enhance.js',
+            commonjs2: '../public/libs/mapboxgl/mapbox-gl-enhance.js',
+            amd: '../public/libs/mapboxgl/mapbox-gl-enhance.js'
           });
         }
         if (/\/public\/libs\/deckgl\/deck.gl/.test(request)) {
           return callback(null, {
             root: 'DeckGL',
-            commonjs: '../../public/libs/deckgl/deck.gl.min.js',
-            commonjs2: '../../public/libs/deckgl/deck.gl.min.js',
-            amd: '../../public/libs/deckgl/deck.gl.min.js'
+            commonjs: '../public/libs/deckgl/deck.gl.min.js',
+            commonjs2: '../public/libs/deckgl/deck.gl.min.js',
+            amd: '../public/libs/deckgl/deck.gl.min.js'
           });
         }
         if (/\/public\/libs\/echarts-layer\/EchartsLayer/.test(request)) {
           return callback(null, {
             root: 'EchartsLayer',
-            commonjs: '../../public/libs/echarts-layer/EchartsLayer.js',
-            commonjs2: '../../public/libs/echarts-layer/EchartsLayer.js',
-            amd: '../../public/libs/echarts-layer/EchartsLayer.js'
+            commonjs: '../public/libs/echarts-layer/EchartsLayer.js',
+            commonjs2: '../public/libs/echarts-layer/EchartsLayer.js',
+            amd: '../public/libs/echarts-layer/EchartsLayer.js'
           });
         }
         if (/\/public\/libs\/iclient-mapboxgl\/iclient9-mapboxgl/.test(request)) {
           return callback(null, {
             root: 'SuperMap',
-            commonjs: '../../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js',
-            commonjs2: '../../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js',
-            amd: '../../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js'
+            commonjs: '../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js',
+            commonjs2: '../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js',
+            amd: '../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js'
           });
         }
         callback();

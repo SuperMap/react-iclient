@@ -9,6 +9,7 @@ yarn-error.log*
 /config/
 /scripts/
 
+/dist/mapboxgl/
 /public/index.html
 /public/libs/Cesium/
 /public/mbgl-index.js
