@@ -9,7 +9,7 @@
     "test": "node scripts/test.js",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
-    "prepublish": "node ./config/publish.js",
+    "prepublishOnly": "node ./config/publish.js",
     "publish:all": "npm run build -mapboxgl && npm publish -mapboxgl"
   },
   "dependencies": {
