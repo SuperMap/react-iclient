@@ -14,4 +14,7 @@ fs.copy(path.resolve(__dirname, `../src/${key}/.npmignore`), path.resolve(__dirn
 fs.copy(path.resolve(__dirname, `../dist/${key}/`), path.resolve(__dirname, `../dist/`), err => {
   if (err) throw err;
 });
+fs.copy(path.resolve(__dirname, `../src/${key}/README.md`), path.resolve(__dirname, `../README.md`), err => {
+  if (err) throw err;
+});
 
