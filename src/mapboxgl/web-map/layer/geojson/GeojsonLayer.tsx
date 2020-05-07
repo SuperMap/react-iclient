@@ -3,16 +3,16 @@ import GeojsonLayerViewModel from './GeojsonLayerViewModel';
 import { compose } from 'recompose';
 import isEqual from 'lodash.isequal';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 
-interface GeojsonLayerProps extends MapGetterProps, LayerProps {
+interface GeojsonLayerProps extends MapGetterProps, BaseLayerProps {
   layerStyle: object;
   data: object | string;
 }
 
 @compose(
   mapGetter,
-  layer
+  BaseLayer
 )
 export default class GeojsonLayer extends Component<GeojsonLayerProps> {
   viewModel: GeojsonLayerViewModel;

@@ -2,6 +2,7 @@ import React from 'react';
 import { addListener, removeListener } from 'resize-detector';
 import debounce from 'lodash.debounce';
 import capitalize from 'lodash.capitalize';
+import upperFirst from 'lodash.upperfirst';
 import { Spin, message } from 'antd';
 import get from 'lodash.get';
 import isEqual from 'lodash.isequal';
@@ -51,7 +52,8 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
 
   componentDidUpdate(prevProps: WebMapProps) {
     this.viewModel && this.state.viewModelProps.forEach(prop => {
-      const funcName = `set${capitalize(prop.slice(-1).toString())}`;
+      const name = prop.includes('.') ? prop.split('.')[1] : prop;
+      const funcName = `set${upperFirst(name)}`;
       const propsValue = get(this.props, prop);
       const prevPropsValue = get(prevProps, prop);
       if (propsValue && !isEqual(propsValue, prevPropsValue)) {

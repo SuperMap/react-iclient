@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import MapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import Layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import { compose } from 'recompose';
 import DeckglLayerViewModel from './DeckglLayerViewModel';
 
-interface DeckglLayerProps extends MapGetterProps, LayerProps {
+interface DeckglLayerProps extends MapGetterProps, BaseLayerProps {
   layerType:string,
   options:object
 }
@@ -18,7 +18,7 @@ const LAYER_TYPE_ID_LIST = [
   'screen-grid-layer'
 ];
 
-@compose(MapGetter,Layer)
+@compose(MapGetter,BaseLayer)
 export default class DeckglLayer extends Component<DeckglLayerProps> {
   viewModel: DeckglLayerViewModel
   loaded(map: mapboxglTypes.Map) {

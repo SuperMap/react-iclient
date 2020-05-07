@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import DataFlowLayerViewModel from './DataFlowLayerViewModel';
 import { CircleStyle, FillStyle, LineStyle } from '../../../_types';
 import { isFunction } from '../../../../common/_utils/util';
 
-interface DataFlowProps extends MapGetterProps, LayerProps {
+interface DataFlowProps extends MapGetterProps, BaseLayerProps {
   serviceUrl: string;
   registerToken?: string;
   geometry?: object;
@@ -20,7 +20,7 @@ interface DataFlowProps extends MapGetterProps, LayerProps {
 
 @compose(
   mapGetter,
-  layer
+  BaseLayer
 )
 export default class DataFlowLayer extends React.Component<DataFlowProps> {
   viewModel: DataFlowLayerViewModel;

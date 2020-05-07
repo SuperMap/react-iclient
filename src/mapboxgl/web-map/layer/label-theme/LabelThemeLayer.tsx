@@ -1,17 +1,17 @@
 import { Component } from 'react';
 import { compose } from 'recompose';
 import MapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import Layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import { isFunction } from '../../../../common/_utils/util';
 import LabelThemeLayerViewModel from './LabelThemeLayerViewModel.js';
 
-interface LabelThemeLayerProps extends MapGetterProps, LayerProps {
+interface LabelThemeLayerProps extends MapGetterProps, BaseLayerProps {
   layerName:string,
   options?:object,
   data:Array<any>,
   onLoad?: (themeLayer?:any, map?: mapboxglTypes.Map) => void
 }  
-@compose(MapGetter,Layer)
+@compose(MapGetter,BaseLayer)
 export default class LabelThemeLayer extends Component<LabelThemeLayerProps> {
   viewModel:LabelThemeLayerViewModel
   static defaultProps = {

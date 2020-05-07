@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import MapvLayerViewModel from './MapvLayerViewModel';
 
-interface MapvProps extends MapGetterProps, LayerProps {
+interface MapvProps extends MapGetterProps, BaseLayerProps {
   options?: object;
   data?: object;
 }
 
 @compose(
   mapGetter,
-  layer
+  BaseLayer
 )
 export default class MapvLayer extends React.Component<MapvProps> {
   viewModel: MapvLayerViewModel;

@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import HeatmapLayerViewModel from './HeatmapLayerViewModel';
 import HeatMapStyle from '../../../_types/HeatMapStyle';
 
-interface HeatmapProps extends MapGetterProps, LayerProps {
+interface HeatmapProps extends MapGetterProps, BaseLayerProps {
   data: object;
   layerStyle?: object;
 }
 
 @compose(
   mapGetter,
-  layer
+  BaseLayer
 )
 export default class HeatmapLayer extends React.Component<HeatmapProps> {
   viewModel: HeatmapLayerViewModel;

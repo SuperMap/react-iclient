@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import UniqueId from 'lodash.uniqueid';
 import capitalize from 'lodash.capitalize';
@@ -21,7 +21,7 @@ interface layerEvents {
   onTouchcancel?(params: object): void
 }
 
-export interface LayerProps extends layerEvents {
+export interface BaseLayerProps extends layerEvents {
   layerId?: string;
   layerName?: string;
   minzoom?: number;
@@ -29,11 +29,11 @@ export interface LayerProps extends layerEvents {
   filter?: any[];
   layout?: object;
   paint?: object;
-  before?: object;
+  before?: string;
 }
 
-export default function withLayer<P extends LayerProps = LayerProps>(WrappedComponent: React.ComponentType<P>) {
-  class Layer extends Component<P> {
+export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(WrappedComponent: React.ComponentType<P>) {
+  class BaseLayer extends PureComponent<P> {
     map: mapboxglTypes.Map;
     instanceRef: React.ReactInstance;
     eventList: string[];
@@ -83,17 +83,15 @@ export default function withLayer<P extends LayerProps = LayerProps>(WrappedComp
         }
       }
 
-      if (this.props.layout && prevProps.layout !== this.props.layout) {
-        for (let prop of Object.keys(this.props.layout)) {
-          this.map.setLayoutProperty(this.props.layerId, prop, this.props.layout[prop]);
-        }
-      }
-
       if (this.props.paint && prevProps.paint !== this.props.paint) {
         for (let prop of Object.keys(this.props.paint)) {
           this.map.setPaintProperty(this.props.layerId, prop, this.props.paint[prop]);
         }
       }
+    }
+
+    componentWillUnmount() {
+      this.remove();
     }
 
     loaded(map) {
@@ -160,19 +158,20 @@ export default function withLayer<P extends LayerProps = LayerProps>(WrappedComp
     }
 
     render() {
-      const { layerId } = this.props;
-      const sourceLoaded =
-        this.map && layerId ? this.map.isSourceLoaded(layerId) : false;
-      const mapLayer = this.map ? this.map.getLayer(layerId) : null;
-      const mapSource =
-        this.map && layerId ? this.map.getSource(layerId) : null;
+      // const { layerId } = this.props;
+      // const id = source || layerId;
+      // const sourceLoaded =
+      //   this.map && layerId ? this.map.isSourceLoaded(layerId) : false;
+      // const mapLayer = this.map ? this.map.getLayer(layerId) : null;
+      // const mapSource =
+      //   this.map && layerId ? this.map.getSource(layerId) : null;
       const newProps = Object.assign({}, this.props, {
-        sourceLoaded,
-        mapLayer,
-        mapSource
+        // sourceLoaded,
+        // mapLayer,
+        // mapSource
       });
       return <WrappedComponent {...newProps} ref={this.getComponentInstance} move={this.move} remove={this.remove} />;
     }
   };
-  return hoistNonReactStatics(Layer, WrappedComponent);
+  return hoistNonReactStatics(BaseLayer, WrappedComponent);
 };

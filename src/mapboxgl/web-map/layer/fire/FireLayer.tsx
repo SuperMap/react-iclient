@@ -4,17 +4,17 @@ import isEqual from 'lodash.isequal';
 import { FeatureCollection } from 'geojson';
 import { compose } from 'recompose';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import FireLayerViewModel from './FireLayerViewModel';
 
-interface FireProps extends MapGetterProps, LayerProps {
+interface FireProps extends MapGetterProps, BaseLayerProps {
   features?: FeatureCollection;
   modelScale?: number;
 }
 
 @compose(
   mapGetter,
-  layer
+  BaseLayer
 )
 export default class FireLayer extends React.Component<FireProps> {
   viewModel: FireLayerViewModel;

@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 
-interface VectorTileProps extends MapGetterProps, LayerProps {
+interface VectorTileProps extends MapGetterProps, BaseLayerProps {
   styleOptions?: string | object;
 }
 
 @compose(
   mapGetter,
-  layer
+  BaseLayer
 )
 export default class VectorTileLayer extends React.Component<VectorTileProps> {
   static propTypes = {

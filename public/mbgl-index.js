@@ -4,13 +4,13 @@ Object.defineProperty(exports, "__esModule", {
 
 require('antd/dist/antd.css');
 
-require('@supermap/react-iclient-mapboxgl/public/libs/mapboxgl/mapbox-gl-enhance.css');
+require('../public/libs/mapboxgl/mapbox-gl-enhance.css');
 
-require('@supermap/react-iclient-mapboxgl/public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.css');
+require('../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.css');
 
-require('@supermap/react-iclient-mapboxgl/dist/iclient-mapboxgl-react.min.css');
+require('./iclient-mapboxgl-react.css');
 
-var iclient = require('@supermap/react-iclient-mapboxgl/dist/iclient-mapboxgl-react');
+var iclient = require('./iclient-mapboxgl-react.js');
 
 exports.default = iclient;
 exports = module.exports = iclient;

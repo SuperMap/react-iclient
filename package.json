@@ -47,13 +47,14 @@
     "resize-detector": "^0.2.0",
     "semver": "6.3.0",
     "three": "^0.111.0",
-    "turf": "^3.0.14",
+    "@turf/turf": "^5.1.6",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-decorators": "^7.6.0",
     "@svgr/webpack": "4.3.2",
+    "@types/lodash.upperfirst": "^4.3.6",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
     "babel-eslint": "^10.0.3",
@@ -88,6 +89,7 @@
     "jest-resolve": "24.8.0",
     "jest-watch-typeahead": "0.3.1",
     "lint-staged": "^9.4.2",
+    "lodash.upperfirst": "^4.3.1",
     "mini-css-extract-plugin": "0.5.0",
     "node-sass": "^4.12.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",

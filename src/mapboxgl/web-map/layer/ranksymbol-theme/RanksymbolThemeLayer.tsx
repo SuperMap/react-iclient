@@ -1,11 +1,11 @@
 import { Component } from 'react';
 import { compose } from 'recompose';
 import MapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import Layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import { isFunction } from '../../../../common/_utils/util';
 import RanksymbolThemeLayerViewModel from './RanksymbolThemeLayerViewModel.js';
 
-interface RanksymbolThemeLayerProps extends LayerProps, MapGetterProps {
+interface RanksymbolThemeLayerProps extends BaseLayerProps, MapGetterProps {
   symbolType: string;
   layerName?:string,
   options?: object;
@@ -15,7 +15,7 @@ interface RanksymbolThemeLayerProps extends LayerProps, MapGetterProps {
 
 @compose(
   MapGetter,
-  Layer
+  BaseLayer
 )
 export default class RanksymbolThemeLayer extends Component<RanksymbolThemeLayerProps> {
   viewModel: RanksymbolThemeLayerViewModel;

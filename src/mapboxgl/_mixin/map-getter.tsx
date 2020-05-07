@@ -6,6 +6,7 @@ import WebMapViewModel from '../web-map/WebMapViewModel';
 import mapEvent from '../_types/map-event';
 import globalEvent from '../../common/_utils/global-event';
 import { callHook, getComponentInstance, getFirstMapTarget } from '../../common/_utils/util';
+import MapViewModal from '../web-map/MapViewModal';
 
 export interface MapGetterProps {
   mapTarget?: string;
@@ -14,7 +15,7 @@ export interface MapGetterProps {
 export default function mapGetter<P extends MapGetterProps = MapGetterProps>(WrappedComponent: React.ComponentType<P>) {
   class MapGetter extends React.Component<P> {
     map: mapboxglTypes.Map;
-    webmap: WebMapViewModel;
+    webmap: WebMapViewModel | MapViewModal;
     instanceRef: React.ReactInstance;
     getComponentInstance: typeof getComponentInstance;
 

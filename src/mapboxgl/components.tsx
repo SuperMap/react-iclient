@@ -1,6 +1,11 @@
 export { default as SmWebMap } from './web-map/WebMap';
+export { default as SmMap } from './web-map/Map';
+
+// source
+export { default as SmSource } from './web-map/Source';
 
 // layers
+export { default as SmLayer } from './web-map/layer/Layer';
 export { default as SmGeojsonLayer } from './web-map/layer/geojson/GeojsonLayer';
 export { default as SmRasterTileLayer } from './web-map/layer/raster-tile/RasterTileLayer';
 export { default as SmVectorTileLayer } from './web-map/layer/vector-tile/VectorTileLayer';

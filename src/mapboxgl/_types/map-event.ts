@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import WebMapViewModel from '../web-map/WebMapViewModel';
 import SourceListModel from '../web-map/SourceListModel';
 import globalEvent from '../../common/_utils/global-event';
+import MapViewModal from '../web-map/MapViewModal';
 
 class MapEvent extends EventEmitter {
   mapCache: object = {};
@@ -12,7 +13,7 @@ class MapEvent extends EventEmitter {
     return this.mapCache[mapTarget];
   }
 
-  getWebMap(webmapTarget: string): WebMapViewModel {
+  getWebMap(webmapTarget: string): WebMapViewModel | MapViewModal {
     return this.webMapCache[webmapTarget];
   }
 
@@ -28,7 +29,7 @@ class MapEvent extends EventEmitter {
     this.mapCache[mapTarget] = map;
   }
 
-  setWebMap(webmapTarget: string, webmap: WebMapViewModel) {
+  setWebMap(webmapTarget: string, webmap: WebMapViewModel | MapViewModal) {
     this.webMapCache[webmapTarget] = webmap;
   }
 

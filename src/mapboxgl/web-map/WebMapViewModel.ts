@@ -162,10 +162,10 @@
  
    private _dataflowService: any;
  
-   constructor(id, options: webMapOptions = {}, mapOptions: any = { version: 8, sources: {}, layers: [] }) {
+   constructor(id, options: webMapOptions = {}, mapOptions: any = {style: { version: 8, sources: {}, layers: [] }}) {
      super();
      this.mapId = id;
-     this.mapOptions = mapOptions;
+     this.mapOptions = Object.assign({ style: { version: 8, sources: {}, layers: [] } }, mapOptions);
      this.serverUrl = options.serverUrl || 'http://www.supermapol.com';
      this.accessToken = options.accessToken;
      this.accessKey = options.accessKey;

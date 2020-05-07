@@ -3,10 +3,10 @@ import ClusterLayerViewModel from './ClusterLayerViewModel';
 import CircleStyle from '../../../_types/CircleStyle';
 import isEqual from 'lodash.isequal';
 import MapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import Layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import { compose } from 'recompose';
 
-interface ClusterLayerProps extends LayerProps, MapGetterProps {
+interface ClusterLayerProps extends BaseLayerProps, MapGetterProps {
   data: object;
   radius?: number;
   maxZoom?: number;
@@ -17,7 +17,7 @@ interface ClusterLayerProps extends LayerProps, MapGetterProps {
 
 @compose(
   MapGetter,
-  Layer
+  BaseLayer
 )
 class ClusterLayer extends Component<ClusterLayerProps> {
   viewModel: ClusterLayerViewModel;

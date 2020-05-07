@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import RasterTileLayerViewModel from './RasterTileLayerViewModel';
 
 type SchemeType = 'xyz' | 'tms';
 
-interface RasterTileProps extends MapGetterProps, LayerProps {
+interface RasterTileProps extends MapGetterProps, BaseLayerProps {
   tileSize?: number;
   mapUrl?: string;
   tiles?: string[];
@@ -20,7 +20,7 @@ interface RasterTileProps extends MapGetterProps, LayerProps {
 
 @compose(
   mapGetter,
-  layer
+  BaseLayer
 )
 export default class RasterTileLayer extends React.Component<RasterTileProps> {
   viewModel: RasterTileLayerViewModel;

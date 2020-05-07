@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import isEqual from 'lodash.isequal';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import { isFunction } from '../../../../common/_utils/util';
 import RangeThemeLayerViewModel from './RangeThemeLayerViewModel';
 
-interface RangeThemeProps extends MapGetterProps, LayerProps {
+interface RangeThemeProps extends MapGetterProps, BaseLayerProps {
   layerName?: string;
   options?: object;
   data: any[];
@@ -16,7 +16,7 @@ interface RangeThemeProps extends MapGetterProps, LayerProps {
 
 @compose(
   mapGetter,
-  layer
+  BaseLayer
 )
 export default class RangeThemeLayer extends React.Component<RangeThemeProps> {
   viewModel: RangeThemeLayerViewModel;

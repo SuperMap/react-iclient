@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import mapGetter, { MapGetterProps } from '../../../_mixin/map-getter';
-import layer, { LayerProps } from '../../../_mixin/layer';
+import BaseLayer, { BaseLayerProps } from '../../../_mixin/base-layer';
 import EchatsLayerViewModel from './EchatsLayerViewModel';
 
-interface EchartsProps extends MapGetterProps, LayerProps {
+interface EchartsProps extends MapGetterProps, BaseLayerProps {
   options: object;
 }
 
 @compose(
   mapGetter,
-  layer
+  BaseLayer
 )
 export default class EchartsLayer extends React.Component<EchartsProps> {
   viewModel: EchatsLayerViewModel;
