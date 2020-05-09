@@ -1,4 +1,5 @@
-Object.defineProperty(exports, "__esModule", {
+/* eslint-disable import/no-unresolved */
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
@@ -10,7 +11,7 @@ require('../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.css');
 
 require('./iclient-mapboxgl-react.css');
 
-var iclient = require('./iclient-mapboxgl-react.js');
+var iclient = require('./iclient-mapboxgl-react.min.js');
 
 exports.default = iclient;
 exports = module.exports = iclient;
