@@ -29,6 +29,7 @@ export interface BaseLayerProps extends layerEvents {
   filter?: any[];
   layout?: object;
   paint?: object;
+  metadata?: object;
   before?: string;
 }
 
@@ -87,6 +88,9 @@ export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(Wra
         for (let prop of Object.keys(this.props.paint)) {
           this.map.setPaintProperty(this.props.layerId, prop, this.props.paint[prop]);
         }
+      }
+      if (this.props.metadata && prevProps.metadata !== this.props.metadata) {
+        Object.assign(this.map.getLayer(this.props.layerId).metadata, this.props.metadata);
       }
     }
 
