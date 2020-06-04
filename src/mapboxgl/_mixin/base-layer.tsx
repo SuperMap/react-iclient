@@ -92,6 +92,10 @@ export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(Wra
       if (this.props.metadata && prevProps.metadata !== this.props.metadata) {
         Object.assign(this.map.getLayer(this.props.layerId).metadata, this.props.metadata);
       }
+
+      if (prevProps.before !== this.props.before) {
+        this.move(this.props.before);
+      }
     }
 
     componentWillUnmount() {
