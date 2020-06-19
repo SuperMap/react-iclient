@@ -1,6 +1,6 @@
 {
   "name": "@supermap/react-iclient",
-  "version": "10.0.1",
+  "version": "10.1.0-alpha",
   "description": "SuperMap iClient for React.js",
   "homepage": "http://iclient.supermap.io",
   "scripts": {

@@ -90,7 +90,7 @@ module.exports = function(isEnvProduction) {
         {
           oneOf: [
             {
-              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+              test: /\.(png|jpg|jpeg|gif|woff|woff2|svg|eot|ttf)$/,
               loader: require.resolve('url-loader'),
               options: {
                 limit: parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '200000'),
