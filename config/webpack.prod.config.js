@@ -145,17 +145,17 @@ function getProdConfig(isMinify) {
             warnings: false
           },
           output: {
-            comments: false
+            comments: true
           }
         },
         extractComments: {
           banner: () => {
             return `
 * 
-*       @supermap/react-iclient.(http://iclient.supermap.io)
+*       ${pkg.name}.(${pkg.homepage})
 *       Copyright© 2000 - 2020 SuperMap Software Co.Ltd
-*       license: Apache-2.0
-*       version: v10.1.0-alpha
+*       license: ${pkg.license}
+*       version: v${pkg.version}
 * 
 `;
           },
