@@ -15,6 +15,7 @@ yarn-error.log*
 /public/mbgl-index.js
 
 /src/mapboxgl/packageConfig.json
+/dist/iclient-mapboxgl-react.min.js.LICENSE
 
 .git
 .editorconfig
