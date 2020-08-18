@@ -25,12 +25,17 @@ export default class Layer extends React.Component<LayerProps> {
       console.error(`Source "${source}" is not loaded`);
       return;
     }
+    
+    if (type !== 'background' && !source) {
+      console.error(`Source is required unless type is background`);
+      return;
+    }
 
     const layerOption: mapboxglTypes.Layer = {
       id: layerId,
-      type,
-      source
+      type
     };
+    source && (layerOption.source = source);
     minzoom !== undefined && (layerOption.minzoom = minzoom);
     maxzoom !== undefined && (layerOption.maxzoom = maxzoom);
     filter && (layerOption.filter = filter);
