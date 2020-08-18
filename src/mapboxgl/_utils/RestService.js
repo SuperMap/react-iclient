@@ -1,5 +1,5 @@
 import mapboxgl from '../../../public/libs/mapboxgl/mapbox-gl-enhance';
-import '../../../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min';
+import '../../../public/libs/iclient-mapboxgl/iclient-mapboxgl.min';
 
 export default class RestService extends mapboxgl.Evented {
   /**

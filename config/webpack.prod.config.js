@@ -80,12 +80,12 @@ function getProdConfig(isMinify) {
             amd: '../public/libs/echarts-layer/EchartsLayer.js'
           });
         }
-        if (/\/public\/libs\/iclient-mapboxgl\/iclient9-mapboxgl/.test(request)) {
+        if (/\/public\/libs\/iclient-mapboxgl\/iclient-mapboxgl/.test(request)) {
           return callback(null, {
             root: 'SuperMap',
-            commonjs: '../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js',
-            commonjs2: '../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js',
-            amd: '../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min.js'
+            commonjs: '../public/libs/iclient-mapboxgl/iclient-mapboxgl.min.js',
+            commonjs2: '../public/libs/iclient-mapboxgl/iclient-mapboxgl.min.js',
+            amd: '../public/libs/iclient-mapboxgl/iclient-mapboxgl.min.js'
           });
         }
         callback();

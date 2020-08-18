@@ -6,7 +6,7 @@
  import SourceListModel from './SourceListModel';
  import { handleMultyPolygon } from '../_utils/geometry-util';
  import { isXField, isYField } from '../../common/_utils/util';
- import '../../../public/libs/iclient-mapboxgl/iclient9-mapboxgl.min';
+ import '../../../public/libs/iclient-mapboxgl/iclient-mapboxgl.min';
  import '../../../public/libs/geostats/geostats';
  import '../../../public/libs/json-sql/jsonsql';
  import * as convert from 'xml-js';
