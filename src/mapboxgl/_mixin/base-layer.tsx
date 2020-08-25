@@ -90,7 +90,13 @@ export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(Wra
         }
       }
       if (this.props.metadata && prevProps.metadata !== this.props.metadata) {
-        Object.assign(this.map.getLayer(this.props.layerId).metadata, this.props.metadata);
+        const layer = this.map.getLayer(this.props.layerId),
+          metadata = layer.metadata;
+        if(metadata) {
+          Object.assign(layer.metadata, this.props.metadata);
+        } else {
+          layer.metadata = this.props.metadata;
+        }  
       }
 
       if (prevProps.before !== this.props.before) {
