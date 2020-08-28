@@ -96,6 +96,7 @@ export interface MapOptions {
   style?: any;
   container?: string;
   crs?: string;
+  transformRequest?: Function;
 }
 
 export interface WebMapProps extends MapEvents {
