@@ -43,8 +43,7 @@ class Map extends Component<MapProps, MapState> {
     'mapOptions.maxBounds',
     'mapOptions.renderWorldCopies',
     'mapOptions.bearing',
-    'mapOptions.pitch',
-    'mapOptions.transformRequest'
+    'mapOptions.pitch'
   ];
 
   static defaultProps = {
