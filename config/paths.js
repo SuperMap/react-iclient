@@ -82,10 +82,11 @@ module.exports = {
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
+  colorcolorNodeModules: resolveApp('node_modules/colorcolor'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
 };
 
-
+module.exports.resolveApp = resolveApp;
 
 module.exports.moduleFileExtensions = moduleFileExtensions;

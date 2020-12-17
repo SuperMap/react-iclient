@@ -48,11 +48,11 @@ function getProdConfig(isMinify) {
         antd: 'antd',
         echarts: 'echarts',
         mapv: 'mapv',
-        three: {
+        'three/build/three': {
           root: 'THREE',
-          commonjs: 'three',
-          commonjs2: 'three',
-          amd: 'three'
+          commonjs: 'three/build/three',
+          commonjs2: 'three/build/three',
+          amd: 'three/build/three'
         }
       },
       function(context, request, callback) {

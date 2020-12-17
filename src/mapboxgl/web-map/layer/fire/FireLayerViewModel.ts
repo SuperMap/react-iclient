@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from 'three/build/three';
 import { FeatureCollection } from 'geojson';
 import mapboxgl from '../../../../../public/libs/mapboxgl/mapbox-gl-enhance';
 import Tendrils from './assets/tendrils.png';

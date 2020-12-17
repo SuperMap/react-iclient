@@ -99,7 +99,7 @@ module.exports = function(isEnvProduction) {
             },
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
-              include: [paths.appSrc, paths.appDemo],
+              include: [paths.appSrc, paths.appDemo, paths.resolveApp('node_modules/colorcolor') , paths.resolveApp('node_modules/resize-detector')],
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve('babel-preset-react-app/webpack-overrides'),
@@ -124,6 +124,7 @@ module.exports = function(isEnvProduction) {
             {
               test: /\.(js|mjs)$/,
               exclude: /@babel(?:\/|\\{1,2})runtime/,
+              include: [paths.appSrc, paths.appDemo],
               loader: require.resolve('babel-loader'),
               options: {
                 babelrc: false,
