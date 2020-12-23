@@ -99,7 +99,7 @@ function getProdConfig(isMinify) {
       new webpack.DefinePlugin(env.stringified),
       new webpack.BannerPlugin(`
       ${pkg.name}.(${pkg.homepage})
-      Copyright© 2000 - 2020 SuperMap Software Co.Ltd
+      Copyright© 2000 - 2021 SuperMap Software Co.Ltd
       license: ${pkg.license}
       version: v${pkg.version}
      `),
@@ -153,7 +153,7 @@ function getProdConfig(isMinify) {
             return `
 * 
 *       ${pkg.name}.(${pkg.homepage})
-*       Copyright© 2000 - 2020 SuperMap Software Co.Ltd
+*       Copyright© 2000 - 2021 SuperMap Software Co.Ltd
 *       license: ${pkg.license}
 *       version: v${pkg.version}
 * 
