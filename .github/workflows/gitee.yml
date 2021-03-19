@@ -1,6 +1,9 @@
   
 name: Auto Sync
-on: push
+on: 
+  push:
+    branches:
+      - '*'
 jobs:
   mirror_to_gitee:
     runs-on: ubuntu-latest
