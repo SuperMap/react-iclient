@@ -1,6 +1,6 @@
   
 name: Auto Sync
-on: [push,create,delete]
+on: push
 jobs:
   mirror_to_gitee:
     runs-on: ubuntu-latest
