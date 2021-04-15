@@ -1,12 +1,12 @@
 {
   "name": "@supermap/react-iclient",
-  "version": "10.1.1",
+  "version": "11.0.0-dev",
   "description": "SuperMap iClient for React.js",
   "homepage": "https://iclient.supermap.io",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "test": "jest --config jest.config.js --collectCoverage --testResultsProcessor jest-sonar-reporter",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "prepublishOnly": "node ./config/publish.js",
@@ -69,6 +69,8 @@
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.4.0",
@@ -85,8 +87,10 @@
     "html-webpack-plugin": "4.0.0-beta.5",
     "husky": "^3.0.9",
     "jest": "24.8.0",
+    "jest-canvas-mock": "^2.3.1",
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.8.0",
+    "jest-sonar-reporter": "^2.0.0",
     "jest-watch-typeahead": "0.3.1",
     "lint-staged": "^9.4.2",
     "lodash.upperfirst": "^4.3.1",
@@ -147,54 +151,6 @@
       "last 1 safari version"
     ]
   },
-  "jest": {
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
-    ],
-    "setupFiles": [
-      "react-app-polyfill/jsdom"
-    ],
-    "setupFilesAfterEnv": [],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
-    ],
-    "testEnvironment": "jest-environment-jsdom-fourteen",
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "modulePaths": [],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-    },
-    "moduleFileExtensions": [
-      "web.js",
-      "js",
-      "web.ts",
-      "ts",
-      "web.tsx",
-      "tsx",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ],
-    "watchPlugins": [
-      "jest-watch-typeahead/filename",
-      "jest-watch-typeahead/testname"
-    ]
-  },
   "babel": {
     "plugins": [
       [
@@ -225,5 +181,10 @@
     "SuperMap",
     "React"
   ],
+  "jestSonar": {
+    "reportPath": "test/unit/report",
+    "reportFile": "test-reporter.xml",
+    "indent": 4
+  },
   "license": "Apache-2.0"
 }
