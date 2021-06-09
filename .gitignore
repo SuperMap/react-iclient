@@ -6,7 +6,8 @@
 .pnp.js
 /dist
 # testing
-/coverage
+/test/unit/coverage
+/test/unit/report
 
 # production
 /build

@@ -92,11 +92,11 @@ export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(Wra
       if (this.props.metadata && prevProps.metadata !== this.props.metadata) {
         const layer = this.map.getLayer(this.props.layerId),
           metadata = layer.metadata;
-        if(metadata) {
+        if (metadata) {
           Object.assign(layer.metadata, this.props.metadata);
         } else {
           layer.metadata = this.props.metadata;
-        }  
+        }
       }
 
       if (prevProps.before !== this.props.before) {
@@ -159,7 +159,7 @@ export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(Wra
       if (this.registerEvents && this.registerEvents.length) {
         this.$_unbindLayerEvents(this.registerEvents);
       }
-      this.map.removeLayer(layerId);
+      this.map && this.map.removeLayer(layerId);
       this.$_emitEvent('layer-removed');
     };
 

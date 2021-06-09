@@ -1,12 +1,11 @@
-class Evented {
-  on(){};
-}
+var LngLat = require('mapbox-gl/src/geo/lng_lat');
+var Evented = require('mapbox-gl/src/util/evented');
 
 module.exports.mapboxgl = {
-  Map: jest.fn(),
+  Map: require('./map'),
   Evented: Evented,
   Popup: jest.fn(),
-  LngLat: jest.fn(),
+  LngLat: LngLat,
   CRS: {
     get: get => {
       return true;

@@ -1,0 +1,9 @@
+/build/
+/config/
+/dist/
+/lib/
+/test/
+/test/unit/coverage/
+/demo
+*.test.js
+/**/*.d.ts

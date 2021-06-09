@@ -9,10 +9,12 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
     '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js'
   },
-  transformIgnorePatterns: ['node_modules/(?!(ant-design-vue)/)'],
+  transformIgnorePatterns: ['node_modules/(?!(mapbox-gl|ant-design-vue)/)'],
   modulePaths: ['src', 'node_modules'],
   moduleNameMapper: {
-    '^@libs/(.*)$': '<rootDir>/public/libs/$1'
+    '^@libs/(.*)$': '<rootDir>/public/libs/$1',
+    '^@test/(.*)$': '<rootDir>/test/$1',
+    '^@types_mapboxgl/(.*)$': '<rootDir>/src/mapboxgl/_types/$1',
   },
   moduleFileExtensions: ['js', 'ts', 'tsx', 'json', 'jsx'],
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],

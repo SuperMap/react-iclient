@@ -18,8 +18,8 @@ export default class GeojsonLayer extends Component<GeojsonLayerProps> {
   viewModel: GeojsonLayerViewModel;
 
   componentDidUpdate(prevProps: GeojsonLayerProps) {
-    if (prevProps.layerStyle !== this.props.layerStyle) {
-      this.viewModel && this.viewModel.setLayerStyle(this.props.layerStyle);
+    if (!isEqual(this.props.layerStyle, prevProps.layerStyle) && this.viewModel) {
+      this.viewModel.setLayerStyle(this.props.layerStyle);
     }
     if (!isEqual(this.props.data, prevProps.data) && this.viewModel) {
       this.viewModel.setData(this.props.data);
