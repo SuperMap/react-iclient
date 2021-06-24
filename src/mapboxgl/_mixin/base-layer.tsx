@@ -159,8 +159,10 @@ export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(Wra
       if (this.registerEvents && this.registerEvents.length) {
         this.$_unbindLayerEvents(this.registerEvents);
       }
-      this.map.removeLayer(layerId);
-      this.$_emitEvent('layer-removed');
+      if(this.map) {
+        this.map.removeLayer(layerId);
+        this.$_emitEvent('layer-removed');
+      }
     };
 
     removed(map) {
