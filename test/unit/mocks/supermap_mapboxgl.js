@@ -44,4 +44,21 @@ supermap.AddressMatchService = () => {
   };
 };
 
+supermap.Util = {
+  hexToRgba: function(hex, opacity) {
+    var color = [],
+      rgba = [];
+    hex = hex.replace(/#/, '');
+    for (let i = 0; i < 6; i += 2) {
+      color[i] = '0x' + hex.substr(i, 2);
+      rgba.push(parseInt(Number(color[i])));
+    }
+    rgba.push(opacity);
+    return 'rgba(' + rgba.join(',') + ')';
+  },
+  isNumber: function(num) {
+    return true;
+  }
+};
+
 module.exports = supermap;

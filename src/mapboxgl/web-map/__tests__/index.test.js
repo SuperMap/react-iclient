@@ -166,4 +166,130 @@ describe(`SmWebMap`, () => {
       });
     });
   });
+
+  it('initial-markerLayer', done => {
+    const spy = jest.spyOn(mapboxgl, 'Map');
+    const onLoad = jest.fn();
+    wrapper = mount(
+      <SmWebMap serverUrl="https://fakeiportal.supermap.io/iportal" mapId="123456" onLoad={onLoad}></SmWebMap>
+    );
+    mapLoaded(wrapper, e => {
+      setTimeout(() => {
+        expect(spy).toBeCalled();
+        expect(wrapper.props().mapId).toBe('123456');
+        expect(wrapper.props().serverUrl).toBe('https://fakeiportal.supermap.io/iportal');
+        const layers = Object.values(e.map.overlayLayersManager);
+        expect(layers.length).toBe(2);
+        const markerLayer = layers[1];
+        expect(markerLayer.type).toBe('symbol');
+        expect(markerLayer.layout['icon-image']).toBe(
+          'http://fakeiportal/iportal/apps/dataviz/static/imgs/markers/ktv_red.png'
+        );
+        done();
+      }, 1000);
+    });
+  });
+
+  it('initial-heatLayer', done => {
+    const spy = jest.spyOn(mapboxgl, 'Map');
+    const onLoad = jest.fn();
+    wrapper = mount(
+      <SmWebMap serverUrl="https://fakeiportal.supermap.io/iportal" mapId="12345678" onLoad={onLoad}></SmWebMap>
+    );
+    mapLoaded(wrapper, e => {
+      expect(spy).toBeCalled();
+      expect(wrapper.props().mapId).toBe('12345678');
+      expect(wrapper.props().serverUrl).toBe('https://fakeiportal.supermap.io/iportal');
+      const layers = Object.values(e.map.overlayLayersManager);
+      expect(layers.length).toBe(2);
+      const heatLayer = layers[1];
+      expect(heatLayer.type).toBe('heatmap');
+      expect(heatLayer.paint['heatmap-radius']).toBe(25);
+      done();
+    });
+  });
+
+  it('initial-vectorLayer-point', done => {
+    const spy = jest.spyOn(mapboxgl, 'Map');
+    const onLoad = jest.fn();
+    wrapper = mount(
+      <SmWebMap serverUrl="https://fakeiportal.supermap.io/iportal" mapId="147258369" onLoad={onLoad}></SmWebMap>
+    );
+    mapLoaded(wrapper, e => {
+      expect(spy).toBeCalled();
+      expect(wrapper.props().mapId).toBe('147258369');
+      expect(wrapper.props().serverUrl).toBe('https://fakeiportal.supermap.io/iportal');
+      const layers = Object.values(e.map.overlayLayersManager);
+      expect(layers.length).toBe(2);
+      const vectorLayerPoint = layers[1];
+      expect(vectorLayerPoint.type).toBe('circle');
+      expect(vectorLayerPoint.paint['circle-radius']).toBe(6);
+      done();
+    });
+  });
+  it('initial-vectorLayer-line', done => {
+    const spy = jest.spyOn(mapboxgl, 'Map');
+    const onLoad = jest.fn();
+    wrapper = mount(
+      <SmWebMap serverUrl="https://fakeiportal.supermap.io/iportal" mapId="159357852" onLoad={onLoad}></SmWebMap>
+    );
+    mapLoaded(wrapper, e => {
+      expect(spy).toBeCalled();
+      expect(wrapper.props().mapId).toBe('159357852');
+      expect(wrapper.props().serverUrl).toBe('https://fakeiportal.supermap.io/iportal');
+      const layers = Object.values(e.map.overlayLayersManager);
+      expect(layers.length).toBe(2);
+      const vectorLayerLine = layers[1];
+      expect(vectorLayerLine.type).toBe('line');
+      expect(vectorLayerLine.paint['line-width']).toBe(7);
+      done();
+    });
+  });
+
+  it('initial-ranksymbolLayer', done => {
+    const spy = jest.spyOn(mapboxgl, 'Map');
+    const onLoad = jest.fn();
+    wrapper = mount(
+      <SmWebMap serverUrl="https://fakeiportal.supermap.io/iportal" mapId="123456789" onLoad={onLoad}></SmWebMap>
+    );
+    mapLoaded(wrapper, e => {
+      expect(spy).toBeCalled();
+      expect(wrapper.props().mapId).toBe('123456789');
+      expect(wrapper.props().serverUrl).toBe('https://fakeiportal.supermap.io/iportal');
+      const layers = Object.values(e.map.overlayLayersManager);
+      expect(layers.length).toBe(3);
+      const vectorLayerPoint = layers[1];
+      expect(vectorLayerPoint.type).toBe('circle');
+      expect(vectorLayerPoint.paint['circle-radius'].length).toBeGreaterThan(0);
+      const labelLayer = layers[2];
+      expect(labelLayer.type).toBe('symbol');
+      expect(labelLayer.paint['text-color']).toBe('#333');
+      expect(labelLayer.layout['text-field']).toBe('{机场}');
+      done();
+    });
+  });
+
+  it('initial-uniqueLayer-polygon', done => {
+    const spy = jest.spyOn(mapboxgl, 'Map');
+    const onLoad = jest.fn();
+    wrapper = mount(
+      <SmWebMap serverUrl="https://fakeiportal.supermap.io/iportal" mapId="2064629293" onLoad={onLoad}></SmWebMap>
+    );
+    mapLoaded(wrapper, e => {
+      expect(spy).toBeCalled();
+      expect(wrapper.props().mapId).toBe('2064629293');
+      expect(wrapper.props().serverUrl).toBe('https://fakeiportal.supermap.io/iportal');
+      const layers = Object.values(e.map.overlayLayersManager);
+      expect(layers.length).toBe(3);
+      const vectorLayerPoint = layers[1];
+      const id = vectorLayerPoint.id;
+      expect(vectorLayerPoint.type).toBe('fill');
+      expect(vectorLayerPoint.paint['fill-color'].length).toBeGreaterThan(0);
+      const strokeLayer = layers[2];
+      expect(strokeLayer.id).toBe(`${id}-strokeLine`);
+      expect(strokeLayer.type).toBe('line');
+      expect(strokeLayer.paint['line-color']).toBe('#ffffff');
+      done();
+    });
+  });
 });

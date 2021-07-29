@@ -1,4 +1,18 @@
-import { portal_data, portal_data1, portal_data2, chart_data } from './services';
+import {
+  portal_data,
+  portal_data1,
+  portal_data2,
+  chart_data,
+  marker_data,
+  webmap_markerLayer,
+  webmap_heatLayer,
+  iportal_content,
+  webmap_vectorLayer_point,
+  webmap_vectorLayer_line,
+  webmap_rangeLayer,
+  webmap_ranksymbolLayer,
+  webmap_uniqueLayer_polygon
+} from './services';
 import '../../../public/libs/iclient-mapboxgl/iclient-mapboxgl.min';
 
 var SuperMap = (window.SuperMap = window.SuperMap || {});
@@ -59,10 +73,30 @@ var FetchRequest = (SuperMap.FetchRequest = {
         process.nextTick(() => resolve(new Response(JSON.stringify(portal_data))));
       } else if (url.indexOf('iportal/web/maps/wrong-layer') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(portal_data1))));
+      } else if (url.indexOf('wrong/content.json?pageSize=9999999&currentPage=1') > -1) {
+        process.nextTick(() => reject(''));
       } else if (url.indexOf('676516522') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(chart_data))));
       } else if (url.indexOf('WMTS') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(portal_data2))));
+      } else if (url.indexOf('123456/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_markerLayer))));
+      } else if (url.indexOf('12345678/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_heatLayer))));
+      } else if (url.indexOf('datas/123456/content.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(marker_data))));
+      } else if (url.indexOf('147258369/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_vectorLayer_point))));
+      } else if (url.indexOf('159357852/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_vectorLayer_line))));
+      } else if (url.indexOf('167943279/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_rangeLayer))));
+      } else if (url.indexOf('123456789/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_ranksymbolLayer))));
+      } else if (url.indexOf('2064629293/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_uniqueLayer_polygon))));
+      } else if (url.indexOf('content.json?pageSize=9999999&currentPage=1') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(iportal_content))));
       } else {
         process.nextTick(() => reject('未匹配到'));
       }

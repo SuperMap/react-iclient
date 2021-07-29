@@ -1,7 +1,7 @@
 require('flow-remove-types/register')({
   includes: /.*?\/mapbox-gl\/src\/.*/,
   excludes: {
-    test: function () {
+    test: function() {
       return false;
     }
   }
@@ -21,7 +21,7 @@ var defaultOptions = {
 };
 
 function functor(x) {
-  return function () {
+  return function() {
     return x;
   };
 }
@@ -53,7 +53,7 @@ function _fakeResourceTiming(name) {
   };
 }
 
-var Map = function (options) {
+var Map = function(options) {
   var evented = new Evented();
   this.on = evented.on;
   this.fire = evented.fire;
@@ -67,7 +67,7 @@ var Map = function (options) {
   this._container = this.options.container || 'map';
   // this.style;
   this._layers = {};
-  this.getContainer = function () {
+  this.getContainer = function() {
     return this._container;
   };
   //add by sunxy
@@ -81,10 +81,10 @@ var Map = function (options) {
   } catch (e) {
     this.center = this.options.center ? new LngLat(this.options.center[0], this.options.center[1]) : new LngLat(0, 0);
   }
-  this.resize = function () {};
+  this.resize = function() {};
   // this.style = new Style();
   this.style = options.style;
-  this.setStyle = function (style, options) {
+  this.setStyle = function(style, options) {
     // this.style = new Style(this, options || {});
     for (var i = 0, list = style.layers; i < list.length; i += 1) {
       var layer = list[i];
@@ -97,11 +97,11 @@ var Map = function (options) {
   // this.transform = new Transform();
   this._controlCorners = {
     'top-left': {
-      appendChild: function () {}
+      appendChild: function() {}
     }
   };
   setTimeout(
-    function () {
+    function() {
       this.fire('load');
     }.bind(this),
     0
@@ -133,7 +133,7 @@ var Map = function (options) {
 
   // var threeVis = 'visible';
   // var twoVis = 'visible';
-  this.setLayoutProperty = function (layerid) {
+  this.setLayoutProperty = function(layerid) {
     // if (layerid == '三级道路L@北京') {
     //   threeVis === "visible" ? "none" : "visible";
     // } else if (layerid == '二级道路L@北京') {
@@ -141,7 +141,7 @@ var Map = function (options) {
     // }
   };
 
-  this.addControl = function (control) {
+  this.addControl = function(control) {
     control.onAdd(this);
   };
 
@@ -149,7 +149,7 @@ var Map = function (options) {
   //   this.setStyle(options.style, { localIdeographFontFamily: options.localIdeographFontFamily });
   // }
 
-  this.getStyle = function () {
+  this.getStyle = function() {
     if (this.style) {
       return this.style;
     }
@@ -158,26 +158,26 @@ var Map = function (options) {
     // }
   };
 
-  this.getContainer = function () {
+  this.getContainer = function() {
     var container = {
       parentNode: container,
-      appendChild: function () {},
-      removeChild: function () {},
-      getElementsByClassName: function () {
+      appendChild: function() {},
+      removeChild: function() {},
+      getElementsByClassName: function() {
         return [container];
       },
-      addEventListener: function (name, handle) {},
-      removeEventListener: function () {},
+      addEventListener: function(name, handle) {},
+      removeEventListener: function() {},
       classList: {
-        add: function () {},
-        remove: function () {}
+        add: function() {},
+        remove: function() {}
       }
     };
 
     return container;
   };
 
-  this.getSource = function (name) {
+  this.getSource = function(name) {
     if (name === 'UNIQUE-民航数-0') {
       let chartResult = {
         features: [
@@ -210,7 +210,7 @@ var Map = function (options) {
     }
     if (this._sources[name]) {
       return {
-        setData: function (data) {
+        setData: function(data) {
           this._sources[name].data = data;
           if (this._sources[name].type === 'geojson') {
             const e = {
@@ -227,12 +227,12 @@ var Map = function (options) {
             this.fire('data', e);
           }
         }.bind(this),
-        loadTile: function () {}
+        loadTile: function() {}
       };
     }
     if (name === 'ChinaDark') {
       return {
-        setData: function (data) {
+        setData: function(data) {
           this._sources[name].data = data;
           if (this._sources[name].type === 'geojson') {
             const e = {
@@ -249,11 +249,11 @@ var Map = function (options) {
             this.fire('data', e);
           }
         }.bind(this),
-        loadTile: function () {}
+        loadTile: function() {}
       };
     } else {
       return {
-        setData: function (data) {
+        setData: function(data) {
           //   this._sources[name].data = data;
           //   if (this._sources[name].type === 'geojson') {
           //     const e = {
@@ -271,22 +271,22 @@ var Map = function (options) {
           //   }
           // }.bind(this),
         },
-        loadTile: function () {}
+        loadTile: function() {}
       };
     }
   };
 
-  this.loaded = function () {
+  this.loaded = function() {
     return true;
   };
 
-  this.removeControl = function () {
+  this.removeControl = function() {
     return this;
   };
 
   this.overlayLayersManager = {};
 
-  this.addSource = function (name, source) {
+  this.addSource = function(name, source) {
     this._sources[name] = source;
     if (source.type === 'geojson') {
       const e = {
@@ -303,23 +303,23 @@ var Map = function (options) {
     }
   };
 
-  this.removeSource = function (name) {
+  this.removeSource = function(name) {
     delete this._sources[name];
   };
-  this.off = function () {};
-  this.addLayer = function (layer, before) {
+  this.off = function() {};
+  this.addLayer = function(layer, before) {
     this.overlayLayersManager[layer.id] = layer;
 
     // this._layers[id] = layer;
     return this;
   };
 
-  this.removeLayer = function (layerId) {};
-  this.moveLayer = function (layerId) {};
-  this.getFilter = function (layerId) {};
-  this.setFilter = function (layerId, filter) {};
+  this.removeLayer = function(layerId) {};
+  this.moveLayer = function(layerId) {};
+  this.getFilter = function(layerId) {};
+  this.setFilter = function(layerId, filter) {};
   // this._layers[id] = layer;
-  this.getLayer = function (id) {
+  this.getLayer = function(id) {
     if (this.overlayLayersManager[id]) {
       return this.overlayLayersManager[id];
     }
@@ -328,19 +328,19 @@ var Map = function (options) {
       return this._layers[id];
     }
   };
-  this.getBounds = function () {
+  this.getBounds = function() {
     return this.bounds;
   };
 
-  this.getZoom = function () {
+  this.getZoom = function() {
     return this.zoom;
   };
   this.getBearing = functor(0);
   this.getPitch = functor(0);
-  this.getCenter = function () {
+  this.getCenter = function() {
     return this.center;
   };
-  this.setCenter = function (x) {
+  this.setCenter = function(x) {
     if (x instanceof Array) {
       this.center = new LngLat(x[0], x[1]);
     } else if (x instanceof Object) {
@@ -348,29 +348,29 @@ var Map = function (options) {
     }
   };
 
-  this.getMinZoom = function () {
+  this.getMinZoom = function() {
     return 0;
   };
-  this.getMaxZoom = function () {
+  this.getMaxZoom = function() {
     return 22;
   };
   this.doubleClickZoom = {
-    disable: function () {},
-    enable: function () {}
+    disable: function() {},
+    enable: function() {}
   };
 
   this.boxZoom = {
-    disable: function () {},
-    enable: function () {}
+    disable: function() {},
+    enable: function() {}
   };
 
   this.dragPan = {
-    disable: function () {},
-    enable: function () {}
+    disable: function() {},
+    enable: function() {}
   };
 
-  this.project = function () {};
-  this.unproject = function (point) {
+  this.project = function() {};
+  this.unproject = function(point) {
     return new LngLat(-73.9876, 40.7661);
   };
   /**
@@ -379,7 +379,7 @@ var Map = function (options) {
    *
    * pointOrBox: either [x, y] pixel coordinates of a point, or [ [x1, y1] , [x2, y2] ]
    */
-  this.queryRenderedFeatures = function (pointOrBox, queryParams) {
+  this.queryRenderedFeatures = function(pointOrBox, queryParams) {
     var searchBoundingBox = [];
     if (pointOrBox[0].x !== undefined) {
       // convert point into bounding box
@@ -448,21 +448,30 @@ var Map = function (options) {
     return features;
   };
 
-  this.remove = function () {
+  this.remove = function() {
     this._events = [];
     this.sources = [];
   };
 
-  this.zoomIn = function (e) {
+  this.zoomIn = function(e) {
     this.zoom++;
     return this.zoom;
   };
 
-  this.zoomOut = function (e) {
+  this.zoomOut = function(e) {
     this.zoom--;
     this.fire('wheel');
     this.fire('zoomend', this.zoom);
     return this.zoom;
+  };
+  this.loadImage = function(src, callback) {
+    setTimeout(function() {
+      callback(null, [1, 2, 3]);
+    }, 10);
+  };
+  this.addImage = function() {};
+  this.hasImage = function() {
+    return true;
   };
 };
 
