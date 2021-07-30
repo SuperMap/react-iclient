@@ -172,6 +172,105 @@ const chart_data = {
   }
 };
 
+const portalDataService = {
+  dataMetaInfo: null,
+  lastModfiedTime: 1552361419799,
+  fileName: 'sichuan.geojson',
+  dataItemServices: [
+    {
+      serviceType: 'RESTMAP',
+      accessCount: 0,
+      address: 'portalproxy/iserver/services/sichuan/rest',
+      dataID: 1962026684,
+      createTime: null,
+      serviceStatus: 'PUBLISHED',
+      editable: false,
+      updateTime: null,
+      serviceNode: 'z62wol8e',
+      serviceID: 'sichuan',
+      serviceName: 'sichuan'
+    },
+    {
+      serviceType: 'RESTDATA',
+      accessCount: 0,
+      address: '/portalproxy/iserver/services/sichuan/rest',
+      dataID: 1962026684,
+      createTime: null,
+      serviceStatus: 'PUBLISHED',
+      editable: true,
+      updateTime: null,
+      serviceNode: 'z62wol8e',
+      serviceID: 'sichuan',
+      serviceName: 'sichuan'
+    }
+  ],
+  dataCheckResult: {
+    serviceCheckInfos: [
+      {
+        serviceType: 'RESTDATA',
+        checkStatus: 'SUCCESS',
+        checkMsg: null,
+        dataType: 'GEOJSON',
+        id: 9,
+        MD5: 'c1e4a265e355de9a4aa2d5e40612285d'
+      },
+      {
+        serviceType: 'RESTMAP',
+        checkStatus: 'SUCCESS',
+        checkMsg: null,
+        dataType: 'GEOJSON',
+        id: 35,
+        MD5: 'c1e4a265e355de9a4aa2d5e40612285d'
+      }
+    ],
+    dataCheckInfo: {
+      checkStatus: 'SUCCESS',
+      checkMsg: null,
+      dataType: 'GEOJSON',
+      id: 9,
+      MD5: 'c1e4a265e355de9a4aa2d5e40612285d'
+    }
+  }
+};
+const restMap = [
+  {
+    visible: true,
+    subLayers: {
+      layers: [
+        {
+          ugcLayerType: 'VECTOR',
+          visible: true,
+          fieldValuesDisplayFilter: {
+            fieldName: '',
+            values: [],
+            fieldValuesDisplayMode: 'DISABLE'
+          },
+          caption: 'dataGeoJson_1627314311@supermap2_pg',
+          subLayers: {},
+          type: 'UGC',
+          datasetInfo: {
+            type: 'REGION',
+            dataSourceName: 'supermap2_pg',
+            tableName: null
+          },
+          queryable: true,
+          opaqueRate: 100,
+          name: 'dataGeoJson_1627314311@supermap2_pg'
+        }
+      ]
+    },
+    type: 'UGC',
+    name: 'mapOfsupermap2_pg'
+  }
+];
+const restData = {
+  datasetCount: 1,
+  datasetNames: ['dataGeoJson_1627314311'],
+  childUriList: [
+    '/portalproxy/iserver/services/data_sichuan/rest/data/datasources/supermap2_pg/datasets/dataGeoJson_1627314311'
+  ]
+};
+
 const mapOptions = {
   container: 'map', // container id
   style: {
@@ -536,6 +635,9 @@ const iportal_content = {
 module.exports = {
   portal_data,
   portal_data1,
+  portalDataService,
+  restMap,
+  restData,
   chart_data,
   mapOptions,
   marker_data,

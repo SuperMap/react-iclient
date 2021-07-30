@@ -163,13 +163,17 @@ supermap.DataFlowService = serviceUrl => {
     }
   };
 };
-supermap.MapvLayer = () => {
+supermap.MapvLayer = map => {
   return {
-    onAdd: () => {
+    onAdd: callback => {
+      callback(map);
       return this;
     },
     removeFromMap: () => {
       return this;
+    },
+    render: callback => {
+      callback();
     }
   };
 };

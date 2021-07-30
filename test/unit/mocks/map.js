@@ -333,6 +333,12 @@ var Map = function(options) {
   this.off = function() {};
   this.addLayer = function(layer, before) {
     this.overlayLayersManager[layer.id] = layer;
+    // if (layer.onAdd) {
+    //   layer.onAdd(this, gl);
+    // }
+    // if (layer.render) {
+    //   layer.render(gl, matrix);
+    // }
 
     // this._layers[id] = layer;
     return this;

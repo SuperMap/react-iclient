@@ -2,6 +2,9 @@ import {
   portal_data,
   portal_data1,
   portal_data2,
+  portalDataService,
+  restMap,
+  restData,
   chart_data,
   marker_data,
   webmap_markerLayer,
@@ -97,6 +100,16 @@ var FetchRequest = (SuperMap.FetchRequest = {
         process.nextTick(() => resolve(new Response(JSON.stringify(webmap_ranksymbolLayer))));
       } else if (url.indexOf('2064629293/map.json') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(webmap_uniqueLayer_polygon))));
+      } else if (url.indexOf('https://fakeiportal.supermap.io/iportal/wrong-succeed') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify({ succeed: false }))));
+      } else if (url.indexOf('https://fakeiportal.supermap.io/iportal/portalDataService') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(portalDataService))));
+      } else if (url.indexOf('/portalproxy/iserver/services/sichuan/rest/data/datasources/supermap2_pg') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(restData))));
+      } else if (url.indexOf('/portalproxy/iserver/services/sichuan/rest/data/datasources') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify({ datasourceNames: ['supermap2_pg'] }))));
+      } else if (url.indexOf('portalproxy/iserver/services/sichuan/rest') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(restMap))));
       } else if (url.indexOf('content.json?pageSize=9999999&currentPage=1') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(iportal_content))));
       } else {
