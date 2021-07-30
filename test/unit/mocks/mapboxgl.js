@@ -10,5 +10,10 @@ module.exports.mapboxgl = {
     get: get => {
       return true;
     }
+  },
+  MercatorCoordinate: {
+    fromLngLat: coor => {
+      return coor;
+    }
   }
 };

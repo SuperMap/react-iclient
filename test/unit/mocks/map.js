@@ -251,6 +251,27 @@ var Map = function(options) {
         }.bind(this),
         loadTile: function() {}
       };
+    } else if (name === 'dataflowlayer-1') {
+      return null;
+    } else if (name == 'dataflowlayer-source') {
+      return {
+        setData: function(data) {},
+        loadTile: function() {},
+        _data: {
+          features: [
+            { geometry: { type: 'Point', coordinates: [0, 0] }, properties: { id: 1 } },
+            { geometry: { type: 'Point', coordinates: [0, 0] }, properties: { id: 2 } }
+          ]
+        }
+      };
+    } else if (name == 'dataflowlayer-source-has-false') {
+      return {
+        setData: function(data) {},
+        loadTile: function() {},
+        _data: {
+          features: [{ geometry: { type: 'Point', coordinates: [0, 0] }, properties: { id: 2 } }]
+        }
+      };
     } else {
       return {
         setData: function(data) {
@@ -271,7 +292,10 @@ var Map = function(options) {
           //   }
           // }.bind(this),
         },
-        loadTile: function() {}
+        loadTile: function() {},
+        _data: {
+          features: [{ geometry: { type: 'Point', coordinates: [0, 0] }, properties: { id: 1 } }]
+        }
       };
     }
   };

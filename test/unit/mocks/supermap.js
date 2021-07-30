@@ -46,7 +46,9 @@ SuperMap.ArrayStatistic.getArraySegments = function(array, type, segNum) {
     14.1324461706
   ];
 };
-
+SuperMap.SecurityManager = {
+  registerToken: () => {}
+};
 var GetFeaturesBySQLParameters = (SuperMap.GetFeaturesBySQLParameters = jest.fn());
 var GetFeaturesBySQLParameters = (SuperMap.GetFeaturesByBoundsParameters = jest.fn());
 var QueryByGeometryParameters = (SuperMap.QueryByGeometryParameters = jest.fn());

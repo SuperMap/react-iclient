@@ -5,34 +5,8 @@ import SmWebMap from '../../../WebMap';
 import CircleStyle from '../../../../_types/CircleStyle';
 import mapboxgl from '@libs/mapboxgl/mapbox-gl-enhance.js';
 import mountTest, { mapLoaded } from '@test/unit/mountTest';
+import { mapOptions } from '@test/unit/mocks/services';
 
-const mapOptions = {
-  container: 'map', // container id
-  style: {
-    version: 8,
-    sources: {
-      'raster-tiles': {
-        attribution: 'attribution',
-        type: 'raster',
-        tiles: [
-          'https://fakeiserver.supermap.io/iserver/services/map-china400/rest/maps/China/zxyTileImage.png?z={z}&x={x}&y={y}'
-        ],
-        tileSize: 256
-      }
-    },
-    layers: [
-      {
-        id: 'simple-tiles',
-        type: 'raster',
-        source: 'raster-tiles',
-        minzoom: 0,
-        maxzoom: 22
-      }
-    ]
-  },
-  center: [120.143, 30.236],
-  zoom: 3
-};
 const data = {
   type: 'FeatureCollection',
   features: [

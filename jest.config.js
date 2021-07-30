@@ -1,6 +1,11 @@
 module.exports = {
   roots: ['<rootDir>/src'],
-  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', 'src/**/index.{js,jsx,ts,tsx}', '!src/**/*.test.{js,jsx,ts,tsx}','!src/**/*.d.ts'],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    'src/**/index.{js,jsx,ts,tsx}',
+    '!src/**/*.test.{js,jsx,ts,tsx}',
+    '!src/**/*.d.ts'
+  ],
   setupFiles: ['<rootDir>/test/unit/setup.js', 'jest-canvas-mock'],
   setupFilesAfterEnv: [],
   testMatch: ['<rootDir>/src/**/__tests__/**/*.test.{js,jsx,ts,tsx}'],
@@ -15,6 +20,8 @@ module.exports = {
     '^@libs/(.*)$': '<rootDir>/public/libs/$1',
     '^@test/(.*)$': '<rootDir>/test/$1',
     '^@types_mapboxgl/(.*)$': '<rootDir>/src/mapboxgl/_types/$1',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/test/unit/assetsTransformer.js'
   },
   moduleFileExtensions: ['js', 'ts', 'tsx', 'json', 'jsx'],
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],

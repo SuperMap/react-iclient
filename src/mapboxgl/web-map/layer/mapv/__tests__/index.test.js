@@ -69,7 +69,7 @@ describe(`SmMapvLayer`, () => {
     done();
   });
 
-  xit('wrapperWebMap', done => {
+  it('wrapperWebMap', done => {
     const spy = jest.spyOn(mapboxgl, 'Map');
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
