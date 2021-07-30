@@ -14,7 +14,9 @@ import {
   webmap_vectorLayer_line,
   webmap_rangeLayer,
   webmap_ranksymbolLayer,
-  webmap_uniqueLayer_polygon
+  webmap_uniqueLayer_polygon,
+  echart_iPortal_data,
+  echart_rest_data,
 } from './services';
 import '../../../public/libs/iclient-mapboxgl/iclient-mapboxgl.min';
 
@@ -112,6 +114,10 @@ var FetchRequest = (SuperMap.FetchRequest = {
         process.nextTick(() => resolve(new Response(JSON.stringify(restMap))));
       } else if (url.indexOf('content.json?pageSize=9999999&currentPage=1') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(iportal_content))));
+      } else if (url.indexOf('echart/rest/data') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(echart_rest_data))));
+      } else if (url.indexOf('echart/iportal/data') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(echart_iPortal_data))));
       } else {
         process.nextTick(() => reject('未匹配到'));
       }

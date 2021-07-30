@@ -1,53 +1,68 @@
 import airport from './data/airport.json';
+
 const portal_data = {
   extent: {
-    leftBottom: { x: -20037508.342789248, y: -20037508.34278914 },
-    rightTop: { x: 20037508.342789244, y: 20037508.342789087 }
+    leftBottom: {
+      x: -20037508.342789248,
+      y: -20037508.34278914
+    },
+    rightTop: {
+      x: 20037508.342789244,
+      y: 20037508.342789087
+    }
   },
   maxScale: '1:144447.927',
   level: 5,
-  center: { x: 11615300.701720804, y: 4436879.386230171 },
+  center: {
+    x: 11615300.701720804,
+    y: 4436879.386230171
+  },
   baseLayer: {
     layerType: 'TILE',
     visible: true,
     name: 'ChinaDark',
     url: 'https://iserver.supermap.io/iserver/services/map-china400/rest/maps/ChinaDark'
   },
-  layers: [
-    {
-      layerType: 'UNIQUE',
-      visible: true,
-      themeSetting: {
-        themeField: '名次',
-        customSettings: {
-          '"421': '#eff8a6',
-          110: '#e8f69c',
-          111: '#8bca99',
-          112: '#f0f9a8',
-          113: '#fee99a',
-          114: '#feea9d'
-        },
-        colors: ['#D53E4F', '#FC8D59', '#FEE08B', '#FFFFBF', '#E6F598', '#99D594', '#3288BD']
+  layers: [{
+    layerType: 'UNIQUE',
+    visible: true,
+    themeSetting: {
+      themeField: '名次',
+      customSettings: {
+        '"421': '#eff8a6',
+        110: '#e8f69c',
+        111: '#8bca99',
+        112: '#f0f9a8',
+        113: '#fee99a',
+        114: '#feea9d'
       },
-      name: '民航数据',
-      featureType: 'POINT',
-      xyField: { xField: 'longitude', yField: 'latitude' },
-      style: {
-        strokeWidth: 1,
-        offsetX: 0,
-        fillColor: '#3288bd',
-        offsetY: 0,
-        fillOpacity: 0.9,
-        radius: 8,
-        strokeColor: '#ffffff',
-        type: 'BASIC_POINT',
-        strokeOpacity: 1
-      },
-      projection: 'EPSG:4326',
-      enableFields: ['latitude', 'longitude', 'altitude', 'geometry', '机场', 'X坐标', 'Y坐标', '名次'],
-      dataSource: { accessType: 'DIRECT', type: 'PORTAL_DATA', serverId: '676516522' }
+      colors: ['#D53E4F', '#FC8D59', '#FEE08B', '#FFFFBF', '#E6F598', '#99D594', '#3288BD']
+    },
+    name: '民航数据',
+    featureType: 'POINT',
+    xyField: {
+      xField: 'longitude',
+      yField: 'latitude'
+    },
+    style: {
+      strokeWidth: 1,
+      offsetX: 0,
+      fillColor: '#3288bd',
+      offsetY: 0,
+      fillOpacity: 0.9,
+      radius: 8,
+      strokeColor: '#ffffff',
+      type: 'BASIC_POINT',
+      strokeOpacity: 1
+    },
+    projection: 'EPSG:4326',
+    enableFields: ['latitude', 'longitude', 'altitude', 'geometry', '机场', 'X坐标', 'Y坐标', '名次'],
+    dataSource: {
+      accessType: 'DIRECT',
+      type: 'PORTAL_DATA',
+      serverId: '676516522'
     }
-  ],
+  }],
   description: '',
   projection: 'EPSG:3857',
   minScale: '1:591658710.909',
@@ -58,52 +73,66 @@ const portal_data = {
 
 const portal_data1 = {
   extent: {
-    leftBottom: { x: -20037508.342789248, y: -20037508.34278914 },
-    rightTop: { x: 20037508.342789244, y: 20037508.342789087 }
+    leftBottom: {
+      x: -20037508.342789248,
+      y: -20037508.34278914
+    },
+    rightTop: {
+      x: 20037508.342789244,
+      y: 20037508.342789087
+    }
   },
   maxScale: '1:144447.927',
   level: 5,
-  center: { x: 11615300.701720804, y: 4436879.386230171 },
+  center: {
+    x: 11615300.701720804,
+    y: 4436879.386230171
+  },
   baseLayer: {
     layerType: 'TILE',
     visible: true,
     name: 'ChinaDark',
     url: 'https://iserver.supermap.io/iserver/services/map-china400/rest/maps/ChinaDark'
   },
-  layers: [
-    {
-      layerType: 'UNIQUE',
-      visible: true,
-      themeSetting: {
-        themeField: '名次',
-        customSettings: {
-          '"421': '#eff8a6',
-          110: '#e8f69c',
-          111: '#8bca99',
-          112: '#f0f9a8',
-          113: '#fee99a'
-        },
-        colors: ['#D53E4F', '#FC8D59', '#FEE08B', '#FFFFBF', '#E6F598', '#99D594', '#3288BD']
+  layers: [{
+    layerType: 'UNIQUE',
+    visible: true,
+    themeSetting: {
+      themeField: '名次',
+      customSettings: {
+        '"421': '#eff8a6',
+        110: '#e8f69c',
+        111: '#8bca99',
+        112: '#f0f9a8',
+        113: '#fee99a'
       },
-      name: '民航数据',
-      featureType: 'POINT',
-      xyField: { xField: 'longitude', yField: 'latitude' },
-      style: {
-        strokeWidth: 1,
-        offsetX: 0,
-        fillColor: '#3288bd',
-        offsetY: 0,
-        fillOpacity: 0.9,
-        radius: 8,
-        strokeColor: '#ffffff',
-        type: 'BASIC_POINT',
-        strokeOpacity: 1
-      },
-      projection: 'EPSG:4326',
-      enableFields: [],
-      dataSource: { accessType: 'DIRECT', type: 'PORTAL_DATA', serverId: 'wrong' }
+      colors: ['#D53E4F', '#FC8D59', '#FEE08B', '#FFFFBF', '#E6F598', '#99D594', '#3288BD']
+    },
+    name: '民航数据',
+    featureType: 'POINT',
+    xyField: {
+      xField: 'longitude',
+      yField: 'latitude'
+    },
+    style: {
+      strokeWidth: 1,
+      offsetX: 0,
+      fillColor: '#3288bd',
+      offsetY: 0,
+      fillOpacity: 0.9,
+      radius: 8,
+      strokeColor: '#ffffff',
+      type: 'BASIC_POINT',
+      strokeOpacity: 1
+    },
+    projection: 'EPSG:4326',
+    enableFields: [],
+    dataSource: {
+      accessType: 'DIRECT',
+      type: 'PORTAL_DATA',
+      serverId: 'wrong'
     }
-  ],
+  }],
   description: '',
   projection: 'EPSG:3857',
   minScale: '1:591658710.909',
@@ -285,15 +314,13 @@ const mapOptions = {
         tileSize: 256
       }
     },
-    layers: [
-      {
-        id: 'simple-tiles',
-        type: 'raster',
-        source: 'raster-tiles',
-        minzoom: 0,
-        maxzoom: 22
-      }
-    ]
+    layers: [{
+      id: 'simple-tiles',
+      type: 'raster',
+      source: 'raster-tiles',
+      minzoom: 0,
+      maxzoom: 22
+    }]
   },
   center: [120.143, 30.236],
   zoom: 3
@@ -319,14 +346,12 @@ const webmap_markerLayer = {
     name: 'China',
     url: 'http://support.supermap.com.cn:8090/iserver/services/map-china400/rest/maps/China'
   },
-  layers: [
-    {
-      layerType: 'MARKER',
-      visible: true,
-      name: '民航数',
-      serverId: 123456
-    }
-  ],
+  layers: [{
+    layerType: 'MARKER',
+    visible: true,
+    name: '民航数',
+    serverId: 123456
+  }],
   description: '',
   projection: 'EPSG:3857',
   title: 'unique_民航数据',
@@ -334,78 +359,92 @@ const webmap_markerLayer = {
 };
 const webmap_ranksymbolLayer = {
   extent: {
-    leftBottom: { x: -20037508.342789248, y: -20037508.34278914 },
-    rightTop: { x: 20037508.342789244, y: 20037508.342789087 }
+    leftBottom: {
+      x: -20037508.342789248,
+      y: -20037508.34278914
+    },
+    rightTop: {
+      x: 20037508.342789244,
+      y: 20037508.342789087
+    }
   },
   maxScale: '1:144447.927',
   level: 5,
-  center: { x: 11615300.701720804, y: 4436879.386230171 },
+  center: {
+    x: 11615300.701720804,
+    y: 4436879.386230171
+  },
   baseLayer: {
     layerType: 'TILE',
     visible: true,
     name: 'ChinaDark',
     url: 'https://iserver.supermap.io/iserver/services/map-china400/rest/maps/ChinaDark'
   },
-  layers: [
-    {
-      layerType: 'RANK_SYMBOL',
-      visible: true,
-      themeSetting: {
-        maxRadius: 12,
-        themeField: '名次',
-        customSettings: {},
-        minRadius: 6,
-        segmentMethod: 'offset',
-        segmentCount: 6
-      },
-      name: '民航数据',
-      featureType: 'POINT',
-      labelStyle: {
-        offsetX: 0,
-        textBaseline: 'bottom',
-        fontFamily: '黑体',
-        offsetY: -10,
-        outlineWidth: 0,
-        textAlign: 'center',
-        outlineColor: '#000000',
-        fontSize: '14px',
-        fill: '#333',
-        backgroundFill: [255, 255, 255, 0.8],
-        labelField: '机场'
-      },
-      xyField: { xField: 'longitude', yField: 'latitude' },
-      style: {
-        strokeWidth: 1,
-        fillColor: '#24B391',
-        offsetX: 0,
-        offsetY: 0,
-        fillOpacity: 0.9,
-        radius: 6,
-        strokeColor: '#ffffff',
-        type: 'BASIC_POINT',
-        strokeOpacity: 1
-      },
-      projection: 'EPSG:4326',
-      enableFields: [
-        'latitude',
-        'longitude',
-        'altitude',
-        'geometry',
-        '机场',
-        'X坐标',
-        'Y坐标',
-        '名次',
-        '2017旅客吞吐量（人次）',
-        '2016旅客吞吐量（人次）',
-        '同比增速%',
-        '2017货邮吞吐量（吨）',
-        '2016货邮吞吐量（吨）',
-        '2017起降架次（架次）',
-        '2016起降架次（架次）'
-      ],
-      dataSource: { accessType: 'DIRECT', type: 'PORTAL_DATA', serverId: '676516522' }
+  layers: [{
+    layerType: 'RANK_SYMBOL',
+    visible: true,
+    themeSetting: {
+      maxRadius: 12,
+      themeField: '名次',
+      customSettings: {},
+      minRadius: 6,
+      segmentMethod: 'offset',
+      segmentCount: 6
+    },
+    name: '民航数据',
+    featureType: 'POINT',
+    labelStyle: {
+      offsetX: 0,
+      textBaseline: 'bottom',
+      fontFamily: '黑体',
+      offsetY: -10,
+      outlineWidth: 0,
+      textAlign: 'center',
+      outlineColor: '#000000',
+      fontSize: '14px',
+      fill: '#333',
+      backgroundFill: [255, 255, 255, 0.8],
+      labelField: '机场'
+    },
+    xyField: {
+      xField: 'longitude',
+      yField: 'latitude'
+    },
+    style: {
+      strokeWidth: 1,
+      fillColor: '#24B391',
+      offsetX: 0,
+      offsetY: 0,
+      fillOpacity: 0.9,
+      radius: 6,
+      strokeColor: '#ffffff',
+      type: 'BASIC_POINT',
+      strokeOpacity: 1
+    },
+    projection: 'EPSG:4326',
+    enableFields: [
+      'latitude',
+      'longitude',
+      'altitude',
+      'geometry',
+      '机场',
+      'X坐标',
+      'Y坐标',
+      '名次',
+      '2017旅客吞吐量（人次）',
+      '2016旅客吞吐量（人次）',
+      '同比增速%',
+      '2017货邮吞吐量（吨）',
+      '2016货邮吞吐量（吨）',
+      '2017起降架次（架次）',
+      '2016起降架次（架次）'
+    ],
+    dataSource: {
+      accessType: 'DIRECT',
+      type: 'PORTAL_DATA',
+      serverId: '676516522'
     }
-  ],
+  }],
   description: '',
   projection: 'EPSG:3857',
   minScale: '1:591658710.909',
@@ -434,23 +473,21 @@ const webmap_heatLayer = {
     name: 'China',
     url: 'http://support.supermap.com.cn:8090/iserver/services/map-china400/rest/maps/China'
   },
-  layers: [
-    {
-      layerType: 'HEAT',
-      visible: true,
-      name: '民航数',
-      featureType: 'POINT',
-      themeSetting: {
-        customSettings: {},
-        radius: 10,
-        colors: ['#0000ff', '#00ffff', '#00ff00', '#ffff00', '#ff0000']
-      },
-      dataSource: {
-        type: 'PORTAL_DATA',
-        serverId: '1920557079'
-      }
+  layers: [{
+    layerType: 'HEAT',
+    visible: true,
+    name: '民航数',
+    featureType: 'POINT',
+    themeSetting: {
+      customSettings: {},
+      radius: 10,
+      colors: ['#0000ff', '#00ffff', '#00ff00', '#ffff00', '#ff0000']
+    },
+    dataSource: {
+      type: 'PORTAL_DATA',
+      serverId: '1920557079'
     }
-  ],
+  }],
   description: '',
   projection: 'EPSG:3857',
   title: 'unique_民航数据',
@@ -477,44 +514,42 @@ const webmap_uniqueLayer_polygon = {
     name: 'China',
     url: 'http://support.supermap.com.cn:8090/iserver/services/map-china400/rest/maps/China'
   },
-  layers: [
-    {
-      layerType: 'UNIQUE',
-      visible: true,
-      themeSetting: {
-        themeField: '行政区划_c',
-        customSettings: {
-          四川省: {
-            strokeWidth: 1,
-            fillColor: '#e6f599',
-            fillOpacity: 0.9,
-            lineDash: 'solid',
-            strokeColor: '#ffffff',
-            type: 'POLYGON',
-            strokeOpacity: 1
-          }
-        },
-        colors: ['#D53E4F', '#FC8D59', '#FEE08B', '#FFFFBF', '#E6F598', '#99D594', '#3288BD']
+  layers: [{
+    layerType: 'UNIQUE',
+    visible: true,
+    themeSetting: {
+      themeField: '行政区划_c',
+      customSettings: {
+        四川省: {
+          strokeWidth: 1,
+          fillColor: '#e6f599',
+          fillOpacity: 0.9,
+          lineDash: 'solid',
+          strokeColor: '#ffffff',
+          type: 'POLYGON',
+          strokeOpacity: 1
+        }
       },
-      name: '市级行政区划_1_2',
-      featureType: 'POLYGON',
-      style: {
-        strokeWidth: 1,
-        fillColor: '#3288bd',
-        fillOpacity: 0.9,
-        lineDash: 'solid',
-        strokeColor: '#ffffff',
-        type: 'POLYGON',
-        strokeOpacity: 1
-      },
-      projection: 'EPSG:4326',
-      enableFields: ['Shape_Area', 'Shape_Leng', 'UserID', '分县连接成', '行政区划_1', '行政区划_2', '行政区划_c'],
-      dataSource: {
-        type: 'PORTAL_DATA',
-        serverId: '1960447494'
-      }
+      colors: ['#D53E4F', '#FC8D59', '#FEE08B', '#FFFFBF', '#E6F598', '#99D594', '#3288BD']
+    },
+    name: '市级行政区划_1_2',
+    featureType: 'POLYGON',
+    style: {
+      strokeWidth: 1,
+      fillColor: '#3288bd',
+      fillOpacity: 0.9,
+      lineDash: 'solid',
+      strokeColor: '#ffffff',
+      type: 'POLYGON',
+      strokeOpacity: 1
+    },
+    projection: 'EPSG:4326',
+    enableFields: ['Shape_Area', 'Shape_Leng', 'UserID', '分县连接成', '行政区划_1', '行政区划_2', '行政区划_c'],
+    dataSource: {
+      type: 'PORTAL_DATA',
+      serverId: '1960447494'
     }
-  ],
+  }],
   description: '',
   projection: 'EPSG:3857',
   title: 'unique_民航数据',
@@ -541,29 +576,27 @@ const webmap_vectorLayer_point = {
     name: 'China',
     url: 'http://support.supermap.com.cn:8090/iserver/services/map-china400/rest/maps/China'
   },
-  layers: [
-    {
-      layerType: 'VECTOR',
-      name: '浙江省高等院校(3)',
-      visible: true,
-      featureType: 'POINT',
-      style: {
-        radius: 6,
-        fillColor: '#ff0000',
-        fillOpacity: 0.9,
-        strokeColor: '#ffffff',
-        strokeWidth: 1,
-        strokeOpacity: 1,
-        lineDash: 'solid',
-        symbolType: 'svg',
-        type: 'BASIC_POINT'
-      },
-      dataSource: {
-        type: 'PORTAL_DATA',
-        serverId: '1920557079'
-      }
+  layers: [{
+    layerType: 'VECTOR',
+    name: '浙江省高等院校(3)',
+    visible: true,
+    featureType: 'POINT',
+    style: {
+      radius: 6,
+      fillColor: '#ff0000',
+      fillOpacity: 0.9,
+      strokeColor: '#ffffff',
+      strokeWidth: 1,
+      strokeOpacity: 1,
+      lineDash: 'solid',
+      symbolType: 'svg',
+      type: 'BASIC_POINT'
+    },
+    dataSource: {
+      type: 'PORTAL_DATA',
+      serverId: '1920557079'
     }
-  ],
+  }],
   description: '',
   projection: 'EPSG:3857',
   title: 'unique_民航数据',
@@ -591,28 +624,26 @@ const webmap_vectorLayer_line = {
     name: 'China',
     url: 'http://support.supermap.com.cn:8090/iserver/services/map-china400/rest/maps/China'
   },
-  layers: [
-    {
-      layerType: 'VECTOR',
-      name: '浙江省高等院校(3)',
-      visible: true,
-      featureType: 'LINE',
-      style: {
-        radius: 5,
-        fillColor: '#ee4d5a',
-        fillOpacity: 0.9,
-        strokeColor: '#8b572a',
-        strokeWidth: 7,
-        strokeOpacity: 1,
-        lineDash: 'solid',
-        type: 'BASIC_POINT'
-      },
-      dataSource: {
-        type: 'PORTAL_DATA',
-        serverId: '1920557079'
-      }
+  layers: [{
+    layerType: 'VECTOR',
+    name: '浙江省高等院校(3)',
+    visible: true,
+    featureType: 'LINE',
+    style: {
+      radius: 5,
+      fillColor: '#ee4d5a',
+      fillOpacity: 0.9,
+      strokeColor: '#8b572a',
+      strokeWidth: 7,
+      strokeOpacity: 1,
+      lineDash: 'solid',
+      type: 'BASIC_POINT'
+    },
+    dataSource: {
+      type: 'PORTAL_DATA',
+      serverId: '1920557079'
     }
-  ],
+  }],
   description: '',
   projection: 'EPSG:3857',
   title: 'unique_民航数据',
@@ -622,8 +653,7 @@ const marker_data = {
   fileName: '未命名标注图层1.geojson',
   type: 'GEOJSON',
   lineNumber: null,
-  content:
-    '{"type":"FeatureCollection","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"dataViz_title":"","dataViz_description":"","dataViz_imgUrl":"","dataViz_url":"","dataViz_videoUrl":""},"dv_v5_markerStyle":{"src":"http://fakeiportal/iportal/apps/dataviz/static/imgs/markers/ktv_red.png","scale":1,"anchor":[0.5,0.5],"imgWidth":48,"imgHeight":43},"dv_v5_markerInfo":{"dataViz_title":"","dataViz_description":"","dataViz_imgUrl":"","dataViz_url":"","dataViz_videoUrl":""},"geometry":{"type":"Point","coordinates":[-24.29687500000026,70.60610918076662]}}]}'
+  content: '{"type":"FeatureCollection","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"dataViz_title":"","dataViz_description":"","dataViz_imgUrl":"","dataViz_url":"","dataViz_videoUrl":""},"dv_v5_markerStyle":{"src":"http://fakeiportal/iportal/apps/dataviz/static/imgs/markers/ktv_red.png","scale":1,"anchor":[0.5,0.5],"imgWidth":48,"imgHeight":43},"dv_v5_markerInfo":{"dataViz_title":"","dataViz_description":"","dataViz_imgUrl":"","dataViz_url":"","dataViz_videoUrl":""},"geometry":{"type":"Point","coordinates":[-24.29687500000026,70.60610918076662]}}]}'
 };
 
 const iportal_content = {
@@ -632,6 +662,170 @@ const iportal_content = {
   lineNumber: 222,
   content: airport
 };
+
+const echart_iPortal_data = {
+  features: [{
+    'type': 'Feature',
+    'properties': {
+      "latitude": "40.07108",
+      "longitude": "116.588918",
+      "altitude": "",
+      "geometry": "Point",
+      "机场": "北京/首都",
+      "X坐标": "116.588918",
+      "Y坐标": "40.07108"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        116.588918,
+        40.07108
+      ]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "latitude": "31.093992",
+      "longitude": "121.812361",
+      "altitude": "",
+      "geometry": "Point",
+      "机场": "上海/浦东",
+      "X坐标": "121.812361",
+      "Y坐标": "31.093992"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        121.812361,
+        31.093992
+      ]
+    }
+  }],
+  fieldCaptions: [
+    "latitude",
+    "longitude",
+    "altitude",
+    "geometry",
+    "机场",
+    "X坐标",
+    "Y坐标"
+  ],
+  fieldValues: [
+    ['40.07108', '31.093992'],
+    ['116.588918', '121.812361'],
+    ['', ''],
+    ['Point', 'Point'],
+    ['北京/首都', '上海/浦东'],
+    ['116.588918', '121.812361'],
+    ['40.07108', '31.093992']
+  ]
+}
+
+const echart_rest_data = {
+  data: {
+    'SMID': '2',
+    'SMSDRIW': '116.60084',
+    'SMSDRIN': '41.040543',
+    'SMSDRIE': '116.72102',
+    'SMSDRIS': '40.853382',
+    'SMUSERID': '4',
+    'SMAREA': '9.680888002534656E7',
+    'SMPERIMETER': '50298.305148811625',
+    'SMGEOMETRYSIZE': '360',
+    'LANDTYPE': '用材林',
+    'AREA': '97.0',
+    'AREA_1': '97'
+  },
+  success: true,
+  code: 200
+};
+
+const rest_service_url = 'https://iserver.supermap.io/echart/rest/data';
+
+const echartiPortalDataset = {
+  type: 'iPortal',
+  url: "https://iportal.supermap.io/echart/iportal/data",
+  maxFeatures: 2
+};
+
+const echartRestDataset = {
+  type: 'rest',
+  url: rest_service_url,
+  maxFeatures: 2,
+  dataName: ['Jingjin:Landuse_R'],
+  attributeFilter: 'SmID = 2'
+};
+
+const echartBarDatasetOptions = [
+  {
+    seriesType: 'bar',
+    isStastic: true,
+    isStack: true,
+    xField: '机场',
+    yField: '2016起降架次（架次）'
+  },
+  {
+    seriesType: 'bar',
+    isStastic: true,
+    isStack: true,
+    xField: '机场',
+    yField: '2017起降架次（架次）'
+  }
+];
+
+const echartGaugeDatasetOptions = [
+  {
+    seriesType: 'gauge',
+    isStastic: true,
+    xField: 'LANDTYPE',
+    yField: 'AREA'
+  }
+];
+
+const echartBarOptions = {
+  xAxis: [
+    {
+    'data': [
+      '北京/首都',
+      '上海/浦东'
+    ]
+    }
+  ],
+  yAxis: {},
+  series: [{
+      'type': 'bar',
+      'name': '2016起降架次（架次）',
+      'data': [
+        606081,
+        479902
+      ],
+      'stack': 1,
+      'tooltip': null
+    },
+    {
+      'type': 'bar',
+      'name': '2017起降架次（架次）',
+      'data': [
+        597259,
+        496774
+      ],
+      'stack': 1,
+      'tooltip': null
+    }
+  ]
+};
+
+const echartGaugeOptions = {
+  series: [{
+      'type': 'gauge',
+      'name': 'AREA',
+      'data': [97],
+      'stack': 0,
+      'tooltip': null
+    }
+  ]
+};
+
 module.exports = {
   portal_data,
   portal_data1,
@@ -647,5 +841,14 @@ module.exports = {
   webmap_heatLayer,
   webmap_uniqueLayer_polygon,
   webmap_vectorLayer_point,
-  webmap_vectorLayer_line
+  webmap_vectorLayer_line,
+  echart_iPortal_data,
+  echart_rest_data,
+  echartiPortalDataset,
+  echartBarDatasetOptions,
+  echartBarOptions,
+  echartRestDataset,
+  echartGaugeDatasetOptions,
+  echartGaugeOptions,
+  rest_service_url
 };
