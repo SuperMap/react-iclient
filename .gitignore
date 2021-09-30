@@ -6,7 +6,8 @@
 .pnp.js
 /dist
 # testing
-/coverage
+/test/unit/coverage
+/test/unit/report
 
 # production
 /build
@@ -23,3 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 
 package-lock.json
+
+.history

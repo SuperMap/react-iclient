@@ -2299,7 +2299,7 @@
                type: 'symbol',
                source: source,
                layout: {
-                 'icon-image': index + '',
+                 'icon-image': defaultStyle.src,
                  'icon-size': defaultStyle.scale,
                  visibility: layerInfo.visible
                }

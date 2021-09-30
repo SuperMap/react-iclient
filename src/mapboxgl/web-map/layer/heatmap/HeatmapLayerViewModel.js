@@ -25,6 +25,34 @@ export default class HeatMapLayerViewModel extends mapboxgl.Evented {
     this._initializeHeatMapLayer();
   }
 
+  setData(data) {
+    if (!data || !this.map.getSource(this.layerId)) {
+      return;
+    }
+    this.data = data;
+    if (this.layerId && !this.map.getSource(this.layerId)) {
+      this._initializeHeatMapLayer();
+    } else {
+      this.map.getSource(this.layerId).setData(data);
+    }
+  }
+
+  setLayerStyle(layerStyle) {
+    if (!layerStyle || !this.map.getSource(this.layerId)) {
+      return;
+    }
+
+    let { paint, layout } = layerStyle;
+    for (let prop of Object.keys(paint)) {
+      this.map.setPaintProperty(this.layerId, prop, paint[prop]);
+    }
+    for (let prop of Object.keys(layout)) {
+      this.map.setLayoutProperty(this.layerId, prop, layout[prop]);
+    }
+
+    this.layerStyle = layerStyle;
+  }
+
   _initializeHeatMapLayer() {
     this.map.addSource(this.layerId, {
       type: 'geojson',
@@ -35,7 +63,6 @@ export default class HeatMapLayerViewModel extends mapboxgl.Evented {
       id: this.layerId,
       type: 'heatmap',
       source: this.layerId,
-      maxzoom: 9,
       paint: this.paint || {
         'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 0, 1, 9, 3],
         'heatmap-color': [
@@ -55,12 +82,10 @@ export default class HeatMapLayerViewModel extends mapboxgl.Evented {
           1,
           'rgb(178,24,43)'
         ],
-        'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 0, 2, 9, 20],
-        'heatmap-opacity': ['interpolate', ['linear'], ['zoom'], 7, 1, 9, 0]
+        'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 0, 2, 9, 20]
       },
       layout: this.layout || {}
     });
-
     this.fire('heatmaplayeraddsucceeded', { map: this.map });
   }
 }

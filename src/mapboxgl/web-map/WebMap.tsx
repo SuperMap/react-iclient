@@ -15,6 +15,7 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
   map?: mapboxglTypes.Map;
   viewModel: WebMapViewModel;
   selfRef: React.RefObject<HTMLInputElement>;
+  _isMounted = false;
 
   static defaultProps = {
     target: 'map',
@@ -46,6 +47,7 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.initializeWebMap();
     this.registerEvents();
   }
@@ -56,7 +58,7 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
       const funcName = `set${upperFirst(name)}`;
       const propsValue = get(this.props, prop);
       const prevPropsValue = get(prevProps, prop);
-      if (propsValue && !isEqual(propsValue, prevPropsValue)) {
+      if (propsValue !== undefined && propsValue !== null && !isEqual(propsValue, prevPropsValue)) {
         this.viewModel[funcName](propsValue);
       }
     });
@@ -69,6 +71,7 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
     if (autoresize && this.selfRef.current) {
       removeListener(this.selfRef.current, this.__resizeHandler);
     }
+    this._isMounted = false;
   }
 
   initializeWebMap = () => {
@@ -104,9 +107,11 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
   registerEvents = () => {
     const { target, onLoad } = this.props;
     this.viewModel.on('addlayerssucceeded', (e) => {
-      this.setState({
-        spinning: false
-      });
+      if (this._isMounted) {
+        this.setState({
+          spinning: false
+        });
+      }
       mapEvent.setMap(target, e.map);
       this.viewModel && mapEvent.setWebMap(target, this.viewModel);
       mapEvent.emit('load-map', e.map, target);
@@ -130,9 +135,11 @@ class WebMap extends React.Component<WebMapProps, WebMapState> {
        */
       isFunction(onGetMapFailed) && onGetMapFailed({ error: e.error });
       message.error(e.error.message);
-      this.setState({
-        spinning: false
-      });
+      if (this._isMounted) {
+        this.setState({
+          spinning: false
+        });
+      }
     });
     this.viewModel.on('getlayerdatasourcefailed', e => {
       const { onGetLayerDatasourceFailed } = this.props;

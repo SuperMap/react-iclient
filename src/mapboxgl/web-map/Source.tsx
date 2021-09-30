@@ -17,14 +17,9 @@ export default class Source extends React.PureComponent<SourceProps> {
     this._map = null;
   }
 
-  componentDidUpdate() {
-    console.log(`source "${this.props.id}" updated`);
-  }
-
   componentWillUnmount() {
     setTimeout(() => {
       this._map.removeSource(this.props.id);
-      console.log('source "'.concat(this.props.id, '" removed'));
     }, 100);
   }
 
@@ -32,8 +27,7 @@ export default class Source extends React.PureComponent<SourceProps> {
     this._map = map;
     const { id, mapNotLoadedTip, ...sourceOption } = this.props;
     if (this._map.getSource(id)) {
-        console.log(`There is already a source with the id "${id}"`);
-        return;
+      return;
     }
     this._map.addSource(id, sourceOption);
   }

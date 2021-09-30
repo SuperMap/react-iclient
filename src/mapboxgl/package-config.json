@@ -1,6 +1,6 @@
 {
   "name": "@supermap/react-iclient-mapboxgl",
-  "version": "10.1.1",
+  "version": "10.2.0",
   "description": "SuperMap iClient for React.js",
   "main": "dist/index",
   "dependencies": {
@@ -24,7 +24,6 @@
     "hoist-non-react-statics": "^3.3.0",
     "identity-obj-proxy": "3.0.0",
     "is-wsl": "^1.1.0",
-    "loadsh": "0.0.4",
     "lodash.capitalize": "^4.2.1",
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
