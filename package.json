@@ -43,7 +43,7 @@
     "lodash.uniqueid": "^4.0.1",
     "prop-types": "^15.7.2",
     "recompose": "^0.30.0",
-    "resize-detector": "^0.2.0",
+    "resize-detector": "^0.3.0",
     "semver": "6.3.0",
     "three": "^0.111.0",
     "@turf/turf": "^5.1.6",
