@@ -195,9 +195,8 @@ supermap.RangeThemeLayer = () => {
 supermap.MapService = () => {
   return {
     getMapInfo(callback) {
-      setTimeout(() => {
-        callback({});
-      }, 0);
+      const mapObj = {element:null, object:{}, result:{},type: "processCompleted"}
+      callback(mapObj);
     }
   };
 };

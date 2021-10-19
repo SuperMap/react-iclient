@@ -39,7 +39,28 @@ describe('SmGraphThemeLayer', () => {
     }
   });
 
-  it('initial', (done) => {
+  it('initial', done => {
+    const spy = jest.spyOn(mapboxgl, 'Map');
+    const onLoad = jest.fn();;
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmGraphThemeLayer chartsType={'Pie'} data={data} onLoad={onLoad}></SmGraphThemeLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+    mapLoaded(wrapper, () => {
+      expect(spy).toBeCalled();
+      const graphThemeWrapper = wrapper.find(SmGraphThemeLayer).get(0);
+      expect(graphThemeWrapper.props.data.type).toBe('FeatureCollection');
+      expect(graphThemeWrapper.props.data.features.length).toBe(1);
+      expect(onLoad).toBeCalled();
+      done();
+    });
+  });
+
+  it('update-data', done => {
     const spy = jest.spyOn(mapboxgl, 'Map');
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
@@ -51,9 +72,17 @@ describe('SmGraphThemeLayer', () => {
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
-      const graphThemeWrapper = wrapper.find(SmGraphThemeLayer).get(0);
-      expect(graphThemeWrapper.props.data.type).toBe('FeatureCollection');
-      expect(graphThemeWrapper.props.data.features.length).toBe(1);
+      const newData = {
+        features: [
+          { geometry: { type: 'Point', coordinates: [0, 0] }, properties: { SmUserID: 'test' }, type: 'Feature' }
+        ],
+        type: 'FeatureCollection'
+      };
+      wrapper.setProps({ children: <SmGraphThemeLayer data={newData}></SmGraphThemeLayer> });
+      wrapper.update();
+      const layerWrapper = wrapper.find(SmGraphThemeLayer).get(0);
+      expect(layerWrapper.props.data).not.toBe(null);
+      expect(layerWrapper.props.data.features[0].properties.SmUserID).toBe('test');
       done();
     });
   });

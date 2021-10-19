@@ -149,6 +149,43 @@ describe('AnimateMarkerLayer.vue', () => {
     });
   });
 
+  it('change breathingAperture width', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+       <SmAnimateMarkerLayer  width={150} height={150} colors={colors} features={features} type={'breathingAperture'} ></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({ children: <SmAnimateMarkerLayer features={features} type={'breathingAperture'} width={600} ></SmAnimateMarkerLayer> });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.width).toBe(600);
+      done();
+    });
+  });
+  
+  it('change breathingAperture color', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+       <SmAnimateMarkerLayer  width={150} height={150} colors={colors} features={features} type={'breathingAperture'} ></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({ children: <SmAnimateMarkerLayer features={features} type={'breathingAperture'}  width={150} height={150} colors={['#f00','#ff0']}></SmAnimateMarkerLayer> });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.colors[0]).toBe('#f00');
+      done();
+    });
+  });
+
   it('change props', done => {
     const newFeatures = {
       features: [
@@ -185,4 +222,6 @@ describe('AnimateMarkerLayer.vue', () => {
       done();
     });
   });
+
+
 });

@@ -67,7 +67,7 @@ export default class AnimateMarkerLayer extends Component<AnimateMarkerLayerProp
       this.marker && this.marker.setMarkersTextFontSize(this.props.textFontSize);
     }
     if (this.viewModel && this.props.colors && this.props.colors.length && this.props.colors.length > 0 && !isEqual(prevProps.colors, this.props.colors)) {
-      this.marker && this.marker.setMarkersTextFontSize(this.props.textFontSize);
+      this.marker && this.marker.setMarkersColors(this.props.textFontSize);
     }
     if (this.viewModel && this.props.textField && prevProps.textField !== this.props.textField) {
       this.marker && this.marker.setMarkersTextField(this.props.textField);
