@@ -17,6 +17,11 @@ import {
   webmap_uniqueLayer_polygon,
   echart_iPortal_data,
   echart_rest_data,
+  webmap_tiandituLayer,
+  webmap_wmsLayer,
+  webmap_wmtsLayer,
+  webmap_xyzLayer,
+  webmap_migrationLayer,
 } from './services';
 import '../../../public/libs/iclient-mapboxgl/iclient-mapboxgl.min';
 
@@ -102,6 +107,18 @@ var FetchRequest = (SuperMap.FetchRequest = {
         process.nextTick(() => resolve(new Response(JSON.stringify(webmap_ranksymbolLayer))));
       } else if (url.indexOf('2064629293/map.json') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(webmap_uniqueLayer_polygon))));
+      } else if (url.indexOf('1224625555/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_tiandituLayer))));
+      } else if (url.indexOf('4845656956/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_wmsLayer))));
+      } else if (url.indexOf('1016996969/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_wmtsLayer))));
+      } else if (url.indexOf('7894565555/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_xyzLayer))));
+      } else if (url.indexOf('6177878786/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_migrationLayer))));
+      } else if (url.indexOf('4784854858/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_rangeLayer))));
       } else if (url.indexOf('https://fakeiportal.supermap.io/iportal/wrong-succeed') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify({ succeed: false }))));
       } else if (url.indexOf('https://fakeiportal.supermap.io/iportal/portalDataService') > -1) {

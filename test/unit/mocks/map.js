@@ -503,6 +503,26 @@ var Map = function(options) {
   this.hasImage = function() {
     return true;
   };
+  this.addStyle = function(style, before) {};
+  this.getCanvasContainer = () => {
+    return {
+      appendChild() {}
+    }
+  }
+  this.getCanvas = () => {
+    return {
+      style: {
+        width: 100,
+        height: 100
+      }
+    }
+  }
+  this.setCRS = (epsgCode) => {
+
+  }
+  this.setRenderWorldCopies = (epsgCode) => {
+
+  }
 };
 
 module.exports = Map;

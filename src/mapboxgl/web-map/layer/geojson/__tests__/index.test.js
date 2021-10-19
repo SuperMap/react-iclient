@@ -39,7 +39,7 @@ describe(`SmGeojsonLayer`, () => {
 
   it('initial', done => {
     const layerStyle = new CircleStyle();
-    wrapper = mount(<SmGeojsonLayer data={data} layerStyle={layerStyle}></SmGeojsonLayer>);
+    wrapper = mount(<SmGeojsonLayer layerId={'geojsonLayerName'} data={data} layerStyle={layerStyle}></SmGeojsonLayer>);
     wrapper.update();
     expect(wrapper.props().data.type).toBe('FeatureCollection');
     expect(wrapper.props().data.features.length).toBe(1);

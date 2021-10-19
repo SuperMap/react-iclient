@@ -192,4 +192,44 @@ supermap.RangeThemeLayer = () => {
   };
 };
 
+supermap.MapService = () => {
+  return {
+    getMapInfo(callback) {
+      setTimeout(() => {
+        callback({});
+      }, 0);
+    }
+  };
+};
+
+supermap.LabelThemeLayer = () => {
+  return {
+    addFeatures() {}
+  };
+};
+
+supermap.RangeThemeLayer = () => {
+  return {
+    addFeatures() {}
+  };
+};
+
+supermap.UniqueThemeLayer = () => {
+  return {
+    addFeatures() {}
+  };
+};
+
+supermap.RankSymbolThemeLayer = () => {
+  return {
+    addFeatures() {}
+  };
+};
+
+supermap.GraphThemeLayer = () => {
+  return {
+    addFeatures() {}
+  };
+};
+
 module.exports = supermap;
