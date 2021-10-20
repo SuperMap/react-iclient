@@ -41,7 +41,7 @@ describe('SmGraphThemeLayer', () => {
 
   it('initial', done => {
     const spy = jest.spyOn(mapboxgl, 'Map');
-    const onLoad = jest.fn();;
+    const onLoad = jest.fn();
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmGraphThemeLayer chartsType={'Pie'} data={data} onLoad={onLoad}></SmGraphThemeLayer>

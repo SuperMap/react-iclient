@@ -91,4 +91,43 @@ describe('ClusterLayer.vue', () => {
       done();
     });
   });
+
+  it('setClusteredPointTextLayout', (done) => {
+    const clusteredPointTextLayout = {}
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmClusterLayer data={data} ></SmClusterLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({ children: <SmClusterLayer data={data} clusteredPointTextLayout={clusteredPointTextLayout}></SmClusterLayer> });
+      wrapper.update();
+      const clusterWrapper = wrapper.find(SmClusterLayer).get(0);
+      expect(clusterWrapper.props.clusteredPointTextLayout).not.toBeNull();
+      done();
+    });
+  });
+
+  it('setClusteredPointTextLayout null', (done) => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmClusterLayer data={data} ></SmClusterLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({ children: <SmClusterLayer data={data} clusteredPointTextLayout={null}></SmClusterLayer> });
+      wrapper.update();
+      const clusterWrapper = wrapper.find(SmClusterLayer).get(0);
+      expect(clusterWrapper.props.clusteredPointTextLayout).toBeNull();
+      done();
+    });
+  });
 });

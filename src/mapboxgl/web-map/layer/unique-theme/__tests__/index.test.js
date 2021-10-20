@@ -61,6 +61,24 @@ describe('SmUniqueThemeLayer', () => {
 
   it('initial', done => {
     const spy = jest.spyOn(mapboxgl, 'Map');
+    const onLoad = jest.fn();
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmUniqueThemeLayer data={data} options={options} onLoad={onLoad}></SmUniqueThemeLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+    mapLoaded(wrapper, () => {
+      expect(spy).toBeCalled();
+      expect(onLoad).toBeCalled();
+      done();
+    });
+  });
+
+  it('update-data', done => {
+    const spy = jest.spyOn(mapboxgl, 'Map');
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmUniqueThemeLayer data={data} options={options}></SmUniqueThemeLayer>
@@ -71,6 +89,14 @@ describe('SmUniqueThemeLayer', () => {
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
+      const newData =  [
+          { geometry: { type: 'Point', coordinates: [0, 0] }, properties: { SmUserID: 'test' }, type: 'Feature' }
+        ];
+      wrapper.setProps({ children: <SmUniqueThemeLayer data={newData}></SmUniqueThemeLayer> });
+      wrapper.update();
+      const layerWrapper = wrapper.find(SmUniqueThemeLayer).get(0);
+      expect(layerWrapper.props.data).not.toBe(null);
+      expect(layerWrapper.props.data[0].properties.SmUserID).toBe('test');
       done();
     });
   });
