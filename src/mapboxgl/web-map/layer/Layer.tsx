@@ -14,7 +14,7 @@ interface LayerProps extends MapGetterProps, BaseLayerProps {
 export default class Layer extends React.Component<LayerProps> {
 
   loaded(map: mapboxglTypes.Map) {
-    const { type, source, layerId, minzoom, maxzoom, filter, layout, paint, metadata, before } = this.props;
+    const { type, source, layerId, minzoom, maxzoom, filter, layout, paint, metadata } = this.props;
 
     if (map.getLayer(layerId)) {
       console.error(`There is already a layer with the id "${layerId}"`);
@@ -44,7 +44,7 @@ export default class Layer extends React.Component<LayerProps> {
     metadata && (layerOption.metadata = metadata);
     this.props['source-layer'] && (layerOption['source-layer'] = this.props['source-layer']);
 
-    map.addLayer(layerOption, before);
+    map.addLayer(layerOption);
   }
 
   removed() {}

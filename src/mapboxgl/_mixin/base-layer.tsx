@@ -46,8 +46,7 @@ export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(Wra
     static defaultProps = {
       layerId: UniqueId(`${WrappedComponent.name.toLowerCase()}-`),
       minzoom: 0,
-      maxzoom: 22,
-      before: undefined
+      maxzoom: 22
     };
     constructor(props: React.ComponentProps<typeof WrappedComponent>) {
       super(props);
@@ -98,10 +97,6 @@ export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(Wra
           layer.metadata = this.props.metadata;
         }
       }
-
-      if (prevProps.before !== this.props.before) {
-        this.move(this.props.before);
-      }
     }
 
     componentWillUnmount() {
@@ -148,12 +143,12 @@ export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(Wra
         });
       }
     };
-    move = beforeId => {
-      this.map.moveLayer(this.props.layerId, beforeId);
-      this.$_emitEvent('layer-moved', {
-        beforeId: beforeId
-      });
-    };
+    // move = beforeId => {
+    //   this.map.moveLayer(this.props.layerId, beforeId);
+    //   this.$_emitEvent('layer-moved', {
+    //     beforeId: beforeId
+    //   });
+    // };
 
     remove = (layerId = this.props.layerId) => {
       if (this.registerEvents && this.registerEvents.length) {
@@ -186,7 +181,7 @@ export default function withLayer<P extends BaseLayerProps = BaseLayerProps>(Wra
         // mapLayer,
         // mapSource
       });
-      return <WrappedComponent {...newProps} ref={this.getComponentInstance} move={this.move} remove={this.remove} />;
+      return <WrappedComponent {...newProps} ref={this.getComponentInstance} remove={this.remove} />;
     }
   };
   return hoistNonReactStatics(BaseLayer, WrappedComponent);

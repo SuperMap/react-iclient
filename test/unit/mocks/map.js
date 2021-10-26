@@ -523,6 +523,12 @@ var Map = function(options) {
   this.setRenderWorldCopies = (epsgCode) => {
 
   }
+  
+  const styleEvent = {
+    addGlyphs: function () { },
+    addSprite: function () { },
+  }
+  Object.assign(this.style, styleEvent);
 };
 
 module.exports = Map;

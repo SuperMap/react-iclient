@@ -234,24 +234,16 @@ class App extends React.Component<null, AppState> {
     });
   };
 
-  renderSources() {
-    const { sources } = this.state;
+  renderChildren() {
+    const { layers } = this.state;
     const UIs = [];
+    const { sources } = this.state;
     for (const id in sources) {
       UIs.push(<SmSource key={id} id={id} {...sources[id]} />);
     }
-    // Object.entries(sources).forEach(([id, source]) => {
-    //   UIs.push(<SmSource key={id} type={source.type} {...source} />);
-    // });
-    return UIs;
-  }
-
-  renderLayers() {
-    const { layers } = this.state;
-    const UIs = [];
     layers.forEach(layer => {
       UIs.push(<SmLayer key={layer.id} layerId={layer.id} {...layer} />);
-    });
+    });    
     return UIs;
   }
 
@@ -318,8 +310,7 @@ class App extends React.Component<null, AppState> {
         </div>
         <header className="App-header">
           <SmMap onClick={e => console.log(e)} mapOptions={mapOptions} sprites={sprites} glyphs={glyphs}>
-            {this.renderSources()}
-            {this.renderLayers()}
+            {this.renderChildren()}
           </SmMap>
           {/* <SmWebMap
             mapId={mapId}
