@@ -3,6 +3,7 @@ import mockFetch from '@test/unit/mocks/FetchRequest';
 import mockMapInfo from '@test/unit/mocks/data/common-map-info.json';
 import mockiPortalServiceProxy from '@test/unit/mocks/data/iportal-service-proxy.json';
 import mockData from '@test/unit/mocks/data/data-minhang.js';
+import mockCsvGeojson from '@test/unit/mocks/data/csv-geojson.json';
 import flushPromises from 'flush-promises';
 
 const fetchResource = {
@@ -173,14 +174,6 @@ describe(`WebMapViewModel`, () => {
     expect(spy).toBeCalled();
   });
 
-  xit('resize', async () => {
-    mockFetch(fetchResource);
-    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
-    const spy = jest.spyOn(viewModel.map, 'setZoom');
-    await flushPromises();
-    viewModel.resize(true);
-    expect(spy).toBeCalled();
-  });
   it('_addlayers HOSTED_TILE RESTDATA', async done => {
     const result = [
       {
@@ -300,12 +293,111 @@ describe(`WebMapViewModel`, () => {
     done();
   });
 
+  it('add vectorLayer_point with SYMBOL_POINT', async done => {
+    document.getElementById = () => {
+      return {
+        classList: {
+          add: () => jest.fn()
+        }
+      };
+    };
+    const mapInfo = {
+      ...mockMapInfo,
+      layers: [
+        {
+          layerType: 'VECTOR',
+          name: '浙江省高等院校(3)',
+          visible: true,
+          featureType: 'POINT',
+          dataSource: { type: 'PORTAL_DATA', serverId: '1920557079' },
+          style: {
+            radius: 6,
+            fillColor: '#ff0000',
+            fillOpacity: 0.9,
+            strokeColor: '#ffffff',
+            strokeWidth: 1,
+            strokeOpacity: 1,
+            lineDash: 'solid',
+            symbolType: 'svg',
+            className: 'supermapol-icons-Shape-50',
+            fontSize: '16px',
+            name: 'Shape2-2',
+            offsetX: 0,
+            offsetY: 0,
+            rotation: 0,
+            type: 'SYMBOL_POINT',
+            unicode: '&#xe691'
+          }
+        }
+      ]
+    };
+    const fetchResource = {
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo,
+      'https://fakeiportal.supermap.io/iportal/web/datas/1920557079/content.json?pageSize=9999999&currentPage=1': mockData
+    };
+    mockFetch(fetchResource);
+    const callback = jest.fn();
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions);
+    viewModel.on({ addlayerssucceeded: callback });
+    await flushPromises();
+    viewModel.map.fire('load');
+    await flushPromises();
+    expect(callback.mock.called).toBeTruthy;
+    done();
+  });
+
+  it('add markerLayer', async done => {
+    window.canvg = (a, b, c) => {
+      c.renderCallback();
+    };
+    const mapInfo = {
+      extent: {
+        leftBottom: { x: -20037508.3427892, y: -20037508.3427891 },
+        rightTop: { x: 20037508.3427892, y: 20037508.3427891 }
+      },
+      level: 5,
+      center: { x: 11810617.9363554, y: 4275239.3340175 },
+      baseLayer: {
+        layerType: 'TILE',
+        name: 'China',
+        url: 'http://support.supermap.com.cn:8090/iserver/services/map-china400/rest/maps/China'
+      },
+      layers: [
+        {
+          layerType: 'MARKER',
+          visible: true,
+          name: '民航数',
+          serverId: 123456,
+          layerStyle: {
+            labelField: 'minghang'
+          }
+        }
+      ],
+      description: '',
+      projection: 'EPSG:3857',
+      title: 'unique_民航数据',
+      version: '1.0'
+    };
+    const fetchResource = {
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo,
+      'https://fakeiportal.supermap.io/iportal/web/datas/123456/content.json?pageSize=9999999&currentPage=1': mockCsvGeojson
+    };
+    mockFetch(fetchResource);
+    const callback = jest.fn();
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions);
+    viewModel.on({ addlayerssucceeded: callback });
+    await flushPromises();
+    setTimeout(() => {
+      expect(callback.mock.called).toBeTruthy;
+      done();
+    }, 100);
+  });
+
   xit('setZoom null', async () => {
     mockFetch(fetchResource);
     const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
     await flushPromises();
     const spy = jest.spyOn(viewModel.map, 'setZoom');
-    // viewModel.setZoom();
     await flushPromises();
     expect(spy).toBeCalled();
   });
@@ -325,7 +417,7 @@ describe(`WebMapViewModel`, () => {
     viewModel.setMaxZoom();
     expect(spy).toBeCalled();
   });
-   xit('setPitch null', async () => {
+  xit('setPitch null', async () => {
     mockFetch(fetchResource);
     const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
     const spy = jest.spyOn(viewModel.map, 'setPitch');
