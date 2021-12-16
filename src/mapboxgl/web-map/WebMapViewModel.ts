@@ -1339,7 +1339,7 @@
          }
        }, this);
      }
-   }
+   } 
    /**
     * @private
     * @function WebMapViewModel.prototype._getFeatures
@@ -1437,7 +1437,7 @@
    }
  
    private _handleDataflowFeatures(layerInfo, e) {
-     let features = JSON.parse(e.data);
+     let features = e.data && JSON.parse(e.data);
      // this._transformFeatures([features]); // TODO 坐标系
      this.fire('dataflowfeatureupdated', {
        features,
@@ -1449,7 +1449,7 @@
        let condition = this._replaceFilterCharacter(layerInfo.filterCondition);
        let sql = 'select * from json where (' + condition + ')';
        let filterResult = window['jsonsql'].query(sql, {
-         attributes: features.properties
+         attributes: features && features.properties
        });
        if (filterResult && filterResult.length > 0) {
          this._addDataflowLayer(layerInfo, features);
@@ -1539,7 +1539,7 @@
      let features = cloneDeep(this.map.getSource(sourceID)._data.features);
      let has = false;
      features.map((item, index) => {
-       if (item.properties[identifyField] === newFeature.properties[identifyField]) {
+       if (newFeature && item.properties[identifyField] === newFeature.properties[identifyField]) {
          has = true;
          if (type === 'line') {
            let coordinates = item.geometry.coordinates;
@@ -2567,7 +2567,7 @@
     * @param {array} allFeatures - 图层上的 feature 集合
     */
    private _getFiterFeatures(filterCondition: string, allFeatures): any {
-     if (!filterCondition) {
+     if (!filterCondition || !allFeatures) {
        return allFeatures;
      }
      let condition = this._replaceFilterCharacter(filterCondition);

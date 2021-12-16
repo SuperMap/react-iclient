@@ -20,6 +20,7 @@ import {
   webmap_tiandituLayer,
   webmap_wmsLayer,
   webmap_wmtsLayer,
+  webmap_wmts100,
   webmap_xyzLayer,
   webmap_migrationLayer,
 } from './services';
@@ -89,7 +90,9 @@ var FetchRequest = (SuperMap.FetchRequest = {
         process.nextTick(() => reject(''));
       } else if (url.indexOf('676516522') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(chart_data))));
-      } else if (url.indexOf('WMTS') > -1) {
+      } else if(url.indexOf('http://fakeiportal:8090/iserver/services/map-china400/wmts100')>-1){
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_wmts100))));
+      }else if (url.indexOf('WMTS') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(portal_data2))));
       } else if (url.indexOf('123456/map.json') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(webmap_markerLayer))));
