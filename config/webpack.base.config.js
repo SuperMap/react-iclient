@@ -7,14 +7,14 @@ const modules = require('./modules');
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP;
 
 module.exports = function(isEnvProduction) {
-  const publicPath = isEnvProduction ? paths.servedPath : '/';
-  const shouldUseRelativeAssetPaths = publicPath === './';
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
       isEnvProduction
         ? {
             loader: MiniCssExtractPlugin.loader,
-            options: shouldUseRelativeAssetPaths ? { publicPath: '../../' } : {}
+            options: paths.publicUrlOrPath.startsWith('.')
+              ? { publicPath: '../../' }
+              : {}
           }
         : require.resolve('style-loader'),
       {

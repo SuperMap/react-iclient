@@ -11,17 +11,15 @@ const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const baseWebpackConfig = require('./webpack.base.config')();
 
-const env = getClientEnvironment('');
-const publicPath = '/';
-
-console.log('appIndexJs: ',paths.appIndexJs);
+const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
 module.exports = merge({}, baseWebpackConfig, {
   mode: 'development',
-  entry: [require.resolve('react-dev-utils/webpackHotDevClient'), paths.appIndexJs].filter(Boolean),
+  entry: [require.resolve('react-dev-utils/webpackHotDevClient'), paths.appIndexJs],
   output: {
+    pathinfo: true,
     filename: '[name].js',
-    publicPath: publicPath
+    publicPath: paths.publicUrlOrPath
   },
   plugins: [
     new HtmlWebpackPlugin(

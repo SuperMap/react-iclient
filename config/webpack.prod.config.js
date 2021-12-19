@@ -14,8 +14,7 @@ const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const pkg = require('../package.json');
 
-const publicUrl = paths.servedPath.slice(0, -1);
-const env = getClientEnvironment(publicUrl);
+const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
 const outputFileName = 'iclient-mapboxgl-react';
 
@@ -23,9 +22,9 @@ function getProdConfig(isMinify) {
   const WebpackConfig = merge({}, baseWebpackConfig, {
     mode: 'production',
     bail: true,
-    entry: [path.resolve(__dirname, '../src/mapboxgl/index.tsx')].filter(Boolean),
+    entry: [path.resolve(__dirname, '../src/mapboxgl/index.tsx')],
     output: {
-      path: path.resolve(__dirname, '../dist/mapboxgl'),
+      path: paths.appBuild,
       filename: isMinify ? `${outputFileName}.min.js` : `${outputFileName}.js`,
       libraryTarget: 'umd',
       libraryExport: 'default',
