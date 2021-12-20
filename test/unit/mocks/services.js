@@ -1368,7 +1368,7 @@ const webmap_wmts100 = `<?xml version="1.0" encoding="UTF-8"?><Capabilities xmln
   </TileMatrixSet>
 </Contents>
 <ServiceMetadataURL xlink:href="http://192.168.11.94:8090/iserver/services/map-Population/wmts100/1.0.0/WMTSCapabilities.xml"/>
-</Capabilities>`
+</Capabilities>`;
 
 const webmap_xyzLayer = {
   extent: {
@@ -2040,7 +2040,47 @@ const echartGaugeOptions = {
     }
   ]
 };
+const fakeMapServiceResult = {
+  result: {
+    recordsets: [
+      {
+        datasetName: 'Capitals@World#1',
+        features: {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              properties: {
+                SMID: '1',
+                NAME: '四川省'
+              },
+              geometry: {
+                type: 'MultiPolygon',
+                coordinates: [
+                  [
+                    [
+                      [101.84004968, 26.0859968692659],
 
+                      [101.95654423, 26.0888446242659],
+                      [101.84004968, 26.0859968692659]
+                    ]
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        fieldCaptions: ['SmID', 'SmX', 'SmY', 'SmLibTileID', 'SmUserID', 'SmGeometrySize', 'USERID', 'POP'],
+        fieldTypes: ['INT32', 'DOUBLE', 'DOUBLE', 'INT32', 'INT32', 'INT32', 'INT32'],
+        fields: ['SmID', 'SmX', 'SmY', 'SmLibTileID', 'SmUserID', 'SmGeometrySize', 'USERID', 'POP']
+      }
+    ],
+    totalCount: 1,
+    currentCount: 1,
+    customResponse: null,
+    succeed: true
+  }
+};
 module.exports = {
   portal_data,
   portal_data1,
@@ -2072,5 +2112,6 @@ module.exports = {
   echartRestDataset,
   echartGaugeDatasetOptions,
   echartGaugeOptions,
-  rest_service_url
+  rest_service_url,
+  fakeMapServiceResult
 };

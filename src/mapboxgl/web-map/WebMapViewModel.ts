@@ -284,7 +284,7 @@
    setMaxZoom(maxZoom): void {
      if (this.map) {
        this.mapOptions.maxZoom = maxZoom;
-       (maxZoom || maxZoom === 0) && this.map.setMinZoom(maxZoom);
+       (maxZoom || maxZoom === 0) && this.map.setMaxZoom(maxZoom);
      }
    }
    /**
@@ -639,10 +639,10 @@
        .then(capabilitiesText => {
          let converts = convert || window.convert;
          let tileMatrixSet = JSON.parse(
-           converts.xml2json(capabilitiesText, {
-             compact: true,
-             spaces: 4
-           })
+          converts.xml2json(capabilitiesText, {
+            compact: true,
+            spaces: 4
+          })
          ).Capabilities.Contents.TileMatrixSet;
          for (let i = 0; i < tileMatrixSet.length; i++) {
            if (

@@ -4,7 +4,7 @@ function mockFetch(resource) {
     return new Promise((resolve, reject) => {
       if(url.indexOf('?REQUEST=GetCapabilities&SERVICE=WMS') > -1 ) {
         resolve(new Response(resource[url]));
-      } else if(url.indexOf('?REQUEST=GetCapabilities&SERVICE=WMTS') > -1 ) {
+      } else if(url.indexOf('http://support.supermap.com.cn:8090/iserver/services/map-china400/wmts100') > -1 ) {
         resolve(new Response(resource[url]));
       } else if(resource[url]){
         resolve(new Response(JSON.stringify(resource[url])));

@@ -4,6 +4,8 @@ import mockMapInfo from '@test/unit/mocks/data/common-map-info.json';
 import mockiPortalServiceProxy from '@test/unit/mocks/data/iportal-service-proxy.json';
 import mockData from '@test/unit/mocks/data/data-minhang.js';
 import mockCsvGeojson from '@test/unit/mocks/data/csv-geojson.json';
+import baseLayers from '@test/unit/mocks/data/baseLayers.json';
+import { wmtsCapabilitiesText } from '@test/unit/mocks/data/CapabilitiesText.js';
 import flushPromises from 'flush-promises';
 
 const fetchResource = {
@@ -236,6 +238,79 @@ describe(`WebMapViewModel`, () => {
     expect(callback.mock.called).toBeTruthy;
     done();
   });
+
+  it('_addlayers REST_DATA', async done => {
+    const mapInfo = {
+      ...mockMapInfo,
+      layers: [
+        {
+          serverId: '123',
+          dataSource: { type: 'REST_DATA', url: 'https://fakeiportal.supermap.io/iportal/processCompleted', datasourceName: 'test' }
+        }
+      ]
+    };
+    const fetchResource1 = {
+      ...fetchResource,
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo
+    };
+    mockFetch(fetchResource1);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    viewModel.on({ addlayerssucceeded: callback });
+    await flushPromises();
+    viewModel.map.fire('load');
+    await flushPromises();
+    expect(callback.mock.called).toBeTruthy;
+    done();
+  });
+
+  it('_addlayers REST_DATA failed', async done => {
+    const mapInfo = {
+      ...mockMapInfo,
+      layers: [
+        {
+          serverId: '123',
+          dataSource: { type: 'REST_DATA', url: 'https://fakeiportal.supermap.io/iportal/processFailed', datasourceName: 'test' }
+        }
+      ]
+    };
+    const fetchResource1 = {
+      ...fetchResource,
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo
+    };
+    mockFetch(fetchResource1);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    viewModel.on({ getlayerdatasourcefailed: callback });
+    await flushPromises();
+    viewModel.map.fire('load');
+    await flushPromises();
+    expect(callback.mock.called).toBeTruthy;
+    done();
+  });
+
+  xit('_addlayers REST_MAP', async done => {
+    const mapInfo = {
+      ...mockMapInfo,
+      layers: [
+        {
+          serverId: '123',
+          dataSource: { type: 'REST_MAP', url: 'https://fakeiportal.supermap.io/iportal/processCompleted', datasourceName: 'test' }
+        }
+      ]
+    };
+    const fetchResource1 = {
+      ...fetchResource,
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo
+    };
+    mockFetch(fetchResource1);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    viewModel.on({ addlayerssucceeded: callback });
+    await flushPromises();
+    viewModel.map.fire('load');
+    await flushPromises();
+    expect(callback.mock.called).toBeTruthy;
+    done();
+  });
+
   it('_addlayers HOSTED_TILE dataItemServices.length = 0', async done => {
     const result = [
       {
@@ -351,17 +426,7 @@ describe(`WebMapViewModel`, () => {
       c.renderCallback();
     };
     const mapInfo = {
-      extent: {
-        leftBottom: { x: -20037508.3427892, y: -20037508.3427891 },
-        rightTop: { x: 20037508.3427892, y: 20037508.3427891 }
-      },
-      level: 5,
-      center: { x: 11810617.9363554, y: 4275239.3340175 },
-      baseLayer: {
-        layerType: 'TILE',
-        name: 'China',
-        url: 'http://support.supermap.com.cn:8090/iserver/services/map-china400/rest/maps/China'
-      },
+      ...mockMapInfo,
       layers: [
         {
           layerType: 'MARKER',
@@ -393,36 +458,81 @@ describe(`WebMapViewModel`, () => {
     }, 100);
   });
 
-  xit('setZoom null', async () => {
+  it('setZoom 0', async () => {
     mockFetch(fetchResource);
     const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
     await flushPromises();
     const spy = jest.spyOn(viewModel.map, 'setZoom');
-    await flushPromises();
-    expect(spy).toBeCalled();
+    viewModel.setZoom(0);
+    expect(spy).toHaveBeenCalled();
   });
-  xit('setMinZoom null', async () => {
+  it('setMinZoom 0', async () => {
     mockFetch(fetchResource);
     const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    await flushPromises();
     const spy = jest.spyOn(viewModel.map, 'setMinZoom');
-    await flushPromises();
-    viewModel.setMinZoom();
+    viewModel.setMinZoom(0);
     expect(spy).toBeCalled();
   });
-  xit('setMaxZoom null', async () => {
+  it('setMaxZoom 0', async () => {
     mockFetch(fetchResource);
     const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    await flushPromises();
     const spy = jest.spyOn(viewModel.map, 'setMaxZoom');
-    await flushPromises();
-    viewModel.setMaxZoom();
+    viewModel.setMaxZoom(0);
     expect(spy).toBeCalled();
   });
-  xit('setPitch null', async () => {
+  it('setPitch 0', async () => {
     mockFetch(fetchResource);
     const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
-    const spy = jest.spyOn(viewModel.map, 'setPitch');
     await flushPromises();
-    viewModel.setPitch();
+    const spy = jest.spyOn(viewModel.map, 'setPitch');
+    viewModel.setPitch(0);
     expect(spy).toBeCalled();
+  });
+
+  it('add baselayer which is bing', async done => {
+    const fetchResource = {
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': baseLayers['BING']
+    };
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    viewModel.on({ addlayerssucceeded: callback });
+    await flushPromises();
+    viewModel.map.fire('load');
+    await flushPromises();
+    expect(callback.mock.called).toBeTruthy;
+    done();
+  });
+
+  it('add wmtsLayer with correct url', async done => {
+    const mapInfo = {
+      ...mockMapInfo,
+      layers: [
+        {
+          layerType: 'WMTS',
+          tileMatrixSet: 'Custom_China',
+          requestEncoding: 'KVP',
+          visible: true,
+          name: 'China',
+          dpi: 90.7142857142857,
+          url: 'http://support.supermap.com.cn:8090/iserver/services/map-china400/wmts100',
+          layer: 'China',
+          layerID: 'China'
+        }
+      ]
+    };
+    const fetchResource1 = {
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo,
+      'http://support.supermap.com.cn:8090/iserver/services/map-china400/wmts100': wmtsCapabilitiesText
+    };
+    mockFetch(fetchResource1);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, { fadeDuration: 300 });
+    viewModel.on({ addlayerssucceeded: callback });
+    await flushPromises();
+    viewModel.map.fire('load');
+    await flushPromises();
+    expect(callback.mock.called).toBeTruthy;
+    done();
   });
 });
