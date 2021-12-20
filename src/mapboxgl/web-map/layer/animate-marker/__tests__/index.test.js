@@ -24,6 +24,16 @@ const features = {
   type: 'FeatureCollection'
 };
 const colors = ['rab(255,155,20)', '#3AD900', '#0080d9'];
+
+document.getElementsByClassName = () => {
+  return [
+    {
+      style: { setProperty: jest.fn(), fontSize: '12px', color: '#f00' },
+      innerHTML: '',
+      children: [{ setAttribute: jest.fn() }, { setAttribute: jest.fn() }, { setAttribute: jest.fn() }]
+    }
+  ];
+};
 describe('AnimateMarkerLayer.vue', () => {
   mountTest(SmAnimateMarkerLayer);
   let wrapper;
@@ -161,6 +171,299 @@ describe('AnimateMarkerLayer.vue', () => {
     });
   });
 
+  it('change rotatingTextBorder height 300', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmAnimateMarkerLayer
+          width={150}
+          height={150}
+          colors={colors}
+          features={features}
+          textField={'name'}
+          type={'rotatingTextBorder'}
+        ></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmAnimateMarkerLayer
+            width={150}
+            height={300}
+            colors={colors}
+            features={features}
+            textField={'name'}
+            type={'rotatingTextBorder'}
+          ></SmAnimateMarkerLayer>
+        )
+      });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.height).toBe(300);
+      done();
+    });
+  });
+  it('change rotatingTextBorder height 0', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmAnimateMarkerLayer
+          width={150}
+          height={150}
+          colors={colors}
+          features={features}
+          textField={'name'}
+          type={'rotatingTextBorder'}
+        ></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmAnimateMarkerLayer
+            width={150}
+            height={0}
+            colors={colors}
+            features={features}
+            textField={'name'}
+            type={'rotatingTextBorder'}
+          ></SmAnimateMarkerLayer>
+        )
+      });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.height).toBe(0);
+      done();
+    });
+  });
+
+  it('change rotatingTextBorder width 0', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmAnimateMarkerLayer
+          width={150}
+          height={150}
+          colors={colors}
+          features={features}
+          textField={'name'}
+          type={'rotatingTextBorder'}
+        ></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmAnimateMarkerLayer
+            width={0}
+            height={150}
+            colors={colors}
+            features={features}
+            textField={'name'}
+            type={'rotatingTextBorder'}
+          ></SmAnimateMarkerLayer>
+        )
+      });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.width).toBe(0);
+      done();
+    });
+  });
+
+  it('change rotatingTextBorder textField 站台', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmAnimateMarkerLayer
+          width={150}
+          height={150}
+          colors={colors}
+          features={features}
+          textField={'name'}
+          type={'rotatingTextBorder'}
+        ></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmAnimateMarkerLayer
+            width={0}
+            height={150}
+            colors={colors}
+            features={features}
+            textField={'站台'}
+            type={'rotatingTextBorder'}
+          ></SmAnimateMarkerLayer>
+        )
+      });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.textField).toBe('站台');
+      done();
+    });
+  });
+
+  it('change rotatingTextBorder textField 站台 features null', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmAnimateMarkerLayer
+          width={150}
+          height={150}
+          colors={colors}
+          features={features}
+          textField={'name'}
+          type={'rotatingTextBorder'}
+        ></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmAnimateMarkerLayer
+            width={0}
+            height={150}
+            colors={colors}
+            features={null}
+            textField={'站台'}
+            type={'rotatingTextBorder'}
+          ></SmAnimateMarkerLayer>
+        )
+      });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.textField).toBe('站台');
+      done();
+    });
+  });
+  it('change rotatingTextBorder textField 站台 features {}', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmAnimateMarkerLayer
+          width={150}
+          height={150}
+          colors={colors}
+          features={features}
+          textField={'name'}
+          type={'rotatingTextBorder'}
+        ></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmAnimateMarkerLayer
+            width={0}
+            height={150}
+            colors={colors}
+            features={{}}
+            textField={'站台'}
+            type={'rotatingTextBorder'}
+          ></SmAnimateMarkerLayer>
+        )
+      });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.textField).toBe('站台');
+      done();
+    });
+  });
+
+  it('change rotatingTextBorder textColor', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmAnimateMarkerLayer
+          width={150}
+          height={150}
+          colors={colors}
+          features={features}
+          textField={'name'}
+          type={'rotatingTextBorder'}
+        ></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmAnimateMarkerLayer
+            width={0}
+            height={150}
+            textColor={'#ff0'}
+            features={features}
+            textField={'name'}
+            type={'rotatingTextBorder'}
+          ></SmAnimateMarkerLayer>
+        )
+      });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.textColor).toBe('#ff0');
+      done();
+    });
+  });
+
+  it('change rotatingTextBorder textFontSize', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmAnimateMarkerLayer
+          width={150}
+          height={150}
+          colors={colors}
+          features={features}
+          textField={'name'}
+          type={'rotatingTextBorder'}
+        ></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmAnimateMarkerLayer
+            width={0}
+            height={150}
+            textFontSize={'15px'}
+            features={features}
+            textField={'name'}
+            type={'rotatingTextBorder'}
+          ></SmAnimateMarkerLayer>
+        )
+      });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.textFontSize).toBe('15px');
+      done();
+    });
+  });
   it('fluorescence', done => {
     const spy = jest.spyOn(mapboxgl, 'Map');
     wrapper = mount(
@@ -232,6 +535,51 @@ describe('AnimateMarkerLayer.vue', () => {
     });
   });
 
+  it('change fluorescence textField name', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmAnimateMarkerLayer features={features} type={'fluorescence'}></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmAnimateMarkerLayer features={features} type={'fluorescence'} textField="name"></SmAnimateMarkerLayer>
+        )
+      });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.textField).toBe('name');
+      done();
+    });
+  });
+
+  it('change fluorescence textField 站台', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmAnimateMarkerLayer features={features} type={'fluorescence'}></SmAnimateMarkerLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmAnimateMarkerLayer features={features} type={'fluorescence'} textField="站台"></SmAnimateMarkerLayer>
+        )
+      });
+      wrapper.update();
+      const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
+      expect(animateMarkerWrapper.props.textField).toBe('站台');
+      done();
+    });
+  });
   it('change rotatingTextBorder width', done => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
@@ -321,13 +669,13 @@ describe('AnimateMarkerLayer.vue', () => {
           <SmAnimateMarkerLayer
             features={features}
             type={'rotatingAperture'}
-            colors={['#f00', '#f20']}
+            colors={['rgb(0,0,255)', '#f00', '#f20']}
           ></SmAnimateMarkerLayer>
         )
       });
       wrapper.update();
       const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
-      expect(animateMarkerWrapper.props.colors[0]).toBe('#f00');
+      expect(animateMarkerWrapper.props.colors[0]).toBe('rgb(0,0,255)');
       done();
     });
   });
@@ -456,9 +804,7 @@ describe('AnimateMarkerLayer.vue', () => {
 
     mapLoaded(wrapper, () => {
       wrapper.setProps({
-        children: (
-          <SmAnimateMarkerLayer features={features} type={'haloRing'} width={600}></SmAnimateMarkerLayer>
-        )
+        children: <SmAnimateMarkerLayer features={features} type={'haloRing'} width={600}></SmAnimateMarkerLayer>
       });
       wrapper.update();
       const animateMarkerWrapper = wrapper.find(SmAnimateMarkerLayer).get(0);
@@ -480,11 +826,7 @@ describe('AnimateMarkerLayer.vue', () => {
     mapLoaded(wrapper, () => {
       wrapper.setProps({
         children: (
-          <SmAnimateMarkerLayer
-            features={features}
-            type={'haloRing'}
-            colors={['#f00', '#f20']}
-          ></SmAnimateMarkerLayer>
+          <SmAnimateMarkerLayer features={features} type={'haloRing'} colors={['#f00', '#f20']}></SmAnimateMarkerLayer>
         )
       });
       wrapper.update();

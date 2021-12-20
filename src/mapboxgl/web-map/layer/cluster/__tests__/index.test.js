@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import SmWebMap from '../../../WebMap';
 import SmClusterLayer from '../ClusterLayer';
-import mapboxgl from '@libs/mapboxgl/mapbox-gl-enhance.js';
 import mountTest, { mapLoaded } from '@test/unit/mountTest';
 import { mapOptions } from '@test/unit/mocks/services';
 import CircleStyle from '../../../../_types/CircleStyle';
@@ -28,7 +27,7 @@ let data = {
       },
       properties: {
         区站号: '50136',
-        站台: '漠河',
+        站台: '漠河'
       },
       type: 'Feature'
     }
@@ -48,15 +47,35 @@ describe('ClusterLayer.vue', () => {
     }
   });
 
-  it('initial', (done) => {
-    wrapper = mount(<SmClusterLayer data={data} ></SmClusterLayer>);
+  it('initial', done => {
+    wrapper = mount(<SmClusterLayer data={data}></SmClusterLayer>);
     wrapper.update();
     expect(wrapper.props().data.type).toBe('FeatureCollection');
     expect(wrapper.props().data.features.length).toBe(1);
     done();
   });
 
-  it('setData', (done) => {
+  xit('wrap map click', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmClusterLayer data={data}></SmClusterLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+    mapLoaded(wrapper, e => {
+      // const spy = jest.spyOn(e.map, 'click');
+      const clusterWrapper = wrapper.find(SmClusterLayer).get(0);
+      wrapper.find('#map').simulate('click');
+      wrapper.update();
+      expect(clusterWrapper.props.data.type).toBe('FeatureCollection');
+      // expect(spy).toHaveBeenCalled();
+      done();
+    });
+  });
+
+  it('setData', done => {
     let newData = {
       type: 'FeatureCollection',
       features: [
@@ -75,7 +94,7 @@ describe('ClusterLayer.vue', () => {
 
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
-        <SmClusterLayer data={data} ></SmClusterLayer>
+        <SmClusterLayer data={data}></SmClusterLayer>
       </SmWebMap>,
       {
         wrappingComponent: SmWebMap
@@ -83,7 +102,15 @@ describe('ClusterLayer.vue', () => {
     );
 
     mapLoaded(wrapper, () => {
-      wrapper.setProps({ children: <SmClusterLayer data={newData} clusteredPointStyle={clusteredPointStyle} unclusteredPointStyle={unclusteredPointStyle} ></SmClusterLayer> });
+      wrapper.setProps({
+        children: (
+          <SmClusterLayer
+            data={newData}
+            clusteredPointStyle={clusteredPointStyle}
+            unclusteredPointStyle={unclusteredPointStyle}
+          ></SmClusterLayer>
+        )
+      });
       wrapper.update();
       const clusterWrapper = wrapper.find(SmClusterLayer).get(0);
       expect(clusterWrapper.props.data.type).toBe('FeatureCollection');
@@ -92,11 +119,10 @@ describe('ClusterLayer.vue', () => {
     });
   });
 
-  it('setClusteredPointTextLayout', (done) => {
-    const clusteredPointTextLayout = {}
+  it('setData null', done => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
-        <SmClusterLayer data={data} ></SmClusterLayer>
+        <SmClusterLayer data={data}></SmClusterLayer>
       </SmWebMap>,
       {
         wrappingComponent: SmWebMap
@@ -104,7 +130,63 @@ describe('ClusterLayer.vue', () => {
     );
 
     mapLoaded(wrapper, () => {
-      wrapper.setProps({ children: <SmClusterLayer data={data} clusteredPointTextLayout={clusteredPointTextLayout}></SmClusterLayer> });
+      wrapper.setProps({
+        children: (
+          <SmClusterLayer
+            data={null}
+            clusteredPointStyle={clusteredPointStyle}
+            unclusteredPointStyle={unclusteredPointStyle}
+          ></SmClusterLayer>
+        )
+      });
+      wrapper.update();
+      const clusterWrapper = wrapper.find(SmClusterLayer).get(0);
+      expect(clusterWrapper.props.data).toBe(null);
+      done();
+    });
+  });
+
+  it('setUnclusteredPointStyle unclusteredPointStyle null', done => {
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmClusterLayer data={data}></SmClusterLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: (
+          <SmClusterLayer
+            data={data}
+            clusteredPointStyle={clusteredPointStyle}
+            unclusteredPointStyle={null}
+          ></SmClusterLayer>
+        )
+      });
+      wrapper.update();
+      const clusterWrapper = wrapper.find(SmClusterLayer).get(0);
+      expect(clusterWrapper.props.unclusteredPointStyle).toBe(null);
+      done();
+    });
+  });
+  it('setClusteredPointTextLayout', done => {
+    const clusteredPointTextLayout = {};
+    wrapper = mount(
+      <SmWebMap mapOptions={mapOptions}>
+        <SmClusterLayer data={data}></SmClusterLayer>
+      </SmWebMap>,
+      {
+        wrappingComponent: SmWebMap
+      }
+    );
+
+    mapLoaded(wrapper, () => {
+      wrapper.setProps({
+        children: <SmClusterLayer data={data} clusteredPointTextLayout={clusteredPointTextLayout}></SmClusterLayer>
+      });
       wrapper.update();
       const clusterWrapper = wrapper.find(SmClusterLayer).get(0);
       expect(clusterWrapper.props.clusteredPointTextLayout).not.toBeNull();
@@ -112,10 +194,10 @@ describe('ClusterLayer.vue', () => {
     });
   });
 
-  it('setClusteredPointTextLayout null', (done) => {
+  it('setClusteredPointTextLayout null', done => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
-        <SmClusterLayer data={data} ></SmClusterLayer>
+        <SmClusterLayer data={data}></SmClusterLayer>
       </SmWebMap>,
       {
         wrappingComponent: SmWebMap
