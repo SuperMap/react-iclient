@@ -79,7 +79,7 @@ describe(`WebMapViewModel`, () => {
   it('add DATAFLOW_POINT_TRACKLayer with style is IMAGE_POINT', async done => {
     const mockUrl = 'https://fakeiportal.supermap.io/iportal/mock-dataflow-info';
     const mockDataflow = {
-      urls: [{ url: 'https://fakeiportal.supermap.io/iportal/wsUrl/iserver/services/test/dataflow' }],
+      urls: [{ url: 'https://fakeiportal.supermap.io/iportal/wsUrl/iserver/services/noSource/dataflow' }],
       featureMetaData: {
         featureType: 'test',
         fieldInfos: [
@@ -95,6 +95,9 @@ describe(`WebMapViewModel`, () => {
         {
           ...mockMapInfo.layers[0],
           layerType: 'DATAFLOW_POINT_TRACK',
+          labelStyle:{},
+          visible: true,
+          lineStyle:{},
           url: mockUrl,
           wsUrl: '',
           dataSource: '',
@@ -132,19 +135,20 @@ describe(`WebMapViewModel`, () => {
     done();
   });
 
-  it('add DATAFLOW_POINT_TRACKLayer with style is SVG_POINT', async done => {
+  it('add DATAFLOW_POINT_TRACKLayer with style is other', async done => {
     const mapInfo = {
       ...mockMapInfo,
       layers: [
         {
           ...mockMapInfo.layers[0],
           layerType: 'DATAFLOW_POINT_TRACK',
+          name: '',
           wsUrl: '',
           dataSource: '',
           filterCondition: '>5',
           projection: 'EPSG:3857',
           pointStyle: {
-            type: 'SVG_POINT',
+            type: '',
             url: 'http://test'
           }
         }
@@ -245,7 +249,11 @@ describe(`WebMapViewModel`, () => {
       layers: [
         {
           serverId: '123',
-          dataSource: { type: 'REST_DATA', url: 'https://fakeiportal.supermap.io/iportal/processCompleted', datasourceName: 'test' }
+          dataSource: {
+            type: 'REST_DATA',
+            url: 'https://fakeiportal.supermap.io/iportal/processCompleted',
+            datasourceName: 'test'
+          }
         }
       ]
     };
@@ -269,7 +277,11 @@ describe(`WebMapViewModel`, () => {
       layers: [
         {
           serverId: '123',
-          dataSource: { type: 'REST_DATA', url: 'https://fakeiportal.supermap.io/iportal/processFailed', datasourceName: 'test' }
+          dataSource: {
+            type: 'REST_DATA',
+            url: 'https://fakeiportal.supermap.io/iportal/processFailed',
+            datasourceName: 'test'
+          }
         }
       ]
     };
@@ -287,13 +299,17 @@ describe(`WebMapViewModel`, () => {
     done();
   });
 
-  xit('_addlayers REST_MAP', async done => {
+  it('_addlayers REST_MAP', async done => {
     const mapInfo = {
       ...mockMapInfo,
       layers: [
         {
           serverId: '123',
-          dataSource: { type: 'REST_MAP', url: 'https://fakeiportal.supermap.io/iportal/processCompleted', datasourceName: 'test' }
+          dataSource: {
+            type: 'REST_MAP',
+            url: 'https://fakeiportal.supermap.io/iportal/processCompleted',
+            datasourceName: 'test'
+          }
         }
       ]
     };
@@ -304,6 +320,34 @@ describe(`WebMapViewModel`, () => {
     mockFetch(fetchResource1);
     const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
     viewModel.on({ addlayerssucceeded: callback });
+    await flushPromises();
+    viewModel.map.fire('load');
+    await flushPromises();
+    expect(callback.mock.called).toBeTruthy;
+    done();
+  });
+
+  it('_addlayers REST_MAP failed', async done => {
+    const mapInfo = {
+      ...mockMapInfo,
+      layers: [
+        {
+          serverId: '123',
+          dataSource: {
+            type: 'REST_MAP',
+            url: 'https://fakeiportal.supermap.io/iportal/processFailed',
+            datasourceName: 'test'
+          }
+        }
+      ]
+    };
+    const fetchResource1 = {
+      ...fetchResource,
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo
+    };
+    mockFetch(fetchResource1);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    viewModel.on({ getlayerdatasourcefailed: callback });
     await flushPromises();
     viewModel.map.fire('load');
     await flushPromises();

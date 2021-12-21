@@ -230,6 +230,9 @@ var Map = function(options) {
         loadTile: function() {}
       };
     }
+    if(name.includes('noSource')) {
+      return null;
+    }
     if (name === 'ChinaDark') {
       return {
         setData: function(data) {

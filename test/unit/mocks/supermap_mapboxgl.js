@@ -18,11 +18,20 @@ supermap.FeatureService = () => {
   };
 };
 
-supermap.QueryService = () => {
+supermap.QueryService = (url) => {
   return {
     queryBySQL: (param, callback) =>
       setTimeout(() => {
-        callback(fakeMapServiceResult);
+        const data =
+        url.includes('processFailed')
+            ? {
+                type: 'processFailed'
+              }
+            : {
+                type: 'processCompleted',
+                ...fakeMapServiceResult
+              };
+        callback(data);
       }, 0),
     queryByBounds: (param, callback) =>
       setTimeout(() => {
@@ -195,7 +204,7 @@ supermap.RangeThemeLayer = () => {
 supermap.MapService = () => {
   return {
     getMapInfo(callback) {
-      const mapObj = {element:null, object:{}, result:{},type: "processCompleted"}
+      const mapObj = { element: null, object: {}, result: {}, type: 'processCompleted' };
       callback(mapObj);
     }
   };

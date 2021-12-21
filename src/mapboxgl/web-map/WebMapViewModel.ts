@@ -1491,8 +1491,8 @@
        let layerStyle = layerInfo.pointStyle;
        layerInfo.style = layerStyle;
        if (!this.map.getSource(layerID)) {
-         let iconRotateExpression = this._getDataFlowRotateStyle(
-           [feature],
+      let iconRotateExpression = this._getDataFlowRotateStyle(
+           feature ? [feature] : [],
            layerInfo.directionField,
            layerInfo.identifyField
          );
@@ -1513,10 +1513,10 @@
        }
        if (layerInfo.lineStyle && layerInfo.visible) {
          if (!this.map.getSource(layerID + '-line')) {
-           let geometry = feature.geometry.coordinates;
+           let geometry = feature && feature.geometry.coordinates || [];
            let lineFeature = {
              type: 'Feature',
-             properties: feature.properties,
+             properties: feature && feature.properties,
              geometry: {
                type: 'LineString',
                coordinates: [geometry]
