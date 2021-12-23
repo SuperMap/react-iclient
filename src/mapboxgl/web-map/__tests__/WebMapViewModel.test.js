@@ -95,9 +95,9 @@ describe(`WebMapViewModel`, () => {
         {
           ...mockMapInfo.layers[0],
           layerType: 'DATAFLOW_POINT_TRACK',
-          labelStyle:{},
+          labelStyle: {},
           visible: true,
-          lineStyle:{},
+          lineStyle: {},
           url: mockUrl,
           wsUrl: '',
           dataSource: '',
@@ -235,7 +235,6 @@ describe(`WebMapViewModel`, () => {
     mockFetch(fetchResource1);
     const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
     viewModel.on({ addlayerssucceeded: callback });
-    // viewModel._addLayers([layer]);
     await flushPromises();
     viewModel.map.fire('load');
     await flushPromises();
@@ -243,6 +242,89 @@ describe(`WebMapViewModel`, () => {
     done();
   });
 
+  it('_addlayers other type catch', async done => {
+    const result = [
+      {
+        name: 'test',
+        type: 'FeatureCollection'
+      }
+    ];
+    const mapInfo = {
+      ...mockMapInfo,
+      layers: [
+        {
+          layerType: 'other',
+          dataSource: {
+            serverId: '676516522',
+            accessType: 'other'
+          }
+        }
+      ]
+    };
+    const fetchResource1 = {
+      ...fetchResource,
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo,
+      'https://fakeiportal.supermap.io/iportal/web/datas/123/datasets.json': result
+    };
+    mockFetch(fetchResource1);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    viewModel.on({ getlayerdatasourcefailed: callback });
+    await flushPromises();
+    viewModel.map.fire('load');
+    await flushPromises();
+    expect(callback.mock.called).toBeTruthy;
+    done();
+  });
+
+  it('_addlayers HOSTED_TILE RESTMAP', async done => {
+    const result = [
+      {
+        name: 'test',
+        type: 'FeatureCollection'
+      }
+    ];
+    const result1 = {
+      fileId: 'test',
+      datasetName: 'test',
+      dataItemServices: [
+        {
+          serviceType: 'RESTDATA',
+          address: 'https://fakeiportal.supermap.io/iportal/'
+        },
+        {
+          serviceType: 'RESTMAP',
+          address: 'https://fakeiportal.supermap.io/iportal/'
+        }
+      ]
+    };
+    const mapjson = [{ path: 'test' }];
+    const restMapInfo = { bounds: { left: 0, top: 0, right: 0, bottom: 0 } };
+    const mapInfo = {
+      ...mockMapInfo,
+      layers: [
+        {
+          layerType: 'HOSTED_TILE',
+          serverId: '123'
+        }
+      ]
+    };
+    const fetchResource1 = {
+      ...fetchResource,
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo,
+      'https://fakeiportal.supermap.io/iportal/web/datas/123/datasets.json': result,
+      'https://fakeiportal.supermap.io/iportal/web/datas/123.json': result1,
+      'https://fakeiportal.supermap.io/iportal/apps/viewer/getUrlResource.json?url=https%3A%2F%2Ffakeiportal.supermap.io%2Fiportal%2F/maps.json': mapjson,
+      'https://fakeiportal.supermap.io/iportal/apps/viewer/getUrlResource.json?url=test.json?prjCoordSys={"epsgCode":"3857"}': restMapInfo
+    };
+    mockFetch(fetchResource1);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    viewModel.on({ addlayerssucceeded: callback });
+    await flushPromises();
+    viewModel.map.fire('load');
+    await flushPromises();
+    expect(callback.mock.called).toBeTruthy;
+    done();
+  });
   it('_addlayers REST_DATA', async done => {
     const mapInfo = {
       ...mockMapInfo,
@@ -555,7 +637,38 @@ describe(`WebMapViewModel`, () => {
       layers: [
         {
           layerType: 'WMTS',
-          tileMatrixSet: 'Custom_China',
+          tileMatrixSet: 'GlobalCRS84Scale_京津地区地图',
+          requestEncoding: 'KVP',
+          visible: true,
+          name: 'China',
+          dpi: 90.7142857142857,
+          url: 'http://support.supermap.com.cn:8090/iserver/services/map-china400/wmts100',
+          layer: 'China',
+          layerID: 'China'
+        }
+      ]
+    };
+    const fetchResource1 = {
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo,
+      'http://support.supermap.com.cn:8090/iserver/services/map-china400/wmts100': wmtsCapabilitiesText
+    };
+    mockFetch(fetchResource1);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, { fadeDuration: 300 });
+    viewModel.on({ addlayerssucceeded: callback });
+    await flushPromises();
+    viewModel.map.fire('load');
+    await flushPromises();
+    expect(callback.mock.called).toBeTruthy;
+    done();
+  });
+
+  it('add wmtsLayer with correct url Custom', async done => {
+    const mapInfo = {
+      ...mockMapInfo,
+      layers: [
+        {
+          layerType: 'WMTS',
+          tileMatrixSet: 'Custom_京津地区地图',
           requestEncoding: 'KVP',
           visible: true,
           name: 'China',
