@@ -36,7 +36,7 @@
     "recompose": "^0.30.0",
     "resize-detector": "^0.2.0",
     "semver": "6.3.0",
-    "three": "^0.130.0",
+    "three": "0.128.0",
     "turf": "^3.0.14",
     "xml-js": "^1.6.11"
   },
