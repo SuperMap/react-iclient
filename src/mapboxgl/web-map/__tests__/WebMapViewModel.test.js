@@ -5,7 +5,7 @@ import mockiPortalServiceProxy from '@test/unit/mocks/data/iportal-service-proxy
 import mockData from '@test/unit/mocks/data/data-minhang.js';
 import mockCsvGeojson from '@test/unit/mocks/data/csv-geojson.json';
 import baseLayers from '@test/unit/mocks/data/baseLayers.json';
-import { wmtsCapabilitiesText } from '@test/unit/mocks/data/CapabilitiesText.js';
+import { wmtsCapabilitiesText } from '@test/unit/mocks/data/capabilities_text.js';
 import flushPromises from 'flush-promises';
 
 const fetchResource = {
