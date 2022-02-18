@@ -20,7 +20,7 @@ const LAYER_TYPE_ID_LIST = [
 
 @compose(MapGetter,BaseLayer)
 export default class DeckglLayer extends Component<DeckglLayerProps> {
-  viewModel: DeckglLayerViewModel
+  viewModel: DeckglLayerViewModel;
   loaded(map: mapboxglTypes.Map) {
     const matchIndex = LAYER_TYPE_ID_LIST.findIndex(
       item => item === this.props.layerType

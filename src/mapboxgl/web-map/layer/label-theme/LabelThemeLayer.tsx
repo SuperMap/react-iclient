@@ -13,10 +13,10 @@ interface LabelThemeLayerProps extends MapGetterProps, BaseLayerProps {
 }  
 @compose(MapGetter,BaseLayer)
 export default class LabelThemeLayer extends Component<LabelThemeLayerProps> {
-  viewModel:LabelThemeLayerViewModel
+  viewModel:LabelThemeLayerViewModel;
   static defaultProps = {
     options: {}
-  }
+  };
   loaded(map: mapboxglTypes.Map) {
     const { onLoad } = this.props;
     this.viewModel = new LabelThemeLayerViewModel(map, this.props);
