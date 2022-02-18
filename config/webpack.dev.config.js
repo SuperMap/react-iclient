@@ -1,24 +1,21 @@
+
 const path = require('path');
-const resolve = require('resolve');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
-const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
-const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const paths = require('./paths');
-const getClientEnvironment = require('./env');
-const baseWebpackConfig = require('./webpack.base.config')();
+const baseWebpackConfig = require('./webpack.base.config')(false);
 
-const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
-
-module.exports = merge({}, baseWebpackConfig, {
+const devMerge = merge({}, baseWebpackConfig, {
   mode: 'development',
-  entry: [require.resolve('react-dev-utils/webpackHotDevClient'), paths.appIndexJs],
+  devtool: 'cheap-module-source-map',
+  entry: paths.appIndexJs,
   output: {
+    path: paths.appBuild,
     pathinfo: true,
-    filename: '[name].js',
+    filename: 'static/js/[name].js',
+    chunkFilename: 'static/js/[name].chunk.js',
     publicPath: paths.publicUrlOrPath
   },
   plugins: [
@@ -31,29 +28,16 @@ module.exports = merge({}, baseWebpackConfig, {
         }
       )
     ),
-    new ModuleNotFoundPlugin(paths.appPath),
-    new webpack.DefinePlugin(env.stringified),
-    new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-    new ForkTsCheckerWebpackPlugin({
-      typescript: resolve.sync('typescript', {
-        basedir: paths.appNodeModules
-      }),
-      async: true,
-      useTypescriptIncrementalApi: true,
-      checkSyntacticErrors: true,
-      resolveModuleNameModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
-      resolveTypeReferenceDirectiveModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
-      tsconfig: paths.appTsConfig,
-      reportFiles: ['**', '!**/__tests__/**', '!**/?(*.)(spec|test).*', '!**/src/setupProxy.*', '!**/src/setupTests.*'],
-      watch: paths.appSrc,
-      silent: true
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../public'),
-        to: path.resolve(__dirname, '../dist'),
-        ignore: ['libs/Cesium/**/*']
-      }
-    ])
+    new CaseSensitivePathsPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../public'),
+          to: path.resolve(__dirname, '../dist'),
+          globOptions: { ignore: ['libs/Cesium/**/*'] }
+        }
+      ]
+    })
   ].filter(Boolean)
 });
+module.exports = devMerge;

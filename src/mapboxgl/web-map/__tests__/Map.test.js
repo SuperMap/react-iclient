@@ -17,7 +17,7 @@ describe(`SmMap`, () => {
       wrapper.unmount();
     }
   });
-  const mapProps: MapProps = {
+  const mapProps = {
     target: 'mapDomId',
     mapOptions: {
       zoom: 5,
