@@ -6,7 +6,9 @@ import * as commontypes from './_types';
 
 export *  from './components';
 
-export default {
+const exportData = {
   ...components,
   commontypes
 };
+
+export default exportData;

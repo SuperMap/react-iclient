@@ -1,22 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
-const resolve = require('resolve');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
-const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
-const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.config')(true);
 const paths = require('./paths');
-const getClientEnvironment = require('./env');
 const pkg = require('../package.json');
 
-const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
-
 const outputFileName = 'iclient-mapboxgl-react';
+
 
 function getProdConfig(isMinify) {
   const WebpackConfig = merge({}, baseWebpackConfig, {
@@ -26,6 +20,7 @@ function getProdConfig(isMinify) {
     output: {
       path: paths.appBuild,
       filename: isMinify ? `${outputFileName}.min.js` : `${outputFileName}.js`,
+      publicPath: paths.publicUrlOrPath,
       libraryTarget: 'umd',
       libraryExport: 'default',
       library: ['SuperMap', 'Components']
@@ -54,7 +49,7 @@ function getProdConfig(isMinify) {
           amd: 'three/build/three'
         }
       },
-      function(context, request, callback) {
+      function({ request }, callback) {
         if (/\/public\/libs\/mapboxgl\/mapbox-gl-enhance/.test(request)) {
           return callback(null, {
             root: 'mapboxgl',
@@ -94,8 +89,6 @@ function getProdConfig(isMinify) {
       minimizer: []
     },
     plugins: [
-      new ModuleNotFoundPlugin(paths.appPath),
-      new webpack.DefinePlugin(env.stringified),
       new webpack.BannerPlugin(`
       ${pkg.name}.(${pkg.homepage})
       Copyright© 2000 - 2021 SuperMap Software Co.Ltd
@@ -105,33 +98,14 @@ function getProdConfig(isMinify) {
       new MiniCssExtractPlugin({
         filename: isMinify ? `${outputFileName}.min.css` : `${outputFileName}.css`
       }),
-      new ForkTsCheckerWebpackPlugin({
-        typescript: resolve.sync('typescript', {
-          basedir: paths.appNodeModules
-        }),
-        async: false,
-        useTypescriptIncrementalApi: true,
-        checkSyntacticErrors: true,
-        resolveModuleNameModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
-        resolveTypeReferenceDirectiveModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
-        tsconfig: paths.appTsConfig,
-        reportFiles: [
-          '**',
-          '!**/__tests__/**',
-          '!**/?(*.)(spec|test).*',
-          '!**/src/setupProxy.*',
-          '!**/src/setupTests.*'
-        ],
-        watch: paths.appSrc,
-        silent: true,
-        formatter: typescriptFormatter
-      }),
-      new CopyWebpackPlugin([
-        {
-          from: path.resolve(__dirname, '../public/mbgl-index.js'),
-          to: path.resolve(__dirname, '../dist/mapboxgl/index.js')
-        }
-      ])
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, '../public/mbgl-index.js'),
+            to: path.resolve(__dirname, '../dist/mapboxgl/index.js')
+          }
+        ]
+      })
     ]
   });
 
@@ -140,30 +114,26 @@ function getProdConfig(isMinify) {
     WebpackConfig.optimization.minimizer.push(
       new TerserPlugin({
         terserOptions: {
+          parse: {
+            ecma: 8
+          },
           compress: {
-            warnings: false
+            ecma: 5,
+            warnings: false,
+            comparisons: false,
+            inline: 2,
+          },
+          mangle: {
+            safari10: true,
           },
           output: {
-            comments: true
+            ecma: 5,
+            comments: true,
+            ascii_only: true
           }
-        },
-        extractComments: {
-          banner: () => {
-            return `
-* 
-*       ${pkg.name}.(${pkg.homepage})
-*       Copyright© 2000 - 2021 SuperMap Software Co.Ltd
-*       license: ${pkg.license}
-*       version: v${pkg.version}
-* 
-`;
-          },
-        },
-        cache: true,
-        parallel: true,
-        sourceMap: true,
+        }
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new CssMinimizerPlugin()
     );
   }
 
