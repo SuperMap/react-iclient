@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { MapEvents, MapOptions, MAP_EVENT_NAMES } from './interface';
 import MapViewModal from './MapViewModal';
 import debounce from 'lodash.debounce';
@@ -25,6 +25,7 @@ export interface MapProps extends MapEvents {
   onError?(params: object): void;
 }
 
+type MapPreProps = MapProps & Readonly<{ children?: ReactNode }>;
 export interface MapState {
   spinning?: boolean;
 }
@@ -66,7 +67,18 @@ class Map extends Component<MapProps, MapState> {
     this.registerEvents();
   }
 
-  componentDidUpdate(prevProps: MapProps) {
+
+  getLayerIds(children) {
+    return children?.reduce((layerIds, child) => {
+      if (child?.type?.displayName?.includes('Layer')) {
+        const id = child.props.layerId;
+        id && layerIds.push(id);
+      }
+      return layerIds;
+    }, []);
+  }
+
+  componentDidUpdate(prevProps: MapPreProps) {
     this.viewModel &&
       this.viewModelProps.forEach(prop => {
         const name = prop.includes('.') ? prop.split('.')[1] : prop;
@@ -88,7 +100,18 @@ class Map extends Component<MapProps, MapState> {
         this.viewModel.addGlyphs(id, glyphs[id]);
       }
     }
+
+    if (!this.map) {
+      return;
+    }
+    const preLayerIds = this.getLayerIds(prevProps.children);
+    const newLayerIds = this.getLayerIds(this.props.children);
+    // 过滤图层顺序相等的情况
+    if (!isEqual(preLayerIds, newLayerIds)) {
+      this.viewModel.changeLayersOrder(newLayerIds);
+    }
   }
+
 
   componentWillUnmount() {
     const { target, autoresize } = this.props;

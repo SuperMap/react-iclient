@@ -5,12 +5,9 @@ module.exports.mapboxgl = {
   Map: require('./map'),
   Evented: Evented,
   Popup: jest.fn(),
+  Marker: require('./marker'),
   LngLat: LngLat,
-  CRS: {
-    get: get => {
-      return true;
-    }
-  },
+  CRS: require('./CRS'),
   MercatorCoordinate: {
     fromLngLat: coor => {
       return coor;

@@ -164,6 +164,19 @@ class MapViewModal extends mapboxgl.Evented {
       this.map.style.addGlyphs(sourceId, glyph);
     }
   }
+  /**
+   * @function MapViewModel.prototype.changeLayersOrder
+   * @description 设置图层顺序
+   * @param {string[]} newLayerIds - 正确顺序的图层id数据
+   */
+  changeLayersOrder(newLayerIds){
+    // 最后一个图层的位置不变，从倒数第二个图层开始移动图层顺序
+    for (let index = newLayerIds.length - 2; index > -1; index--) {
+      const moveId = newLayerIds[index];
+      const beforeId = newLayerIds[index + 1];
+      this.map.moveLayer(moveId, beforeId);
+    }
+  }
 }
 
 export default MapViewModal;

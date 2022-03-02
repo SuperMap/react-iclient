@@ -17,6 +17,12 @@ import {
   webmap_uniqueLayer_polygon,
   echart_iPortal_data,
   echart_rest_data,
+  webmap_tiandituLayer,
+  webmap_wmsLayer,
+  webmap_wmtsLayer,
+  webmap_wmts100,
+  webmap_xyzLayer,
+  webmap_migrationLayer
 } from './services';
 import '../../../public/libs/iclient-mapboxgl/iclient-mapboxgl.min';
 
@@ -84,6 +90,8 @@ var FetchRequest = (SuperMap.FetchRequest = {
         process.nextTick(() => reject(''));
       } else if (url.indexOf('676516522') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(chart_data))));
+      } else if (url.indexOf('http://fakeiportal:8090/iserver/services/map-china400/wmts100') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_wmts100))));
       } else if (url.indexOf('WMTS') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(portal_data2))));
       } else if (url.indexOf('123456/map.json') > -1) {
@@ -102,6 +110,18 @@ var FetchRequest = (SuperMap.FetchRequest = {
         process.nextTick(() => resolve(new Response(JSON.stringify(webmap_ranksymbolLayer))));
       } else if (url.indexOf('2064629293/map.json') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify(webmap_uniqueLayer_polygon))));
+      } else if (url.indexOf('1224625555/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_tiandituLayer))));
+      } else if (url.indexOf('4845656956/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_wmsLayer))));
+      } else if (url.indexOf('1016996969/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_wmtsLayer))));
+      } else if (url.indexOf('7894565555/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_xyzLayer))));
+      } else if (url.indexOf('6177878786/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_migrationLayer))));
+      } else if (url.indexOf('4784854858/map.json') > -1) {
+        process.nextTick(() => resolve(new Response(JSON.stringify(webmap_rangeLayer))));
       } else if (url.indexOf('https://fakeiportal.supermap.io/iportal/wrong-succeed') > -1) {
         process.nextTick(() => resolve(new Response(JSON.stringify({ succeed: false }))));
       } else if (url.indexOf('https://fakeiportal.supermap.io/iportal/portalDataService') > -1) {
@@ -223,9 +243,53 @@ var results = {
 };
 
 var GetFeaturesBySQLService = (SuperMap.GetFeaturesBySQLService = (url, options) => {
+  const result = {
+    result: {
+      features: {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: {
+              SMID: '1',
+              NAME: '四川省'
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [101.84004968, 26.0859968692659]
+            }
+          }
+        ]
+      }
+    }
+  };
+  if (options.eventListeners) {
+    if (url.indexOf('processFailed') > -1) {
+      options.eventListeners.processFailed('get features faild');
+    }else {
+      options.eventListeners.processCompleted(result);
+    }
+  }
   getFeatureEvent.on('processCompleted', options.eventListeners.processCompleted);
   return {
-    processAsync: processAsync
+    processAsync: () => {
+      let returnData;
+      if (
+        url === 'https://fakeiportal.supermap.io/iportal/processCompleted?parentResType=MAP&parentResId=123' ||
+        'https://fakeiportal.supermap.io/iportal/processFailed?parentResType=MAP&parentResId=123'
+      ) {
+        returnData = result;
+      } else if (
+        url === 'https://fakeiportal.supermap.io/iportal/processFailed.json?token=123&parentResType=MAP&parentResId=123'
+      ) {
+        returnData = result;
+      } else {
+        returnData = results;
+      }
+      setTimeout(() => {
+        getFeatureEvent.emit('processCompleted', returnData);
+      }, 0);
+    }
   };
 });
 var processAsync = (SuperMap.GetFeaturesBySQLService.processAsync = getFeatureBySQLParams => {

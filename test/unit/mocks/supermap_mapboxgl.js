@@ -18,11 +18,20 @@ supermap.FeatureService = () => {
   };
 };
 
-supermap.QueryService = () => {
+supermap.QueryService = (url) => {
   return {
     queryBySQL: (param, callback) =>
       setTimeout(() => {
-        callback(fakeMapServiceResult);
+        const data =
+        url.includes('processFailed')
+            ? {
+                type: 'processFailed'
+              }
+            : {
+                type: 'processCompleted',
+                ...fakeMapServiceResult
+              };
+        callback(data);
       }, 0),
     queryByBounds: (param, callback) =>
       setTimeout(() => {
@@ -189,6 +198,45 @@ supermap.RangeThemeLayer = () => {
     addFeatures(feature) {
       return feature;
     }
+  };
+};
+
+supermap.MapService = () => {
+  return {
+    getMapInfo(callback) {
+      const mapObj = { element: null, object: {}, result: {}, type: 'processCompleted' };
+      callback(mapObj);
+    }
+  };
+};
+
+supermap.LabelThemeLayer = () => {
+  return {
+    addFeatures() {}
+  };
+};
+
+supermap.RangeThemeLayer = () => {
+  return {
+    addFeatures() {}
+  };
+};
+
+supermap.UniqueThemeLayer = () => {
+  return {
+    addFeatures() {}
+  };
+};
+
+supermap.RankSymbolThemeLayer = () => {
+  return {
+    addFeatures() {}
+  };
+};
+
+supermap.GraphThemeLayer = () => {
+  return {
+    addFeatures() {}
   };
 };
 

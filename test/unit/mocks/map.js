@@ -230,6 +230,9 @@ var Map = function(options) {
         loadTile: function() {}
       };
     }
+    if(name.includes('noSource')) {
+      return null;
+    }
     if (name === 'ChinaDark') {
       return {
         setData: function(data) {
@@ -503,6 +506,32 @@ var Map = function(options) {
   this.hasImage = function() {
     return true;
   };
+  this.addStyle = function(style, before) {};
+  this.getCanvasContainer = () => {
+    return {
+      appendChild() {}
+    }
+  }
+  this.getCanvas = () => {
+    return {
+      style: {
+        width: 100,
+        height: 100
+      }
+    }
+  }
+  this.setCRS = (epsgCode) => {
+
+  }
+  this.setRenderWorldCopies = (epsgCode) => {
+
+  }
+  
+  const styleEvent = {
+    addGlyphs: function () { },
+    addSprite: function () { },
+  }
+  Object.assign(this.style, styleEvent);
 };
 
 module.exports = Map;

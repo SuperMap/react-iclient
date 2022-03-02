@@ -4,6 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExternalsOrderPlugin = require('./plugins/ExternalsOrderPlugin');
 const { merge } = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.config')(true);
 const paths = require('./paths');
@@ -91,7 +92,7 @@ function getProdConfig(isMinify) {
     plugins: [
       new webpack.BannerPlugin(`
       ${pkg.name}.(${pkg.homepage})
-      Copyright© 2000 - 2021 SuperMap Software Co.Ltd
+      Copyright© 2000 - 2022 SuperMap Software Co.Ltd
       license: ${pkg.license}
       version: v${pkg.version}
      `),
@@ -105,7 +106,8 @@ function getProdConfig(isMinify) {
             to: path.resolve(__dirname, '../dist/mapboxgl/index.js')
           }
         ]
-      })
+      }),
+      new ExternalsOrderPlugin()
     ]
   });
 

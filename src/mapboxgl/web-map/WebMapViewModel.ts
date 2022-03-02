@@ -1,5 +1,5 @@
 /* eslint-disable */
-/* Copyright© 2000 - 2021 SuperMap Software Co.Ltd. All rights reserved.
+/* Copyright© 2000 - 2022 SuperMap Software Co.Ltd. All rights reserved.
  * This program are made available under the terms of the Apache License, Version 2.0
  * which accompanies this distribution and is available at http://www.apache.org/licenses/LICENSE-2.0.html. */
  import mapboxgl from '../../../public/libs/mapboxgl/mapbox-gl-enhance';
@@ -284,7 +284,7 @@
    setMaxZoom(maxZoom): void {
      if (this.map) {
        this.mapOptions.maxZoom = maxZoom;
-       (maxZoom || maxZoom === 0) && this.map.setMinZoom(maxZoom);
+       (maxZoom || maxZoom === 0) && this.map.setMaxZoom(maxZoom);
      }
    }
    /**
@@ -639,10 +639,10 @@
        .then(capabilitiesText => {
          let converts = convert || window.convert;
          let tileMatrixSet = JSON.parse(
-           converts.xml2json(capabilitiesText, {
-             compact: true,
-             spaces: 4
-           })
+          converts.xml2json(capabilitiesText, {
+            compact: true,
+            spaces: 4
+          })
          ).Capabilities.Contents.TileMatrixSet;
          for (let i = 0; i < tileMatrixSet.length; i++) {
            if (
@@ -1339,7 +1339,7 @@
          }
        }, this);
      }
-   }
+   } 
    /**
     * @private
     * @function WebMapViewModel.prototype._getFeatures
@@ -1437,7 +1437,7 @@
    }
  
    private _handleDataflowFeatures(layerInfo, e) {
-     let features = JSON.parse(e.data);
+     let features = e.data && JSON.parse(e.data);
      // this._transformFeatures([features]); // TODO 坐标系
      this.fire('dataflowfeatureupdated', {
        features,
@@ -1449,7 +1449,7 @@
        let condition = this._replaceFilterCharacter(layerInfo.filterCondition);
        let sql = 'select * from json where (' + condition + ')';
        let filterResult = window['jsonsql'].query(sql, {
-         attributes: features.properties
+         attributes: features && features.properties
        });
        if (filterResult && filterResult.length > 0) {
          this._addDataflowLayer(layerInfo, features);
@@ -1491,8 +1491,8 @@
        let layerStyle = layerInfo.pointStyle;
        layerInfo.style = layerStyle;
        if (!this.map.getSource(layerID)) {
-         let iconRotateExpression = this._getDataFlowRotateStyle(
-           [feature],
+      let iconRotateExpression = this._getDataFlowRotateStyle(
+           feature ? [feature] : [],
            layerInfo.directionField,
            layerInfo.identifyField
          );
@@ -1513,10 +1513,10 @@
        }
        if (layerInfo.lineStyle && layerInfo.visible) {
          if (!this.map.getSource(layerID + '-line')) {
-           let geometry = feature.geometry.coordinates;
+           let geometry = feature && feature.geometry.coordinates || [];
            let lineFeature = {
              type: 'Feature',
-             properties: feature.properties,
+             properties: feature && feature.properties,
              geometry: {
                type: 'LineString',
                coordinates: [geometry]
@@ -1539,7 +1539,7 @@
      let features = cloneDeep(this.map.getSource(sourceID)._data.features);
      let has = false;
      features.map((item, index) => {
-       if (item.properties[identifyField] === newFeature.properties[identifyField]) {
+       if (newFeature && item.properties[identifyField] === newFeature.properties[identifyField]) {
          has = true;
          if (type === 'line') {
            let coordinates = item.geometry.coordinates;
@@ -2567,7 +2567,7 @@
     * @param {array} allFeatures - 图层上的 feature 集合
     */
    private _getFiterFeatures(filterCondition: string, allFeatures): any {
-     if (!filterCondition) {
+     if (!filterCondition || !allFeatures) {
        return allFeatures;
      }
      let condition = this._replaceFilterCharacter(filterCondition);
