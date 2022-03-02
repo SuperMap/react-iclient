@@ -4,6 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExternalsOrderPlugin = require('./plugins/ExternalsOrderPlugin');
 const { merge } = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.config')(true);
 const paths = require('./paths');
@@ -105,7 +106,8 @@ function getProdConfig(isMinify) {
             to: path.resolve(__dirname, '../dist/mapboxgl/index.js')
           }
         ]
-      })
+      }),
+      new ExternalsOrderPlugin()
     ]
   });
 
