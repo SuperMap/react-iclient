@@ -104,7 +104,7 @@ module.exports = function(isEnvProduction) {
         tls: 'false',
         child_process: 'false',
         stream: require.resolve('stream-browserify'),
-        buffer: require.resolve('buffer/')
+        buffer: false
       }
     },
     infrastructureLogging: {
