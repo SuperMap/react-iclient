@@ -55,10 +55,7 @@ describe('SmRanksymbolThemeLayer', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmRanksymbolThemeLayer options={options} symbolType={'circle'}  data={data} ></SmRanksymbolThemeLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -95,10 +92,7 @@ describe('SmRanksymbolThemeLayer', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmRanksymbolThemeLayer options={options} symbolType={'circle'}  data={data} ></SmRanksymbolThemeLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmRanksymbolThemeLayer data={newData} options={newOptions}></SmRanksymbolThemeLayer> });

@@ -37,7 +37,7 @@ describe(`SmGeojsonLayer`, () => {
     }
   });
 
-  it('initial', done => {
+  it('initial', (done) => {
     const layerStyle = new CircleStyle();
     wrapper = mount(<SmGeojsonLayer layerId={'geojsonLayerName'} data={data} layerStyle={layerStyle}></SmGeojsonLayer>);
     wrapper.update();
@@ -47,16 +47,13 @@ describe(`SmGeojsonLayer`, () => {
     done();
   });
 
-  it('wrapperWebMap', done => {
+  it('wrapperWebMap', (done) => {
     const spy = jest.spyOn(mapboxgl, 'Map');
     const layerStyle = new CircleStyle();
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmGeojsonLayer data={data} layerStyle={layerStyle}></SmGeojsonLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -64,7 +61,7 @@ describe(`SmGeojsonLayer`, () => {
     });
   });
 
-  it('setData', done => {
+  it('setData', (done) => {
     const layerStyle = new CircleStyle();
     const newData = {
       type: 'FeatureCollection',
@@ -73,10 +70,7 @@ describe(`SmGeojsonLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmGeojsonLayer data={data} layerStyle={layerStyle}></SmGeojsonLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmGeojsonLayer data={newData} layerStyle={layerStyle}></SmGeojsonLayer> });
@@ -88,15 +82,12 @@ describe(`SmGeojsonLayer`, () => {
     });
   });
 
-  it('setData-null', done => {
+  it('setData-null', (done) => {
     const layerStyle = new CircleStyle();
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmGeojsonLayer data={data} layerStyle={layerStyle}></SmGeojsonLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmGeojsonLayer data={null} layerStyle={layerStyle}></SmGeojsonLayer> });
@@ -107,16 +98,13 @@ describe(`SmGeojsonLayer`, () => {
     });
   });
 
-  it('setLayerStyle', done => {
+  it('setLayerStyle', (done) => {
     const layerStyle = new CircleStyle();
     const newLayerStyle = new CircleStyle({ 'circle-color': 'red' });
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmGeojsonLayer data={data} layerStyle={layerStyle}></SmGeojsonLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmGeojsonLayer data={data} layerStyle={newLayerStyle}></SmGeojsonLayer> });
@@ -128,19 +116,18 @@ describe(`SmGeojsonLayer`, () => {
     });
   });
 
-  it('setLayerStyle-null', done => {
+  it('setLayerStyle-null', (done) => {
     const layerStyle = new CircleStyle();
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmGeojsonLayer data={data} layerStyle={layerStyle}></SmGeojsonLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
-      wrapper.setProps({ children: <SmGeojsonLayer data={data} layerStyle={null}></SmGeojsonLayer> });
-      wrapper.update();
+      try {
+        wrapper.setProps({ children: <SmGeojsonLayer data={data} layerStyle={null}></SmGeojsonLayer> });
+        wrapper.update();
+      } catch (error) {}
       const geoJsonWrapper = wrapper.find(SmGeojsonLayer).get(0);
       expect(geoJsonWrapper.props.layerStyle).toBe(null);
       done();

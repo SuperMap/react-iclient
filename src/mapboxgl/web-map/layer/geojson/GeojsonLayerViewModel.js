@@ -43,7 +43,7 @@ export default class GeojsonLayerViewModel extends mapboxgl.Evented {
   }
 
   _addLayer() {
-    if (!(this.layerStyle instanceof Object)) throw new Error('layerStyle 不能为空');
+    if (!(this.layerStyle instanceof Object)) throw new Error('layerStyle must be objet');
     let { paint, layout } = this.layerStyle;
     this.map.addLayer({
       id: this.layerId,

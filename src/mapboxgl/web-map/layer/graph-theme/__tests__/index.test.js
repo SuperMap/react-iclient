@@ -45,10 +45,7 @@ describe('SmGraphThemeLayer', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmGraphThemeLayer chartsType={'Pie'} data={data} onLoad={onLoad}></SmGraphThemeLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -65,10 +62,7 @@ describe('SmGraphThemeLayer', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmGraphThemeLayer chartsType={'Pie'} data={data}></SmGraphThemeLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();

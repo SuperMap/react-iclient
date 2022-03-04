@@ -35,10 +35,7 @@ describe('SmVectorTileLayer', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmVectorTileLayer styleOptions={styleOptions}></SmVectorTileLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmVectorTileLayer styleOptions={newStyleOptions}></SmVectorTileLayer> });

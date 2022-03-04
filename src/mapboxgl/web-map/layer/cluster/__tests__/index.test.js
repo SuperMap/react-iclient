@@ -59,10 +59,7 @@ describe('ClusterLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmClusterLayer data={data}></SmClusterLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, e => {
       // const spy = jest.spyOn(e.map, 'click');
@@ -95,10 +92,7 @@ describe('ClusterLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmClusterLayer data={data}></SmClusterLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -123,10 +117,7 @@ describe('ClusterLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmClusterLayer data={data}></SmClusterLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -150,10 +141,7 @@ describe('ClusterLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmClusterLayer data={data}></SmClusterLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -177,10 +165,7 @@ describe('ClusterLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmClusterLayer data={data}></SmClusterLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -198,10 +183,7 @@ describe('ClusterLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmClusterLayer data={data}></SmClusterLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
