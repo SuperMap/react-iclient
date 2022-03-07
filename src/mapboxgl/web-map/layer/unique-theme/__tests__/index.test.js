@@ -65,10 +65,7 @@ describe('SmUniqueThemeLayer', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmUniqueThemeLayer data={data} options={options} onLoad={onLoad}></SmUniqueThemeLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -82,10 +79,7 @@ describe('SmUniqueThemeLayer', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmUniqueThemeLayer data={data} options={options}></SmUniqueThemeLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();

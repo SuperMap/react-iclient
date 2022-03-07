@@ -46,10 +46,7 @@ describe('SmLabelThemeLayer', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmLabelThemeLayer data={features} layerName={'LabelThemeLayer'}></SmLabelThemeLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();

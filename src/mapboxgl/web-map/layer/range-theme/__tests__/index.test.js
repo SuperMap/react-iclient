@@ -94,10 +94,7 @@ describe(`SmRangeThemeLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmRangeThemeLayer options={themeOptions} data={features}></SmRangeThemeLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -110,10 +107,7 @@ describe(`SmRangeThemeLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmRangeThemeLayer options={themeOptions} data={features}></SmRangeThemeLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmRangeThemeLayer options={themeOptions} data={newData}></SmRangeThemeLayer> });
@@ -128,10 +122,7 @@ describe(`SmRangeThemeLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmRangeThemeLayer options={themeOptions} data={features}></SmRangeThemeLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmRangeThemeLayer data={null} options={themeOptions}></SmRangeThemeLayer> });

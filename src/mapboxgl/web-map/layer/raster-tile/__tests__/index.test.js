@@ -30,10 +30,7 @@ describe('SmRasterTileLayer', () => {
           opacity={0.8}
           visible={true}
         ></SmRasterTileLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       setTimeout(() => {
@@ -48,10 +45,7 @@ describe('SmRasterTileLayer', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmRasterTileLayer opacity={0.8} visible={true}></SmRasterTileLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       setTimeout(() => {
