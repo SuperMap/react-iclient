@@ -124,12 +124,21 @@ describe(`SmGeojsonLayer`, () => {
       </SmWebMap>
     );
     mapLoaded(wrapper, () => {
-      try {
-        wrapper.setProps({ children: <SmGeojsonLayer data={data} layerStyle={null}></SmGeojsonLayer> });
-        wrapper.update();
-      } catch (error) {}
+      wrapper.setProps({ children: <SmGeojsonLayer data={data} layerStyle={null}></SmGeojsonLayer> });
+      wrapper.update();
       const geoJsonWrapper = wrapper.find(SmGeojsonLayer).get(0);
       expect(geoJsonWrapper.props.layerStyle).toBe(null);
+      done();
+    });
+  });
+
+  it('addlayer-throw-error', (done) => {
+    wrapper = mount(<SmWebMap mapOptions={mapOptions}></SmWebMap>);
+    mapLoaded(wrapper, () => {
+      expect(() => {
+        wrapper.setProps({ children: <SmGeojsonLayer data={data} layerStyle={null}></SmGeojsonLayer> });
+        wrapper.update();
+      }).toThrow('layerStyle must be object');
       done();
     });
   });
