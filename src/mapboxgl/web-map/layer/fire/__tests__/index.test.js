@@ -49,10 +49,7 @@ describe(`SmFireLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmFireLayer features={features} modelScale={5.41843220338983e-6}></SmFireLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -91,10 +88,7 @@ describe(`SmFireLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmFireLayer features={features} modelScale={5.41843220338983e-6}></SmFireLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmFireLayer features={newData} modelScale={5.41843220338983e-6}></SmFireLayer> });
@@ -111,10 +105,7 @@ describe(`SmFireLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmFireLayer features={features} modelScale={5.41843220338983e-6}></SmFireLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({
@@ -131,10 +122,7 @@ describe(`SmFireLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmFireLayer features={features} modelScale={5.41843220338983e-6}></SmFireLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmFireLayer features={features} modelScale={0}></SmFireLayer> });

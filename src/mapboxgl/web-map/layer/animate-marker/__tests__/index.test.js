@@ -68,10 +68,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer features={features}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -91,10 +88,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'rotatingAperture'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -114,10 +108,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'haloRing'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -137,10 +128,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'diffusedAperture'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -160,10 +148,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'rotatingTextBorder'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -182,10 +167,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'rotatingTextBorder'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -218,10 +200,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'rotatingTextBorder'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -255,10 +234,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'rotatingTextBorder'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -292,10 +268,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'rotatingTextBorder'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -329,10 +302,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'rotatingTextBorder'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -365,10 +335,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'rotatingTextBorder'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -402,10 +369,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'rotatingTextBorder'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -439,10 +403,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'rotatingTextBorder'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -476,10 +437,7 @@ describe('AnimateMarkerLayer.vue', () => {
           textField={'name'}
           type={'fluorescence'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -491,10 +449,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer width={150} features={features} type={'fluorescence'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -512,10 +467,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer features={features} type={'fluorescence'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -539,10 +491,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer features={features} type={'fluorescence'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -562,10 +511,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer features={features} type={'fluorescence'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -584,10 +530,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer width={150} features={features} type={'rotatingTextBorder'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -607,10 +550,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer features={features} type={'rotatingTextBorder'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -634,10 +574,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer width={150} features={features} type={'rotatingAperture'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -657,10 +594,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer features={features} type={'rotatingAperture'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -684,10 +618,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer width={150} features={features} type={'diffusedAperture'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -707,10 +638,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer features={features} type={'diffusedAperture'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -739,10 +667,7 @@ describe('AnimateMarkerLayer.vue', () => {
           features={features}
           type={'breathingAperture'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -768,10 +693,7 @@ describe('AnimateMarkerLayer.vue', () => {
           features={features}
           type={'breathingAperture'}
         ></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({
@@ -796,10 +718,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer width={150} features={features} type={'haloRing'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -817,10 +736,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer features={features} type={'haloRing'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {
@@ -857,10 +773,7 @@ describe('AnimateMarkerLayer.vue', () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmAnimateMarkerLayer features={features} textField={'name'}></SmAnimateMarkerLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
 
     mapLoaded(wrapper, () => {

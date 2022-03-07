@@ -70,10 +70,7 @@ describe(`SmHeatmapLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmHeatmapLayer data={features} layerStyle={layerStyle}></SmHeatmapLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       setTimeout(() => {
@@ -91,10 +88,7 @@ describe(`SmHeatmapLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmHeatmapLayer data={newData} layerStyle={layerStyle}></SmHeatmapLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmHeatmapLayer data={features} layerStyle={layerStyle}></SmHeatmapLayer> });
@@ -110,10 +104,7 @@ describe(`SmHeatmapLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmHeatmapLayer data={features} layerStyle={layerStyle}></SmHeatmapLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmHeatmapLayer data={null} layerStyle={layerStyle}></SmHeatmapLayer> });
@@ -133,10 +124,7 @@ describe(`SmHeatmapLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmHeatmapLayer data={features} layerStyle={layerStyle}></SmHeatmapLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmHeatmapLayer data={features} layerStyle={newLayerStyle}></SmHeatmapLayer> });
@@ -151,10 +139,7 @@ describe(`SmHeatmapLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmHeatmapLayer data={features} layerStyle={layerStyle}></SmHeatmapLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmHeatmapLayer data={features} layerStyle={null}></SmHeatmapLayer> });

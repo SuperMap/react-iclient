@@ -48,10 +48,7 @@ describe(`SmDataFlowLayer`, () => {
           layerStyle={layerStyle}
           registerToken={registerToken}
         ></SmDataFlowLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -68,10 +65,7 @@ describe(`SmDataFlowLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmDataFlowLayer serviceUrl={serviceUrl} layerStyle={layerStyle}></SmDataFlowLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -88,10 +82,7 @@ describe(`SmDataFlowLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmDataFlowLayer serviceUrl={serviceUrl} layerStyle={layerStyle}></SmDataFlowLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -107,10 +98,7 @@ describe(`SmDataFlowLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmDataFlowLayer serviceUrl={serviceUrl} layerStyle={layerStyle}></SmDataFlowLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -126,10 +114,7 @@ describe(`SmDataFlowLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmDataFlowLayer serviceUrl={serviceUrl} layerStyle={layerStyle}></SmDataFlowLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -145,10 +130,7 @@ describe(`SmDataFlowLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmDataFlowLayer serviceUrl={serviceUrl} layerStyle={layerStyle}></SmDataFlowLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -165,10 +147,7 @@ describe(`SmDataFlowLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmDataFlowLayer serviceUrl={serviceUrl} layerStyle={layerStyle} layerId={layerId}></SmDataFlowLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -185,10 +164,7 @@ describe(`SmDataFlowLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmDataFlowLayer serviceUrl={serviceUrl} layerStyle={layerStyle} layerId={layerId}></SmDataFlowLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
@@ -205,10 +181,7 @@ describe(`SmDataFlowLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmDataFlowLayer serviceUrl={serviceUrl} layerStyle={layerStyle}></SmDataFlowLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       wrapper.setProps({ children: <SmDataFlowLayer serviceUrl={serviceUrl} layerStyle={newStyle}></SmDataFlowLayer> });

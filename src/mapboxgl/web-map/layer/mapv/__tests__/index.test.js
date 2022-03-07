@@ -74,10 +74,7 @@ describe(`SmMapvLayer`, () => {
     wrapper = mount(
       <SmWebMap mapOptions={mapOptions}>
         <SmMapvLayer data={dataSet} options={options}></SmMapvLayer>
-      </SmWebMap>,
-      {
-        wrappingComponent: SmWebMap
-      }
+      </SmWebMap>
     );
     mapLoaded(wrapper, () => {
       expect(spy).toBeCalled();
