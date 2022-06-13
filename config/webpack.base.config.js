@@ -178,11 +178,7 @@ module.exports = function(isEnvProduction) {
               exclude: /\.module\.css$/,
               use: getStyleLoaders({
                 importLoaders: 1,
-                sourceMap: true,
-                modules: {
-                  mode: 'local',
-                  getLocalIdent: getCSSModuleLocalIdent
-                }
+                sourceMap: true
               }),
               sideEffects: true
             },
@@ -192,10 +188,7 @@ module.exports = function(isEnvProduction) {
               use: getStyleLoaders(
                 {
                   importLoaders: 3,
-                  sourceMap: true,
-                  modules: {
-                    mode: 'icss'
-                  }
+                  sourceMap: true
                 },
                 'sass-loader'
               ),
