@@ -5,7 +5,6 @@ const resolve = require('resolve');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin =
   process.env.TSC_COMPILE_ON_ERROR === 'true'
@@ -30,7 +29,7 @@ const hasJsxRuntime = (() => {
 
 module.exports = function(isEnvProduction) {
   const isEnvDevelopment = !isEnvProduction;
-  const getStyleLoaders = (cssOptions, preProcessor) => {
+  const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
     const loaders = [
       isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {
@@ -81,7 +80,8 @@ module.exports = function(isEnvProduction) {
         {
           loader: require.resolve(preProcessor),
           options: {
-            sourceMap: true
+            sourceMap: true,
+            ...preProcessorOptions
           }
         }
       );
@@ -180,8 +180,7 @@ module.exports = function(isEnvProduction) {
                 importLoaders: 1,
                 sourceMap: true,
                 modules: {
-                  mode: 'local',
-                  getLocalIdent: getCSSModuleLocalIdent
+                  mode: 'icss',
                 }
               }),
               sideEffects: true
@@ -194,10 +193,15 @@ module.exports = function(isEnvProduction) {
                   importLoaders: 3,
                   sourceMap: true,
                   modules: {
-                    mode: 'icss'
+                    mode: 'icss',
                   }
                 },
-                'sass-loader'
+                'sass-loader',
+                 {
+                  sassOptions: {
+                    outputStyle: 'expanded'
+                  }
+                 }
               ),
               sideEffects: true
             },

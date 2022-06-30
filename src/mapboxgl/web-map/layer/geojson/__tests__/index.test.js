@@ -133,4 +133,15 @@ describe(`SmGeojsonLayer`, () => {
       done();
     });
   });
+
+  it('addlayer-throw-error', (done) => {
+    wrapper = mount(<SmWebMap mapOptions={mapOptions}></SmWebMap>);
+    mapLoaded(wrapper, () => {
+      expect(() => {
+        wrapper.setProps({ children: <SmGeojsonLayer data={data} layerStyle={null}></SmGeojsonLayer> });
+        wrapper.update();
+      }).toThrow('layerStyle must be object');
+      done();
+    });
+  });
 });
