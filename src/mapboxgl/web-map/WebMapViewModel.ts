@@ -1403,9 +1403,9 @@
        }
      }
  
-     if (features && layerInfo.projection !== 'EPSG:4326') {
-       this._transformFeatures(features);
-     }
+     if (features && layerInfo.projection && layerInfo.projection !== 'EPSG:4326') {
+      this._transformFeatures(features);
+    }
  
      if (layerType === 'VECTOR') {
        if (layerInfo.featureType === 'POINT') {
