@@ -10,7 +10,7 @@
  import '../../../public/libs/geostats/geostats';
  import '../../../public/libs/json-sql/jsonsql';
  import * as convert from 'xml-js';
- import canvg from 'canvg';
+ import Canvg from 'canvg';
  import echarts from 'echarts';
  import EchartsLayer from '../../../public/libs/echarts-layer/EchartsLayer';
  import provincialCenterData from './config/ProvinceCenter.json'; // eslint-disable-line import/extensions
@@ -143,6 +143,8 @@
   //  fire: any;
  
    echartslayer: any = [];
+
+   canvgsV: any = [];
  
    private _sourceListModel: SourceListModel;
  
@@ -177,6 +179,11 @@
      this.zoom = mapOptions.zoom;
      this.echartslayer = [];
      this._createWebMap();
+     this.on('mapinitialized', () => {
+      this.map.on('remove', () => {
+        this._stopCanvg();
+      });
+    });
    }
    /**
     * @function WebMapViewModel.prototype.resize
@@ -205,6 +212,8 @@
      this.mapId = mapId;
      setTimeout(() => {
        this._createWebMap();
+       //@ts-ignore
+       window.map = this.map;
      }, 0);
    }
  
@@ -2330,6 +2339,7 @@
                      visibility: layerInfo.visible
                    }
                  });
+                 console.log(this.map.getStyle());
                });
            });
          }
@@ -2940,21 +2950,30 @@
      canvas.id = 'dataviz-canvas-' + mapboxgl.supermap.Util.newGuid(8);
      canvas.style.display = 'none';
      divDom.appendChild(canvas);
-     let canvgs = window.canvg ? window.canvg : canvg;
-     canvgs(canvas.id, svgUrl, {
-       ignoreMouse: true,
-       ignoreAnimation: true,
-       renderCallback: () => {
-         if (canvas.width > 300 || canvas.height > 300) {
-           return;
-         }
-         callBack(canvas);
-       },
-       forceRedraw: () => {
-         return false;
-       }
-     });
+     const canvgs = window.canvg && window.canvg.default ? window.canvg.default : Canvg;
+     try {
+      const ctx = canvas.getContext('2d');
+      canvgs.from(ctx, svgUrl, {
+        ignoreMouse: true,
+        ignoreAnimation: true,
+        forceRedraw: () => false
+      }).then(v => {
+        v.start();
+        this.canvgsV.push(v);
+        if (canvas.width > 300 || canvas.height > 300) {
+          return;
+        }
+        callBack(canvas);
+      });
+     } catch (error) {
+       console.log(error);
+     }
    }
+
+   _stopCanvg() {
+    this.canvgsV.forEach(v => v.stop());
+    this.canvgsV = [];
+  }
    /**
     * @private
     * @function WebMapViewModel.prototype._addOverlayToMap

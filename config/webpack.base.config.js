@@ -206,7 +206,7 @@ module.exports = function(isEnvProduction) {
               sideEffects: true
             },
             {
-              exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+              exclude: [/^$/, /\.(js|mjs|cjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
               type: 'asset/resource',
               generator: {
                 filename: 'static/media/[name].[hash:8].[ext]'
