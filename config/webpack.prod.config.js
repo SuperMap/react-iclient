@@ -42,6 +42,7 @@ function getProdConfig(isMinify) {
         },
         antd: 'antd',
         echarts: 'echarts',
+        canvg: 'canvg',
         mapv: 'mapv',
         'three/build/three': {
           root: 'THREE',

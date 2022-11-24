@@ -8,6 +8,11 @@ import baseLayers from '@test/unit/mocks/data/baseLayers.json';
 import { wmtsCapabilitiesText } from '@test/unit/mocks/data/capabilities_text.js';
 import flushPromises from 'flush-promises';
 
+window.canvg = {
+  default: {
+    from: (ctx, url, callback) => Promise.resolve({ stop: jest.fn(), start: jest.fn() })
+  }
+};
 const fetchResource = {
   'https://fakeiportal.supermap.io/iportal/web/config/portal.json': mockiPortalServiceProxy,
   'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mockMapInfo,
@@ -548,9 +553,6 @@ describe(`WebMapViewModel`, () => {
   });
 
   it('add markerLayer', async done => {
-    window.canvg = (a, b, c) => {
-      c.renderCallback();
-    };
     const mapInfo = {
       ...mockMapInfo,
       layers: [
@@ -580,6 +582,10 @@ describe(`WebMapViewModel`, () => {
     await flushPromises();
     setTimeout(() => {
       expect(callback.mock.called).toBeTruthy;
+      viewModel._canvgsV = [{ stop: jest.fn() }];
+      viewModel._stopCanvg();
+      expect(viewModel.canvgsV.length).toBe(0);
+      done();
       done();
     }, 100);
   });
