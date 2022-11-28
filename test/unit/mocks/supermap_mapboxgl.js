@@ -67,7 +67,10 @@ supermap.Util = {
   },
   isNumber: function(num) {
     return true;
-  }
+  },
+  newGuid: function(num) {
+    return 0;
+  },
 };
 
 supermap.DataFlowService = serviceUrl => {
