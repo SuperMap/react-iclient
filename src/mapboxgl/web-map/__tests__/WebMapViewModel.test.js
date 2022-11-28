@@ -4,6 +4,8 @@ import mockMapInfo from '@test/unit/mocks/data/common-map-info.json';
 import mockiPortalServiceProxy from '@test/unit/mocks/data/iportal-service-proxy.json';
 import mockData from '@test/unit/mocks/data/data-minhang.js';
 import mockCsvGeojson from '@test/unit/mocks/data/csv-geojson.json';
+import mockCsvSvgGeojson from '@test/unit/mocks/data/csv-geojson-svg.json';
+import vectorLayer_line from '@test/unit/mocks/data/vectorLayer_line.json';
 import baseLayers from '@test/unit/mocks/data/baseLayers.json';
 import { wmtsCapabilitiesText } from '@test/unit/mocks/data/capabilities_text.js';
 import flushPromises from 'flush-promises';
@@ -582,12 +584,43 @@ describe(`WebMapViewModel`, () => {
     await flushPromises();
     setTimeout(() => {
       expect(callback.mock.called).toBeTruthy;
-      viewModel._canvgsV = [{ stop: jest.fn() }];
+      done();
+    }, 100);
+  });
+
+  it('add markerLayer svg', async done => {
+    const mapInfo = {
+      ...mockMapInfo,
+      layers: [
+        {
+          layerType: 'MARKER',
+          visible: true,
+          name: '民航数',
+          serverId: 123456,
+          layerStyle: {
+            labelField: 'minghang'
+          }
+        }
+      ],
+      description: '',
+      projection: 'EPSG:3857',
+      title: 'unique_民航数据',
+      version: '1.0'
+    };
+    const fetchResource = {
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': mapInfo,
+      'https://fakeiportal.supermap.io/iportal/web/datas/123456/content.json?pageSize=9999999&currentPage=1': mockCsvSvgGeojson
+    };
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions);
+    viewModel.on({ addlayerssucceeded: callback });
+    await flushPromises();
+    setTimeout(() => {
+      viewModel.canvgsV = [{ stop: jest.fn() }];
       viewModel._stopCanvg();
       expect(viewModel.canvgsV.length).toBe(0);
       done();
-      done();
-    }, 100);
+    }, 1000);
   });
 
   it('setZoom 0', async () => {
@@ -696,6 +729,16 @@ describe(`WebMapViewModel`, () => {
     viewModel.map.fire('load');
     await flushPromises();
     expect(callback.mock.called).toBeTruthy;
+    done();
+  });
+
+  it('_stopCanvg', done => {
+    const viewModel = new WebMapViewModel(vectorLayer_line, {}, undefined, null, function (layer) {
+      return layer.name === '浙江省高等院校(3)';
+    });
+    viewModel.canvgsV = [{ stop: jest.fn() }];
+    viewModel._stopCanvg();
+    expect(viewModel.canvgsV.length).toBe(0);
     done();
   });
 });
