@@ -45,7 +45,7 @@
     "prop-types": "^15.7.2",
     "recompose": "^0.30.0",
     "resize-detector": "^0.2.0",
-    "three": "0.128.0",
+    "three": "0.150.0",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
