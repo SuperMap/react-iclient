@@ -400,7 +400,7 @@
     */
    private _createMap(mapInfo: any): void {
      // 获取字体样式
-     let fonts: string[] = [];
+     let fonts: string[] = ['sans-serif'];
      let layers = mapInfo.layers;
      // 获取 label 图层字体类型
      if (layers && layers.length > 0) {
