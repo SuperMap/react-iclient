@@ -8,14 +8,14 @@
 ## 安装
 
 ```
-npm install @supermap/react-iclient-mapboxgl
+npm install @supermapgis/react-iclient-mapboxgl
 ```
 
 ## 开发
 
 ```js
 import React from 'react';
-import { SmWebMap } from '@supermap/react-iclient-mapboxgl';
+import { SmWebMap } from '@supermapgis/react-iclient-mapboxgl';
 
 const App = () => (
   <>

@@ -1,5 +1,5 @@
 {
-  "name": "@supermap/react-iclient",
+  "name": "@supermapgis/react-iclient",
   "version": "11.2.0",
   "description": "SuperMap iClient for React.js",
   "homepage": "https://iclient.supermap.io",
