@@ -31,7 +31,7 @@
     "antd": "^3.24.3",
     "canvg": "~3.0.10",
     "colorcolor": "^1.1.1",
-    "echarts": "^4.4.0",
+    "echarts": "^5.5.1",
     "hoist-non-react-statics": "^3.3.0",
     "identity-obj-proxy": "3.0.0",
     "is-wsl": "^1.1.0",
