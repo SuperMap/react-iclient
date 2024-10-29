@@ -1,5 +1,5 @@
 {
-  "name": "@supermap/react-iclient-mapboxgl",
+  "name": "@supermapgis/react-iclient-mapboxgl",
   "version": "11.1.2",
   "description": "SuperMap iClient for React.js",
   "main": "dist/index",
