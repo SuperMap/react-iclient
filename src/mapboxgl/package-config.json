@@ -1,6 +1,6 @@
 {
   "name": "@supermapgis/react-iclient-mapboxgl",
-  "version": "11.3.0-dev",
+  "version": "11.3.0",
   "description": "SuperMap iClient for React.js",
   "main": "dist/index",
   "dependencies": {
