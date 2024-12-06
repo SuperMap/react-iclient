@@ -1,6 +1,6 @@
 {
   "name": "@supermapgis/react-iclient",
-  "version": "11.2.0",
+  "version": "11.3.0",
   "description": "SuperMap iClient for React.js",
   "homepage": "https://iclient.supermap.io",
   "scripts": {
@@ -69,6 +69,7 @@
     "browserslist": "^4.18.1",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "cheerio": "1.0.0-rc.12",
     "copy-webpack-plugin": "^10.2.4",
     "cross-env": "^7.0.3",
     "css-loader": "^6.6.0",
