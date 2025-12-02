@@ -732,13 +732,284 @@ describe(`WebMapViewModel`, () => {
     done();
   });
 
-  it('_stopCanvg', done => {
-    const viewModel = new WebMapViewModel(vectorLayer_line, {}, undefined, null, function (layer) {
-      return layer.name === '浙江省高等院校(3)';
-    });
-    viewModel.canvgsV = [{ stop: jest.fn() }];
+  it('_stopCanvg', async () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    await flushPromises();
+    
+    // 创建模拟的canvgs对象
+    const mockV = { stop: jest.fn() };
+    viewModel.canvgsV = [mockV];
+    
     viewModel._stopCanvg();
+    
+    expect(mockV.stop).toHaveBeenCalled();
     expect(viewModel.canvgsV.length).toBe(0);
-    done();
+  });
+
+  it('_addStrokeLineForPoly', async () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    await flushPromises();
+    
+    const spy = jest.spyOn(viewModel.map, 'addLayer');
+    const style = { strokeColor: '#ff0000' };
+    const source = { type: 'geojson', data: { type: 'FeatureCollection', features: [] } };
+    
+    viewModel._addStrokeLineForPoly(style, source, 'test-stroke-layer', true);
+    
+    expect(spy).toHaveBeenCalled();
+    const layerArg = spy.mock.calls[0][0];
+    expect(layerArg.id).toBe('test-stroke-layer');
+    expect(layerArg.type).toBe('line');
+  });
+
+  it('_transformStyleToMapBoxGl with POINT type', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const style = {
+      type: 'POINT',
+      fillColor: '#ff0000',
+      strokeWidth: 2,
+      fillOpacity: 0.8
+    };
+    
+    const result = viewModel._transformStyleToMapBoxGl(style, 'POINT');
+    
+    expect(result['circle-color']).toBe('#ff0000');
+    expect(result['circle-stroke-width']).toBe(2);
+    expect(result['circle-opacity']).toBe(0.8);
+  });
+
+  it('_transformStyleToMapBoxGl with LINE type', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const style = {
+      strokeWidth: 3,
+      strokeColor: '#00ff00',
+      strokeOpacity: 0.7
+    };
+    
+    const result = viewModel._transformStyleToMapBoxGl(style, 'LINE');
+    
+    expect(result['line-width']).toBe(3);
+    expect(result['line-color']).toBe('#00ff00');
+    expect(result['line-opacity']).toBe(0.7);
+  });
+
+  it('_transformStyleToMapBoxGl with POLYGON type', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const style = {
+      fillColor: '#0000ff',
+      fillOpacity: 0.6,
+      strokeColor: '#ffff00'
+    };
+    
+    const result = viewModel._transformStyleToMapBoxGl(style, 'POLYGON');
+    
+    expect(result['fill-color']).toBe('#0000ff');
+    expect(result['fill-opacity']).toBe(0.6);
+    expect(result['fill-outline-color']).toBe('#ffff00');
+  });
+
+  it('_transformStyleToMapBoxGl with expression', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const style = {
+      fillColor: '#ff0000'
+    };
+    
+    const expression = ['match', ['get', 'index'], 0, '#00ff00', '#0000ff'];
+    
+    const result = viewModel._transformStyleToMapBoxGl(style, 'POLYGON', expression);
+    
+    expect(result['fill-color']).toEqual(expression);
+  });
+
+  it('_transformStyleToMapBoxGl with line dash', () => {
+    mockFetch(fetchResource);
+    // 模拟SuperMap.Util.isArray函数
+    window.SuperMap = {
+      ...window.SuperMap,
+      Util: {
+        isArray: (obj) => Array.isArray(obj)
+      }
+    };
+    
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const style = {
+      strokeDashstyle: [5, 5],
+      lineDash: 'dash'
+    };
+    
+    const result = viewModel._transformStyleToMapBoxGl(style, 'LINE');
+    
+    expect(result['line-dasharray']).toEqual([5, 5]);
+  });
+
+  it('_getParamString', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const obj = {
+      param1: 'value1',
+      param2: 'value2'
+    };
+    
+    const result = viewModel._getParamString(obj, 'http://example.com');
+    
+    expect(result).toContain('param1=value1');
+    expect(result).toContain('param2=value2');
+    expect(result).toMatch(/^(\?|&)/);
+  });
+
+  it('_getParamString with uppercase', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const obj = {
+      param1: 'value1',
+      param2: 'value2'
+    };
+    
+    const result = viewModel._getParamString(obj, 'http://example.com', true);
+    
+    expect(result).toContain('PARAM1=value1');
+    expect(result).toContain('PARAM2=value2');
+  });
+
+  it('_unproject', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const point = [10000000, 10000000];
+    const result = viewModel._unproject(point);
+    
+    expect(Array.isArray(result)).toBe(true);
+    expect(result.length).toBe(2);
+  });
+
+  it('_getWMTSUrl', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const options = {
+      url: 'http://example.com/wmts',
+      layer: 'test-layer',
+      tileMatrixSet: 'test-matrix'
+    };
+    
+    const result = viewModel._getWMTSUrl(options);
+    
+    expect(result).toContain('http://example.com/wmts');
+    expect(result).toContain('layer=test-layer');
+    expect(result).toContain('tilematrixSet=test-matrix');
+    expect(result).toContain('tilematrix={z}');
+  });
+
+  it('_getWMSUrl', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const mapInfo = {
+      url: 'http://example.com/wms/test-layer'
+    };
+    
+    const result = viewModel._getWMSUrl(mapInfo);
+    
+    expect(result).toContain('http://example.com/wms/test-layer');
+    expect(result).toContain('layers=test-layer');
+    expect(result).toContain('bbox');
+  });
+
+  it('_formatGeoJSON', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const data = {
+      features: [
+        { properties: {} },
+        { properties: {} }
+      ]
+    };
+    
+    const result = viewModel._formatGeoJSON(data);
+    
+    expect(result[0].properties.index).toBe(0);
+    expect(result[1].properties.index).toBe(1);
+  });
+
+  it('echartsLayerResize with empty layers', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    viewModel.echartslayer = [];
+    
+    // 不应抛出异常
+    expect(() => viewModel.echartsLayerResize()).not.toThrow();
+  });
+
+  it('echartsLayerResize with chart layers', () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    
+    const mockChart = { resize: jest.fn() };
+    viewModel.echartslayer = [{ chart: mockChart }];
+    
+    viewModel.echartsLayerResize();
+    
+    expect(mockChart.resize).toHaveBeenCalled();
+  });
+
+  it('_createWebMap without mapId and serverUrl', async () => {
+    mockFetch(fetchResource);
+    const options = {
+      ...mockWebMapOptions,
+      serverUrl: ''
+    };
+    const viewModel = new WebMapViewModel('', options, mockMapOptions);
+    
+    // 等待异步操作完成
+    await flushPromises();
+    
+    expect(viewModel.mapOptions.container).toBe('map');
+  });
+
+  it('_createMap', async () => {
+    mockFetch(fetchResource);
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    await flushPromises();
+    
+    const mapInfo = {
+      center: { x: 100, y: 30 },
+      level: 5,
+      layers: [{
+        labelStyle: { fontFamily: 'Arial' }
+      }]
+    };
+    
+    viewModel._createMap(mapInfo);
+    
+    expect(viewModel.map).toBeDefined();
+  });
+
+  it('constructor with baseProjection EPSG:3857', async () => {
+    mockFetch({
+      ...fetchResource,
+      'https://fakeiportal.supermap.io/iportal/web/maps/123/map.json': {
+        ...mockMapInfo,
+        projection: 'EPSG:3857'
+      }
+    });
+    
+    const viewModel = new WebMapViewModel(mockMapId, mockWebMapOptions, mockMapOptions);
+    await flushPromises();
+    
+    expect(viewModel.baseProjection).toBe('EPSG:3857');
   });
 });
