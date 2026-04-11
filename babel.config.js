@@ -22,12 +22,6 @@ module.exports = function (api) {
       {
         legacy: true
       }
-    ],
-    [
-      'lodash',
-      {
-        id: ['lodash', 'recompose']
-      }
     ]
   ];
 

@@ -3,6 +3,10 @@
   "version": "12.1.0-dev",
   "description": "SuperMap iClient for React.js",
   "homepage": "https://iclient.supermap.io",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.3.0"
+  },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
@@ -49,19 +53,26 @@
     "three": "0.128.0",
     "xml-js": "^1.6.11"
   },
+  "overrides": {
+    "rc-editor-mention": {
+      "immutable": "3.8.3"
+    },
+    "draft-js": {
+      "immutable": "3.8.3"
+    },
+    "rc-editor-core": {
+      "immutable": "3.8.3"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/plugin-proposal-decorators": "^7.6.0",
     "@babel/plugin-transform-runtime": "^7.12.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@types/lodash.upperfirst": "^4.3.6",
-    "@types/mapbox-gl": "^0.51.11",
-    "@typescript-eslint/eslint-plugin": "^2.5.0",
-    "@typescript-eslint/parser": "^2.5.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^26.0.0",
     "babel-loader": "^8.2.3",
-    "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-named-asset-import": "^0.3.3",
     "babel-plugin-transform-flow-strip-types": "^6.14.0",
     "babel-preset-react-app": "^10.0.1",
@@ -79,16 +90,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^8.3.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.4.0",
     "eslint-config-react-app": "^7.0.0",
-    "eslint-loader": "^2.2.1",
-    "eslint-plugin-flowtype": "^3.13.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^1.7.0",
     "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
     "flush-promises": "^1.0.2",
@@ -106,7 +108,7 @@
     "lodash.upperfirst": "^4.3.1",
     "mapbox-gl": "^0.44.1",
     "mini-css-extract-plugin": "^2.5.3",
-    "node-sass": "^7.0.1",
+    "sass": "^1.75.0",
     "postcss": "^8.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^6.2.1",
