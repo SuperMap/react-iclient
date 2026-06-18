@@ -1,6 +1,6 @@
 {
   "name": "@supermapgis/react-iclient",
-  "version": "12.1.0-dev",
+  "version": "12.1.0-r",
   "description": "SuperMap iClient for React.js",
   "homepage": "https://iclient.supermap.io",
   "engines": {
