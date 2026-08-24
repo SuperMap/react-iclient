@@ -55,13 +55,13 @@
   },
   "overrides": {
     "rc-editor-mention": {
-      "immutable": "3.8.3"
+      "immutable": "3.8.4"
     },
     "draft-js": {
-      "immutable": "3.8.3"
+      "immutable": "3.8.4"
     },
     "rc-editor-core": {
-      "immutable": "3.8.3"
+      "immutable": "3.8.4"
     }
   },
   "devDependencies": {
